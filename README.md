@@ -10,9 +10,9 @@ Configura un script como el siguiente y genera cargos de prueba o reales usando 
 		$comproPago = new ComproPago($key); 
 		$request = array(
 	        'currency' => 'MXN',
-	        'product_price' => '2799.00',
-	        'product_name' => 'Samsung Galaxy',
-	        'product_id'=> 'SAMGAL7A',
+	        'order_price' => '2799.00',
+	        'order_name' => 'Samsung Galaxy',
+	        'order_id'=> 'SAMGAL7A',
 	        'image_url'=> '',
 	        'customer_name'=> 'Federico Garcia',
 	        'customer_email'=> 'email@gmail.com',
