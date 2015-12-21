@@ -39,11 +39,11 @@ $compropagoClient= new Compropago\Client($compropagoConfig);
 $compropagoService= new Compropago\Service($compropagoClient);
 
 /**
+//Campos Obligatorios para poder realizar una nueva orden
 $data = array(
 		'order_id'    		 => 'testorderid',
 		'order_price'        => '123.45',
 		'order_name'         => 'Test Order Name',
-		'image_url'          => 'https://test.amazon.com/5f4373',
 		'customer_name'      => 'Compropago Test',
 		'customer_email'     => 'test@compropago.com',
 		'payment_type'       => 'OXXO'
