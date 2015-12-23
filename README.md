@@ -1,5 +1,5 @@
 composer install
 
 {
-	require: "Compropago/php-sdk"
+	require: "compropago/php-sdk"
 }
