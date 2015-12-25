@@ -40,31 +40,31 @@ class Views{
 			//path relativo al vendor Compropago/views
 			$path=__DIR__ . '/../../../views/'.$ext.'/';
 		}
-		$filename=$path.$view.$ext;
+		$filename=$path.$view.'.'.$ext;
 		if( !file_exists($filename) ){
 			throw new Exception('Compropago Error: No se encontro el archivo de View solicitado');
 			return;
 		}
 		switch ($method){
 			case 'ob':
-				return $this->loadOb($filename , $compropagoData);
+				self::loadInclude($filename , $compropagoData);
 			break;
 			case 'include':
 			default:
-				 $this->loadInclude($filename, $compropagoData);
+				 self::loadInclude($filename, $compropagoData);
 				 return true;
 			
 		}
 		
 	}
 	
-	private function loadInclude($filename,$compropagoData){
+	private static function loadInclude($filename,$compropagoData){
 		require $filename;
 	}
-	private function loadTpl(){
+	private static function loadTpl(){
 	
 	}
-	private function loadTwig(){
+	private static function loadTwig(){
 		
 	}
 	/**
@@ -75,7 +75,7 @@ class Views{
 	 * @return bool
 	 * @return buffer
 	 */
-	private function loadOb($filename,$compropagoData){
+	private static function loadOb($filename,$compropagoData){
 		ob_start();
 		require $filename;
 		return ob_get_clean();
