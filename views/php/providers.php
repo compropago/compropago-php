@@ -22,12 +22,12 @@
 
 ?>
 <div id="compropagoWrapper">
-<?php echo $data['description'];?>
+<?php echo $compropagoData['description'];?>
 <hr class="compropagoHr">
-<b><?php echo $data['instrucciones'];?></b>
-<?php if($data['showlogo']=='yes'){?>
+<b><?php echo $compropagoData['instrucciones'];?></b>
+<?php if($compropagoData['showlogo']=='yes'){?>
 	<ul>
-		<?php foreach ($data['providers'] as $provider){ ?>
+		<?php foreach ($compropagoData['providers'] as $provider){ ?>
 		<li>	
 			<input id="compropago_<?php echo $provider->internal_name ?>" type="radio" name="compropagoProvider" value="<?php echo $provider->internal_name ?>" image-label="<?php echo $provider->internal_name ?>">
             <label for="compropago_<?php echo $provider->internal_name ?>" class="compropagoProviderDesc" ">
@@ -38,7 +38,7 @@
 	</ul>
 <?php }else{?>
 	<select name="compropagoProvider">
-	<?php foreach ($data['providers'] as $provider){ ?>
+	<?php foreach ($compropagoData['providers'] as $provider){ ?>
 			<option value="<?php echo $provider->internal_name ?>"><?php echo $provider->name ?></option>		
 	<?php }?>
 	</select>

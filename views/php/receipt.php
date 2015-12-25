@@ -20,10 +20,10 @@
 ?>
 <div id="compropagoWrapper">
 
-	<a href="https://www.compropago.com/comprobante/?confirmation_id=<?php echo $data->id;?>" target="_new">Consulta los detalles de la orden haciendo click <b>Aquí</b></a>
+	<a href="https://www.compropago.com/comprobante/?confirmation_id=<?php echo $compropagoData->id;?>" target="_new">Consulta los detalles de la orden haciendo click <b>Aquí</b></a>
 	<hr class="compropagoHr">
-	<h2><?php //echo $data->order_info->$order_id ?></h2>	
-	vence: <?php echo $data->id;?>
+	<h2><?php //echo $compropagoData->order_info->$order_id ?></h2>	
+	vence: <?php echo $compropagoData->id;?>
 	
 	<table class="table-receipt">
                 <thead>
@@ -34,16 +34,16 @@
                 </thead>
                 <tbody>
                 <tr style="line-height: 18px; padding: 2px;">
-                  <td style="width: 60%;padding-left: 10px;margin: 5px 0px 10px 0px;" class="description"><span style="margin-bottom: 10px"><?php echo $data->order_info->id;?></span></td>
-                  <td style="width: 40%;margin: 5px 0px 10px 0px;" class="description"><span style="margin-left: 3px;"><?php echo $data->order_info->order_price;?></span></td>
+                  <td style="width: 60%;padding-left: 10px;margin: 5px 0px 10px 0px;" class="description"><span style="margin-bottom: 10px"><?php echo $compropagoData->order_info->id;?></span></td>
+                  <td style="width: 40%;margin: 5px 0px 10px 0px;" class="description"><span style="margin-left: 3px;"><?php echo $compropagoData->order_info->order_price;?></span></td>
                 </tr>
                 </tbody>
 	</table>
-	<p><?php echo $data->instructions->description;?></p>
+	<p><?php echo $compropagoData->instructions->description;?></p>
 	<ol>
-		<li><?php echo $data->instructions->step_1;?></li>
-		<li><?php echo $data->instructions->step_2;?></li>
-		<li><?php echo $data->instructions->step_3;?></li>
+		<li><?php echo $compropagoData->instructions->step_1;?></li>
+		<li><?php echo $compropagoData->instructions->step_2;?></li>
+		<li><?php echo $compropagoData->instructions->step_3;?></li>
 	</ol>
 </div>
 
