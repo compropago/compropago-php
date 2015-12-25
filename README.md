@@ -6,6 +6,6 @@ Agregar a composer.json
 
 {
 	"require": { 
-		"compropago/php-sdk":"1.0.0"
+		"compropago/php-sdk":"^1.0"
 	}
 }
