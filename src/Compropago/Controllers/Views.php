@@ -19,10 +19,23 @@
  */
 namespace Compropago\Controllers;
 
+use Compropago\Exception;
+
 class Views{
 	
-	
-	public static function loadView($view,$compropagoData,$method='include',$ext='php',$path=null){
+	/**
+	 * Views Loader
+	 * @param string $view
+	 * @param mixed $compropagoData
+	 * @param string $method
+	 * @param string $ext
+	 * @param string $path
+	 * @throws Exception
+	 * @return null on Exception
+	 * @return boolean according to methods
+	 * @return mixed buffers,etc
+	 */
+	public static function loadView($view='raw',$compropagoData=null,$method='include',$ext='php',$path=null){
 		if($path==null){
 			//path relativo al vendor Compropago/views
 			$path=__DIR__ . '/../../../views/';
