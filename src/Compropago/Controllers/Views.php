@@ -38,7 +38,7 @@ class Views{
 	public static function loadView($view='raw',$compropagoData=null,$method='include',$ext='php',$path=null){
 		if($path==null){
 			//path relativo al vendor Compropago/views
-			$path=__DIR__ . '/../../../views/';
+			$path=__DIR__ . '/../../../views/'.$ext.'/';
 		}
 		$filename=$path.$view.$ext;
 		if( !file_exists($filename) ){
