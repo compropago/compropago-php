@@ -47,7 +47,7 @@ class Views{
 		}
 		switch ($method){
 			case 'ob':
-				self::loadInclude($filename , $compropagoData);
+				return self::loadOb($filename , $compropagoData);
 			break;
 			case 'include':
 			default:
