@@ -1,5 +1,6 @@
 #compropagoWrapper li{ display:inline-block; padding:5px; }
-#compropagoWrapper input { position:absolute; display:none; }
+
+/* #compropagoWrapper input { position:absolute; display:none; } */
 
 #compropagoWrapper input[type="radio"]:checked + label{ 
 	opacity: 0.5;
