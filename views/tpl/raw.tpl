@@ -1,6 +1,5 @@
-<?php
-/*
-* Copyright 2015 Compropago.
+{*
+* Copyright 2015 Compropago. 
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -13,13 +12,13 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
 * limitations under the License.
-*/
-/**
- * @author Rolando Lucio <rolando@compropago.com>
- */
-?>
+*
+* Raw printr TPL template
+* @author Rolando Lucio <rolando@compropago.com>
+*}
+
 <div id="compropagoWrapper">
 	<pre>
-		<?php print_r($compropagoData);?>
+		{$compropagoData|@print_r} 
 	</pre>
 </div>

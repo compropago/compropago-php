@@ -49,6 +49,9 @@ class Views{
 			case 'ob':
 				return self::loadOb($filename , $compropagoData);
 			break;
+			case 'path':
+				return $filename;
+			break;
 			case 'include':
 			default:
 				 self::loadInclude($filename, $compropagoData);
