@@ -1,5 +1,4 @@
 <?php
-use Compropago;
 /*
 * Copyright 2015 Compropago. 
 *
@@ -20,6 +19,10 @@ use Compropago;
  */
 require_once __DIR__.'/../vendor/autoload.php';
 
+use Compropago\Client;
+use Compropago\Controllers\Views;
+use Compropago\Service;
+
 
 //Registrate en https://compropago.com/ para poder obtener llaves de acceso
 $compropagoConfig= array(
@@ -28,16 +31,19 @@ $compropagoConfig= array(
 */
 		//Llave pública
 		'publickey'=>'pk_test_TULLAVEPUBLICA',
-		//Llave privada
+		//Llave privada 
 		'privatekey'=>'sk_test_TULLAVE PRIVADA',
 		//Estas probando?, descomenta la sig. línea y utiliza tus llaves de Modo Pruebas
 		//'live'=>false
 		'live'=>true
 );
 
-$compropagoClient= new Compropago\Client($compropagoConfig);
-$compropagoService= new Compropago\Service($compropagoClient);
-$compropagoData=$compropagoService->getProviders();
+$compropagoClient= new Client($compropagoConfig);
+$compropagoService= new Service($compropagoClient);
+$compropagoData['providers']=$compropagoService->getProviders();
+$compropagoData['showlogo']='yes';
+$compropagoData['description']='Plugin Descriptor compropago';
+$compropagoData['instrucciones']='Compropago Instrucciones';
 ?>
 
 <html>
@@ -45,7 +51,7 @@ $compropagoData=$compropagoService->getProviders();
 	<link rel="stylesheet" type="text/css" href="../assets/css/compropago.css">
 </head>
 <body>
-	<?php Compropago\Controllers\Views::loadView('providers',$compropagoData);?>
+	<?php Views::loadView('providers',$compropagoData);?>
 
 </body>
 </html>
