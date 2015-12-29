@@ -16,13 +16,17 @@
 */
 
 /**
-* Versión para compatibilidad con php 5.3
+* Versión para compatibilidad con php 5.3 +
 * @author Rolando Lucio <rolando@compropago.com>
 */
 
 namespace Compropago\Http;
 
-use GuzzleHttp;
+use Compropago\Http\Curl;
+use Compropago\Http\Request;
+use Compropago\Client;
+use Compropago\Exception;
+
 
 
 class Rest{
@@ -30,13 +34,20 @@ class Rest{
 /**
  * 
  * @param array $auth
- * @param GuzzleHttp\Client $client
- * @param unknown $service
+ * @param Compropago\Client $client
+ * @param string $service
  * @param string $query
  * @param string $method
  * @returns Array
  */
-	public static function doExecute($auth,GuzzleHttp\Client $client,$service,$query=FALSE,$method='GET') {
+	public static function doExecute(Client $client,$service,$query=FALSE,$method='GET') {
+		if(!isset($client)){
+			throw new Exception('Client Required');
+		}
+		//$client->getAuth();
+		//CURLOPT_USERPWD, $username . ":" . $password); 
+		$request=new Request($url);
+		$curl= new Curl();
 		$requestParams=['auth'=>$auth];
 		if($query && $method=='POST'){
 			$requestParams['json']=$query;

@@ -31,7 +31,7 @@ class Client{
 	const API_LIVE_URI='https://api.compropago.com/v1/';
 	//note a https://sandbox.compropago.com/v1/
 	const API_SANDBOX_URI='https://api.compropago.com/v1/'; 
-	const USER_AGENT_SUFFIX = "compropago-sdk-php-client/";
+	const USER_AGENT_SUFFIX = "compropago-php-sdk/";
 	
 	
 	/**
@@ -69,10 +69,10 @@ class Client{
 			$error= "Se requieren las llaves del API de Compropago";
 			throw new Exception($error);
 		}else{
-			$this->auth=[$params['privatekey'],$params['publickey']];
+			$this->auth=[$params['privatekey'],$params['publickey']]; ///////////cambiar a formato curl?
 				
 			
-			//Modo Activo o Pruebas
+			//Modo Activo o Pruebas volver default live !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			if($params['live']==true){
 				$this->deployUri=self::API_LIVE_URI;
 				$this->deployMode=true;

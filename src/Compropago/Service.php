@@ -19,28 +19,23 @@
  */
 namespace Compropago;
 
-use Compropago;
+use Compropago\Client;
 use Compropago\Http\Rest;
 
 
 class Service{
 	/**
 	 *
-	 * @var GuzzleHttp\Client client
+	 * @var Compropago\Client client
 	 */
 	private $client;
-	/**
-	 * @var array auth
-	 */
-	private $auth;
 	
 	/**
 	 * 
-	 * @param GuzzleHttp\Client $client
+	 * @param Compropago\Client $client
 	 */
-	public function __construct(Compropago\Client $client){
+	public function __construct(Client $client){
 		$this->client=$client->getHttp();
-		$this->auth=$client->getAuth();
 	}
 	
 	/**
