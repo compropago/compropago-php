@@ -43,8 +43,9 @@ class Service{
 	 */
 	public function getProviders(){
 		$response=Rest::doExecute($this->client,'providers/true');
+	
 		
-		$jsonObj=json_decode( $response->getBody() );
+		$jsonObj= json_decode($response);
 		
 		usort($jsonObj, function($a, $b) { 
 			return $a->rank > $b->rank ? 1 : -1; 

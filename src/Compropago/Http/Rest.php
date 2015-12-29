@@ -23,7 +23,7 @@
 namespace Compropago\Http;
 
 use Compropago\Http\Curl;
-use Compropago\Http\Request;
+
 use Compropago\Client;
 use Compropago\Exception;
 
@@ -44,24 +44,38 @@ class Rest{
 		if(!isset($client)){
 			throw new Exception('Client Required');
 		}
-		$http=$client->getHttp();
-$http=new Request($url);
-		$http->setServiceUrl($service);
-		$http->setRequestMethod($method);
-		if($method!='GET' || $method!='POST'){
-			//no more in rest 
+		
+		$request= $client->getHttp();
+		switch ($method){
 			
+			case 'GET':
+			case 'POST':
+				//supp rest methods
+				$request->setRequestMethod($method);
+			break;
+			default:
+			//no more in rest 
+			throw new Exception('Rest Method not supported');
 		}
+
+		$request->setServiceUrl($service);
+		
+		
 		if($query && $method=='POST'){
-			//just post data
-			$http->setData($query);
-			$http->evalData();
+			//just post data, throw con query en GET?
+			$request->setData($query);
 		}
+		
+		$request->setMethodOptions($method);
+		//$request->setOptions($addopts);
 		
 		$curl= new Curl();
 		
 		
-		$res = $client->request($method,$service,$requestParams);
-		return $res;		
+		$response = $curl->executeRequest($request);
+		
+		//eval aca, errors parse data, http codes fatal exceptions,etc
+		
+		return $response['responseBody'];
 	}
 }

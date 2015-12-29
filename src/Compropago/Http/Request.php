@@ -27,7 +27,7 @@ class Request{
 	protected $userAgent;
 	protected $requestMethod;
 	protected $url;
-	protected $options;
+	protected $options =array();
 	protected $data;
 	protected $requestHeaders;
 	protected $auth;
@@ -65,7 +65,7 @@ class Request{
 	}
 	
 	public function setOptions($options){
-	    $this->options = $options + $this->options;
+	    $this->options = array_merge($options, $this->options);
 	}
 	
 	public function getOptions(){
@@ -80,20 +80,25 @@ class Request{
 	public function setMethodOptions($method){
 		switch ($method){
 			case 'GET':
-				$this->options[CURLOPT_HTTPGET] = 1;
+				$this->setOptions(array(CURLOPT_HTTPGET=>1));
 			break;
 			case 'DELETE':
-				$this->options[CURLOPT_CUSTOMREQUEST] = 'DELETE';
+				$this->setOptions(array(CURLOPT_CUSTOMREQUEST=>'DELETE'));
 			break;
 			case 'POST':
 				$this->data=json_encode($this->data);
-				$this->options[CURLOPT_POST] = 1;
-				$this->options[CURLOPT_POSTFIELDS] = $this->datadata;;
+				$this->setOptions(array( 
+						CURLOPT_POST=>1,
+						CURLOPT_POSTFIELDS => $this->data
+				) );
+				
 			break;
 			case 'PUT':
 				$this->data=json_encode($this->data);
-				$this->options[CURLOPT_CUSTOMREQUEST] = 'PUT';
-				$this->options[CURLOPT_POSTFIELDS] = $this->data;
+				$this->setOptions(array(
+						CURLOPT_CUSTOMREQUEST=>'PUT',
+						CURLOPT_POSTFIELDS => $this->datadata
+				) );
 			break;			
 			default:
 				throw new Exception('Invalid Request Method');
@@ -115,6 +120,9 @@ class Request{
 		}
 		$this->requestHeaders = $headers;
 	}
+	public function getRequestHeaders(){
+		return $this->requestHeaders;
+	}
 	
 	public function setUserAgent($suffix,$prefix,$contained=null){
 		$this->userAgent= ($contained) ? $suffix.$prefix.' ('.$contained.')' : $suffix.$prefix;
@@ -131,7 +139,9 @@ class Request{
 	public function setData($data){
 		$this->data=$data;
 	}
-	
+	public function getData(){
+		return $this->data;
+	}
 	
 	/**
 	 * Check if data is going to be sent or not data
