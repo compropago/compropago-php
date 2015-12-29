@@ -60,12 +60,12 @@ class Service{
 	 */
 	public function verifyOrder( $orderId ){
 		$response=Rest::doExecute($this->client,'charges/'.$orderId);
-		return json_decode( $response->getBody() );
+		return json_decode( $response );
 	}
 	
 	public function placeOrder( $params ){
 		$response=Rest::doExecute($this->client,'charges/',$params,'POST');
-		return json_decode( $response->getBody() );
+		return json_decode( $response);
 		
 	}
 }
