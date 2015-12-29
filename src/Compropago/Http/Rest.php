@@ -40,17 +40,27 @@ class Rest{
  * @param string $method
  * @returns Array
  */
-	public static function doExecute(Client $client,$service,$query=FALSE,$method='GET') {
+	public static function doExecute(Client $client,$service=null,$query=FALSE,$method='GET') {
 		if(!isset($client)){
 			throw new Exception('Client Required');
 		}
-		
-		$request=new Request($url);
-		$curl= new Curl();
-		$requestParams=['auth'=>$auth];
-		if($query && $method=='POST'){
-			$requestParams['json']=$query;
+		$http=$client->getHttp();
+$http=new Request($url);
+		$http->setServiceUrl($service);
+		$http->setRequestMethod($method);
+		if($method!='GET' || $method!='POST'){
+			//no more in rest 
+			
 		}
+		if($query && $method=='POST'){
+			//just post data
+			$http->setData($query);
+			$http->evalData();
+		}
+		
+		$curl= new Curl();
+		
+		
 		$res = $client->request($method,$service,$requestParams);
 		return $res;		
 	}

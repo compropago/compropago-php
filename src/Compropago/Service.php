@@ -35,7 +35,7 @@ class Service{
 	 * @param Compropago\Client $client
 	 */
 	public function __construct(Client $client){
-		$this->client=$client->getHttp();
+		$this->client=$client;
 	}
 	
 	/**

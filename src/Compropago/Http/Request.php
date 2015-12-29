@@ -31,6 +31,7 @@ class Request{
 	protected $data;
 	protected $requestHeaders;
 	protected $auth;
+	protected $serviceUrl;
 	
 	public function __construct($url,$method = 'GET',$headers = array(),$data = null) {
 		if(empty($url)){
@@ -44,8 +45,13 @@ class Request{
 	public function setUrl($url){
 		$this->url=$url;
 	}
-	public function appendUrl($add){
-		$this->url=$this->url.$add;
+	public function setServiceUrl($service){
+		if($service){
+			$this->serviceUrl=$this->url.$service;
+		}
+	}
+	public function getServiceUrl(){
+		return (isset($this->serviceUrl) && !empty($this->serviceUrl)) ? $this->serviceUrl : $this->url;
 	}
 	public function setAuth($arr){
 		if(!is_array($arr)){

@@ -46,9 +46,10 @@ class Curl{
 	 */
 	public function executeRequest(Request $request){
 		$curl = curl_init();
-		if ($request->getPostBody()) {
+	/*	if ($request->getPostBody()) {
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getPostBody());
-		}
+		}*/
+		
 		$requestHeaders = $request->getRequestHeaders();
 		if ($requestHeaders && is_array($requestHeaders)) {
 			$curlHeaders = array();
@@ -57,7 +58,7 @@ class Curl{
 			}
 			curl_setopt($curl, CURLOPT_HTTPHEADER, $curlHeaders);
 		}
-		curl_setopt($curl, CURLOPT_URL, $request->getUrl());
+		curl_setopt($curl, CURLOPT_URL, $request->getServiceUrl());
 		
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $request->getRequestMethod());
 		curl_setopt($curl, CURLOPT_USERAGENT, $request->getUserAgent());
@@ -79,7 +80,7 @@ class Curl{
 		if (!isset($this->options[CURLOPT_CAINFO])) {
 			curl_setopt($curl, CURLOPT_CAINFO, dirname(__FILE__) . '/cacerts.pem');
 		}
-		/*
+		/* se pasaba directo o primero que falle?
 		 * 	if ($errorCode == 60 || $errorCode == 77) {
 				curl_setopt($curl, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
 				$rbody = curl_exec($curl);
