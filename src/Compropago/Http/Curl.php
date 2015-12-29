@@ -23,21 +23,20 @@
  
 namespace Compropago\Http;
 
-use Compropago;
+use Compropago\Client;
+use Compropago\Exception;
 
 class Curl{
 
 	/**
 	 * @param Compropago_Client los datos 
-	 * @return void
 	 * @throws Compropago_Exception en error de librerias 
-	 * dev-notes, future: puede extender de una clase abstracta o ser extendida de una para funciones rest si la misma API debe hacer llamadas externas a 3ros
 	 */
 	public function __construct(Compropago\Client $client){
 		if (!extension_loaded('curl') && function_exists('curl_init')) {
 			$error="Compropago no se puede ejecutar: se requiere la extensión Curl en el servidor";
-			throw new Compropago_Exception($error);
-			
+			throw new Exception($error);
+			return;
 		}
 	}
 	

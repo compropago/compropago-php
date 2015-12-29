@@ -16,7 +16,7 @@
 */
 
 /**
-* GuzzleHttp implementation of Compropago API
+* Versión para compatibilidad con php 5.3
 * @author Rolando Lucio <rolando@compropago.com>
 */
 
