@@ -61,6 +61,7 @@ class Curl{
 		
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $request->getRequestMethod());
 		curl_setopt($curl, CURLOPT_USERAGENT, $request->getUserAgent());
+		curl_setopt($curl, CURLOPT_USERPWD, $request->getAuth());
 		
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);

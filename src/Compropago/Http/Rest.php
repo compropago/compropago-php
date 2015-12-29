@@ -44,8 +44,7 @@ class Rest{
 		if(!isset($client)){
 			throw new Exception('Client Required');
 		}
-		//$client->getAuth();
-		//CURLOPT_USERPWD, $username . ":" . $password); 
+		
 		$request=new Request($url);
 		$curl= new Curl();
 		$requestParams=['auth'=>$auth];

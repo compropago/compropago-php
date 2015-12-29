@@ -22,7 +22,7 @@
  */
 
 namespace Compropago;
-use GuzzleHttp;
+use Compropago\Http\Request;
 
 
 class Client{
@@ -51,7 +51,7 @@ class Client{
 	
 	
 	/**
-	 * @var GuzzleHttp\ClientInterface $http
+	 * @var Compropago\Request $http
 	 */
 	private $http;
 	
@@ -72,18 +72,25 @@ class Client{
 			$this->auth=[$params['privatekey'],$params['publickey']]; ///////////cambiar a formato curl?
 				
 			
-			//Modo Activo o Pruebas volver default live !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			if($params['live']==true){
-				$this->deployUri=self::API_LIVE_URI;
+			//Modo Activo o Pruebas 
+			if($params['live']==false){
+				$this->deployUri=self::API_SANDBOX_URI;
 				$this->deployMode=true;
 			}else{
-				$this->deployUri=self::API_SANDBOX_URI;
+				$this->deployUri=self::API_LIVE_URI;
 				$this->deployMode=false;
 			}
+			if(isset($params['contained']) && !empty($params['contained']) ){
+				$extra=$params['contained'];
+			}else {
+				$extra='SDK; PHP '. phpversion().';';
+			}
+				
 			
-			$this->http= new GuzzleHttp\Client(['base_uri' => $this->deployUri]);
-			
-			
+			$http= new Request($this->deployUri);
+			$http->setUserAgent(self::USER_AGENT_SUFFIX, $this->getVersion(),$extra);
+			$http->setAuth($this->auth);
+			$this->http=$http;
 			
 		}
 			
@@ -99,9 +106,7 @@ class Client{
 	public function getHttp(){
 		return $this->http;
 	}
-	public function getAuth(){
-		return $this->auth;
-	}
+	
 	
 	
 	

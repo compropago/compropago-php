@@ -30,15 +30,32 @@ class Request{
 	protected $options;
 	protected $data;
 	protected $requestHeaders;
+	protected $auth;
 	
 	public function __construct($url,$method = 'GET',$headers = array(),$data = null) {
 		if(empty($url)){
 			throw new Exception('Missing Url');
 		}
-				$this->url=$url;
+				$this->setUrl($url);
 				$this->setRequestMethod($method);
 				$this->setRequestHeaders($headers);
 				$this->setData($data);
+	}
+	public function setUrl($url){
+		$this->url=$url;
+	}
+	public function appendUrl($add){
+		$this->url=$this->url.$add;
+	}
+	public function setAuth($arr){
+		if(!is_array($arr)){
+			return false;
+		}
+		//eval keys reg express
+		$this->auth= $arr[0] . ":" . $arr[1];
+	}
+	public function getAuth(){
+		return $this->auth;
 	}
 	
 	public function setOptions($options){
@@ -93,8 +110,8 @@ class Request{
 		$this->requestHeaders = $headers;
 	}
 	
-	public function setUserAgent($suffix,$prefix,$contained){
-		$this->userAgent=$suffix.$prefix.' ('.$contained.')';
+	public function setUserAgent($suffix,$prefix,$contained=null){
+		$this->userAgent= ($contained) ? $suffix.$prefix.' ('.$contained.')' : $suffix.$prefix;
 	}
 	
 	public function getUserAgent(){

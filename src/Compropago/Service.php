@@ -42,7 +42,7 @@ class Service{
 	 * @return json
 	 */
 	public function getProviders(){
-		$response=Rest::doExecute($this->auth,$this->client,'providers/true');
+		$response=Rest::doExecute($this->client,'providers/true');
 		
 		$jsonObj=json_decode( $response->getBody() );
 		
@@ -57,13 +57,13 @@ class Service{
 	 * @param string $orderId
 	 * @return json
 	 */
-	public function verifyOrder( $orderId){
-		$response=Rest::doExecute($this->auth,$this->client,'charges/'.$orderId);
+	public function verifyOrder( $orderId ){
+		$response=Rest::doExecute($this->client,'charges/'.$orderId);
 		return json_decode( $response->getBody() );
 	}
 	
-	public function placeOrder($params){
-		$response=Rest::doExecute($this->auth,$this->client,'charges/',$params,'POST');
+	public function placeOrder( $params ){
+		$response=Rest::doExecute($this->client,'charges/',$params,'POST');
 		return json_decode( $response->getBody() );
 		
 	}
