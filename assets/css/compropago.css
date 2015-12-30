@@ -1,3 +1,4 @@
+
 #compropagoWrapper li{
 	display:inline-block; padding:5px;
 }
@@ -8,14 +9,21 @@
 } 
 
 #compropagoWrapper input[type="radio"]:checked + label img{ 
-    box-shadow: 0px 0px 0px 4px rgba(0,170,239,1), 0px 0px 10px 0px rgba(0,0,0,1);
+    border: solid 4px #00AAEF;
     cursor: pointer;
     opacity: 1;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,.3);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,.3);
 }
 
 #compropagoWrapper input[type="radio"] + label img{ 
     cursor: pointer;
     opacity: .6;
+    border: solid 4px transparent;
 }
 
 #compropagoWrapper img{
@@ -23,7 +31,6 @@
 }
 
 #compropagoWrapper input[type="radio"] + label img{ 
-    border-radius: 4px;
     cursor: pointer;
 }
 
