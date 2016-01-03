@@ -20,7 +20,7 @@
  * @author Rolando Lucio <rolando@compropago.com>
  */
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once dirname(__FILE__).'/../vendor/autoload.php';
 
 
 //Registrate en https://compropago.com/ para poder obtener llaves de acceso
