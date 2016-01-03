@@ -19,6 +19,7 @@
  * cUrl implementation of Compropago API
  * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
+ * @version 1.0.1
  */
  
 namespace Compropago\Http;

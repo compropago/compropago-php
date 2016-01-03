@@ -18,6 +18,7 @@
  * @example Ejemplo básico de conexión
  * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
+ * @version 1.0.1
  */
 
 require_once dirname(__FILE__).'/../vendor/autoload.php';
@@ -40,7 +41,7 @@ $compropagoConfig= array(
 $compropagoClient= new Compropago\Client($compropagoConfig);
 $compropagoService= new Compropago\Service($compropagoClient);
 
-/**
+
 //Campos Obligatorios para poder realizar una nueva orden
 $data = array(
 		'order_id'    		 => 'testorderid',
@@ -52,14 +53,4 @@ $data = array(
 );
 echo '<pre>'. json_encode( $compropagoService->placeOrder($data) ). '</pre>';
 
-
-/**
- echo '<pre>'. json_encode( $compropagoService->getProviders() ). '</pre>';
-*/
-
-
-/**
- $orderId='ch_5a702add-787c-4283-9f04-cb6f0a8bd14c';
-echo '<pre>'. json_encode( $compropagoService->verifyOrder($orderId) ). '</pre>';
- */
 

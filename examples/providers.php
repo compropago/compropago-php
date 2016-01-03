@@ -18,6 +18,7 @@
  * @example Como obtener la lista de sitios de pago
  * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
+ * @version 1.0.1
  */
 require_once dirname(__FILE__).'/../vendor/autoload.php';
 
