@@ -15,6 +15,8 @@
 * limitations under the License.
 */
 /**
+ * @example Ejemplo básico de conexión
+ * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
  */
 

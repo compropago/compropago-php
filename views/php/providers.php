@@ -16,6 +16,7 @@
 */
 /**
  * Proveedores view Donde pagar
+ * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
  */
 

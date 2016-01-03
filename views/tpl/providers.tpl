@@ -14,6 +14,7 @@
 * limitations under the License.
 *
 * Providers View TPL template
+* @since 1.0.1
 * @author Rolando Lucio <rolando@compropago.com>
 *}
 

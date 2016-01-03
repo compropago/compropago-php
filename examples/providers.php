@@ -15,6 +15,8 @@
 * limitations under the License.
 */
 /**
+ * @example Como obtener la lista de sitios de pago
+ * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
  */
 require_once dirname(__FILE__).'/../vendor/autoload.php';
@@ -26,9 +28,9 @@ use Compropago\Service;
 
 //Registrate en https://compropago.com/ para poder obtener llaves de acceso
 $compropagoConfig= array(
-		/**
-		 * Obten tus llaves desde el menú de configuración de tu panel de control de ComproPago
-*/
+
+		 // Obten tus llaves desde el menú de configuración de tu panel de control de ComproPago
+
 		//Llave pública
 		'publickey'=>'pk_test_TULLAVEPUBLICA',
 		//Llave privada 
