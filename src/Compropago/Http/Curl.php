@@ -30,17 +30,28 @@ use Compropago\Http\Request;
 
 
 class Curl{
-	
-	// cURL hex representation of version 7.30.0
+	/**
+	 * cURL hex representation of version 7.30.0
+	 * @since 1.0.1
+	 */
 	const NO_QUIRK_VERSION = 0x071E00;
 	
+	
+	/**
+	 * connection headers 
+	 * @var array
+	 */
 	private static $CONNECTION_ESTABLISHED_HEADERS = array(
 			"HTTP/1.0 200 Connection established\r\n\r\n",
 			"HTTP/1.1 200 Connection established\r\n\r\n",
 	);
+	
 	/**
 	 * @throws Compropago\Exception en error de librerias 
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
+	
 	//Singleton Curl or Client, or not?
 	public function __construct(){
 		if (!extension_loaded('curl') || !function_exists('curl_init')) {
@@ -50,15 +61,18 @@ class Curl{
 	}
 	
 	/**
-	 * @param Compropago\Request $request objeto con los parametros validados de una petición
+	 * format and make curl response
+	 * @param Compropago\Request $request objet with valida request parameters
 	 * @return array  ASSOC responseBody responseHeaders responseCode
+	 * @throws Curl exception 
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public function executeRequest(Request $request){
 		$curl = curl_init();
 		if ($request->getData()) {
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getData());
-		}
-		
+		}	
 		$requestHeaders = $request->getRequestHeaders();
 		if ($requestHeaders && is_array($requestHeaders)) {
 			$curlHeaders = array();
@@ -67,20 +81,14 @@ class Curl{
 			}
 			curl_setopt($curl, CURLOPT_HTTPHEADER, $curlHeaders);
 		}
-		curl_setopt($curl, CURLOPT_URL, $request->getServiceUrl());
-		
+		curl_setopt($curl, CURLOPT_URL, $request->getServiceUrl());		
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $request->getRequestMethod());
 		curl_setopt($curl, CURLOPT_USERAGENT, $request->getUserAgent());
-		curl_setopt($curl, CURLOPT_USERPWD, $request->getAuth());
-		
+		curl_setopt($curl, CURLOPT_USERPWD, $request->getAuth());		
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-		
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);		
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_HEADER, true);
-		
-		
-	
 		if(function_exists('curl_setopt_array')){
 			curl_setopt_array($curl, $request->getOptions());
 		}else{
@@ -89,10 +97,6 @@ class Curl{
 				curl_setopt($curl, $key, $var);
 			}
 		}
-		
-		
-		
-	
 		$response = curl_exec($curl);
 		if ($response === false) {
 			$error = curl_error($curl);
@@ -109,9 +113,7 @@ class Curl{
 			
 		}
 		$headerSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-		
 		list($responseHeaders, $responseBody) = $this->parseHttpResponse($response, $headerSize);
-		
 		$responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		
 		return array(
@@ -121,7 +123,13 @@ class Curl{
 		);
 	}
 	
-	
+	/**
+	 * Split response header & body
+	 * @param unknown $respData
+	 * @param unknown $headerSize
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function parseHttpResponse($respData, $headerSize)
 	{
 		// check proxy header
@@ -148,6 +156,14 @@ class Curl{
 		$responseHeaders = $this->getHttpResponseHeaders($responseHeaders);
 		return array($responseHeaders, $responseBody);
 	} 
+	
+	/**
+	 * parse header selector
+	 * @param mixed $rawHeaders string or array headers
+	 * @return mixed parsed headers
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function getHttpResponseHeaders($rawHeaders)
 	{
 		if (is_array($rawHeaders)) {
@@ -157,6 +173,13 @@ class Curl{
 		}
 	}
 	
+	/**
+	 * parse headers in array form
+	 * @param array $rawHeaders
+	 * @return array parsed header array
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	private function parseArrayHeaders($rawHeaders){
 		$header_count = count($rawHeaders);
 		$headers = array();
@@ -170,6 +193,13 @@ class Curl{
 		}
 		return $headers;
 	}
+	/**
+	 * parse headers to array
+	 * @return array headers
+	 * @param string $rawHeaders
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	private function parseStringHeaders($rawHeaders){
 		$headers = array();
 		$responseHeaderLines = explode("\r\n", $rawHeaders);
@@ -186,6 +216,12 @@ class Curl{
 		}
 		return $headers;
 	}
+	/**
+	 * verify curl version
+	 * @return boolean
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	protected function needsQuirk()
 	{
 		$ver = curl_version();

@@ -36,22 +36,26 @@ class Client{
 	
 	
 	/**
+	 * @since 1.0.1
 	 * @var string deployUri
 	 */
 	private $deployUri;
 	
 	/**
+	 * @since 1.0.1
 	 * @var boolean deployMode
 	 */
 	private $deployMode;
 	
 	/**
+	 * @since 1.0.1
 	 * @var array auth
 	 */
 	private $auth;
 	
 	
 	/**
+	 * @since 1.0.1
 	 * @var Compropago\Request $http
 	 */
 	private $http;
@@ -60,7 +64,9 @@ class Client{
 	/**
 	 * Compropago Client Constructor
 	 * @param array $params
-	 * @throws Exception
+	 * @throws Exception Missing compropago Keys
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public function __construct($params = array()){
 		if( !array_key_exists('publickey', $params) ||
@@ -70,7 +76,7 @@ class Client{
 			$error= "Se requieren las llaves del API de Compropago";
 			throw new Exception($error);
 		}else{
-			$this->auth=[$params['privatekey'],$params['publickey']]; ///////////cambiar a formato curl?
+			$this->auth=[$params['privatekey'],$params['publickey']]; 
 				
 			
 			//Modo Activo o Pruebas 
@@ -81,13 +87,13 @@ class Client{
 				$this->deployUri=self::API_LIVE_URI;
 				$this->deployMode=false;
 			}
+			
+			
 			if(isset($params['contained']) && !empty($params['contained']) ){
 				$extra=$params['contained'];
 			}else {
 				$extra='SDK; PHP '. phpversion().';';
 			}
-				
-			
 			$http= new Request($this->deployUri);
 			$http->setUserAgent(self::USER_AGENT_SUFFIX, $this->getVersion(),$extra);
 			$http->setAuth($this->auth);
@@ -98,12 +104,20 @@ class Client{
 	}
 	
 	/**
+	 * Get current version
 	 * @return string 
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public function getVersion(){
 		return self::VERSION;	
 	}
-
+	/**
+	 * Get Request Object
+	 * @return Compropago\Http\Request
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function getHttp(){
 		return $this->http;
 	}

@@ -36,6 +36,8 @@ class Views{
 	 * @return null on Exception
 	 * @return boolean according to methods
 	 * @return mixed buffers,etc
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public static function loadView($view='raw',$compropagoData=null,$method='include',$ext='php',$path=null){
 		if($path==null){
@@ -62,7 +64,13 @@ class Views{
 		}
 		
 	}
-	
+	/**
+	 * include file
+	 * @param string $filename
+	 * @param mixed $compropagoData
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	private static function loadInclude($filename,$compropagoData){
 		require $filename;
 	}
@@ -79,6 +87,8 @@ class Views{
 	 * @param mixed $compropagoData data to be processed
 	 * @return bool
 	 * @return buffer
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	private static function loadOb($filename,$compropagoData){
 		ob_start();
