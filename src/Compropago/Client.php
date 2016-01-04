@@ -30,30 +30,24 @@ class Client{
 	
 	const VERSION="1.0.1";
 	const API_LIVE_URI='https://api.compropago.com/v1/';
-	//note a https://sandbox.compropago.com/v1/
+	//dev-notes a https://sandbox.compropago.com/v1/
 	const API_SANDBOX_URI='https://api.compropago.com/v1/'; 
 	const USER_AGENT_SUFFIX = "compropago-php-sdk/";
-	
-	
 	/**
 	 * @since 1.0.1
 	 * @var string deployUri
 	 */
-	private $deployUri;
-	
+	private $deployUri;	
 	/**
 	 * @since 1.0.1
 	 * @var boolean deployMode
 	 */
 	private $deployMode;
-	
 	/**
 	 * @since 1.0.1
 	 * @var array auth
 	 */
-	private $auth;
-	
-	
+	private $auth;	
 	/**
 	 * @since 1.0.1
 	 * @var Compropago\Request $http
