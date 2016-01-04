@@ -35,13 +35,18 @@ class Service{
 	/**
 	 * 
 	 * @param Compropago\Client $client
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public function __construct(Client $client){
 		$this->client=$client;
 	}
 	
 	/**
+	 * Get where to pay providers
 	 * @return json
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public function getProviders(){
 		$response=Rest::doExecute($this->client,'providers/true');
@@ -56,15 +61,22 @@ class Service{
 		return $jsonObj;
 	}
 	/**
-	 * 
+	 * Verify order Id status
 	 * @param string $orderId
 	 * @return json
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public function verifyOrder( $orderId ){
 		$response=Rest::doExecute($this->client,'charges/'.$orderId);
 		return json_decode( $response );
 	}
-	
+	/**
+	 * place new order
+	 * @param unknown $params
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function placeOrder( $params ){
 		$response=Rest::doExecute($this->client,'charges/',$params,'POST');
 		return json_decode( $response);
