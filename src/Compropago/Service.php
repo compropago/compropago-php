@@ -27,13 +27,11 @@ use Compropago\Http\Rest;
 
 class Service{
 	/**
-	 *
 	 * @var Compropago\Client client
 	 */
 	private $client;
 	
 	/**
-	 * 
 	 * @param Compropago\Client $client
 	 * @since 1.0.1
 	 * @version 1.0.1
@@ -50,14 +48,10 @@ class Service{
 	 */
 	public function getProviders(){
 		$response=Rest::doExecute($this->client,'providers/true');
-	
-		
-		$jsonObj= json_decode($response);
-		
+		$jsonObj= json_decode($response);	
 		usort($jsonObj, function($a, $b) { 
 			return $a->rank > $b->rank ? 1 : -1; 
-		});
-		
+		});	
 		return $jsonObj;
 	}
 	/**
@@ -73,13 +67,13 @@ class Service{
 	}
 	/**
 	 * place new order
-	 * @param unknown $params
+	 * @param array $params
 	 * @since 1.0.1
 	 * @version 1.0.1
 	 */
 	public function placeOrder( $params ){
 		$response=Rest::doExecute($this->client,'charges/',$params,'POST');
-		return json_decode( $response);
-		
+		return json_decode( $response);		
 	}
+	
 }
