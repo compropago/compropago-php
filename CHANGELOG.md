@@ -1,6 +1,13 @@
 # CHANGELOG
 
-
+## 1.0.1 2016-01-04
+Liberación de versión estable:
+* Require: PHP >= 5.3
+* Queda establecida base de documentación 
+* Manejo de Versiones: Mayor.Menor.Patch , -dev (desarrollo) , -RC (Release Candidate)
+* El ciclo de desarrollo para parches y mejoras de la actual versión menor estable (1.0) se realiza sobre el branch "master", (dev-master en composer). 
+* El desarrollo de la siguiente version menor se desarrollara en 1.1.0-dev 
+* Cambios en arquitectura generará cambio de versión Mayor, y se desarrollara en su branch independiente ( 2.0.0-dev) 
 
 ## 1.0.1-dev(RC) 2015-12-30
 * Require: PHP >= 5.3
@@ -21,7 +28,7 @@
 * Added: Compropago\Utils\Utils métodos para manejo de strings y arrays
 * Updated: Soporte de User Agent, app_client_name y app_client_version
 * Various: Limpieza de código, Preparación de documentación y comentarios en código para siguiente liberación de versión (base general). se agrega LICENSE y CHANGELOG.md
-* Restructured: A partir de la siguiente liberación estable se estructurara el nuevo esquema de tags y branches de desarrollo, mientras tanto el ciclo concluirá en el "master" (github) , "dev-master" (en composer).
+* Restructured: A partir de la siguiente liberación estable se estructurara el nuevo esquema de tags y branches.
 
 
 ## 1.0.0-dev 2015-12-25
