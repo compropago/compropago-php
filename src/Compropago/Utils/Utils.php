@@ -27,6 +27,8 @@ class Utils{
 	 * Normalize all keys in an array to lower-case.
 	 * @param array $arr
 	 * @return array Normalized array.
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public static function normalize($arr)
 	{
@@ -43,6 +45,8 @@ class Utils{
 	 * Convert a string to camelCase
 	 * @param  string $value
 	 * @return string
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public static function camelCase($value)
 	{
@@ -56,6 +60,8 @@ class Utils{
 	 * Convert Array to QueryString or validate string
 	 * @param array $query | string QueryString
 	 * @param string $prefix
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public static function encodeQueryString( $query, $prefix=null) {
 		if (!is_array($query)){

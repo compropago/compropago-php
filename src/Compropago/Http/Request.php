@@ -35,6 +35,16 @@ class Request{
 	protected $auth;
 	protected $serviceUrl;
 	
+	/**
+	 * 
+	 * @param string $url
+	 * @param string $method
+	 * @param array $headers
+	 * @param mixed $data
+	 * @throws Exception
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function __construct($url,$method = 'GET',$headers = array(),$data = null) {
 		if(empty($url)){
 			throw new Exception('Missing Url');
@@ -44,17 +54,42 @@ class Request{
 				$this->setRequestHeaders($headers);
 				$this->setData($data);
 	}
+	/**
+	 * set url
+	 * @param string $url
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function setUrl($url){
 		$this->url=$url;
 	}
+	/**
+	 * set service to request
+	 * @param unknown $service
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function setServiceUrl($service){
 		if($service){
 			$this->serviceUrl=$this->url.$service;
 		}
 	}
+	/**
+	 * get service url
+	 * @return request url
+	 * @since 1.0.1
+	 * @version 1.0.1 
+	 */
 	public function getServiceUrl(){
 		return (isset($this->serviceUrl) && !empty($this->serviceUrl)) ? $this->serviceUrl : $this->url;
 	}
+	/**
+	 * set auth
+	 * @param array $arr
+	 * @return false
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function setAuth($arr){
 		if(!is_array($arr)){
 			return false;
@@ -62,14 +97,29 @@ class Request{
 		//eval keys reg express
 		$this->auth= $arr[0] . ":" . $arr[1];
 	}
+	/**
+	 * @return string auth
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function getAuth(){
 		return $this->auth;
 	}
 	
+	/**
+	 * merge options for curl
+	 * @param unknown $options
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function setOptions($options){
 	    $this->options = array_merge($options, $this->options);
 	}
-	
+	/**
+	 * @return array options
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function getOptions(){
 		return $this->options;
 	}
@@ -78,6 +128,8 @@ class Request{
 	 * Set Method Options
 	 * @param string $method
 	 * @throws Exception
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public function setMethodOptions($method){
 		switch ($method){
@@ -109,12 +161,21 @@ class Request{
 			throw new Exception('Method require Data');
 		}	
 	}
-	
+	/** 
+	 * @param string $method
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function setRequestMethod($method){
 		$this->requestMethod = strtoupper($method);
 		return true;
 	}
-	
+	/**
+	 * normalize header
+	 * @param array $headers
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function setRequestHeaders($headers){
 		$headers = Utils::normalize($headers);
 		if ($this->requestHeaders) {
@@ -122,22 +183,48 @@ class Request{
 		}
 		$this->requestHeaders = $headers;
 	}
+	/**
+	 * @return array
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function getRequestHeaders(){
 		return $this->requestHeaders;
 	}
-	
+	/**
+	 * set user agent
+	 * @param string $suffix
+	 * @param string $prefix
+	 * @param string $contained
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function setUserAgent($suffix,$prefix,$contained=null){
 		$this->userAgent= ($contained) ? $suffix.$prefix.' ('.$contained.')' : $suffix.$prefix;
 	}
-	
+	/**
+	 * @return string useragent
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function getUserAgent(){
 		return $this->userAgent;
 	}
-	
+	/**
+	 * @return string method
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function getRequestMethod(){
 		return $this->requestMethod;
 	}
 	
+	/**
+	 * set data to post
+	 * @param mixed $data
+	 * @since 1.0.1
+	 * @version 1.0.1
+	 */
 	public function setData($data){
 		$this->data=$data;
 	}
@@ -146,9 +233,11 @@ class Request{
 	}
 	
 	/**
-	 * Check if data is going to be sent or not data
+	 * Check if data is going to be sent or no data
 	 * @return boolean 
 	 * @throws Exception
+	 * @since 1.0.1
+	 * @version 1.0.1
 	 */
 	public function evalData(){
 	    if (($this->getRequestMethod() == "POST" || $this->getRequestMethod() == "PUT" ) && !empty($this->data)) {

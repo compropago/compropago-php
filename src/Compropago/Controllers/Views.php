@@ -74,12 +74,7 @@ class Views{
 	private static function loadInclude($filename,$compropagoData){
 		require $filename;
 	}
-	private static function loadTpl(){
 	
-	}
-	private static function loadTwig(){
-		
-	}
 	/**
 	 * Process by PHP output buffering
 	 * Some plugins might require to (string)output

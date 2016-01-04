@@ -16,7 +16,7 @@
 */
 
 /**
-* Versión para compatibilidad con php 5.3 +
+* Rest Implementation 
 * @since 1.0.1
 * @author Rolando Lucio <rolando@compropago.com>
 * @version 1.0.1
@@ -34,13 +34,15 @@ use Compropago\Exception;
 class Rest{
 	
 /**
- * 
- * @param array $auth
+ * Base Rest Request
  * @param Compropago\Client $client
  * @param string $service
  * @param string $query
  * @param string $method
  * @returns Array
+ * @throws Compropago\Exception
+ * @since 1.0.1
+ * @version 1.0.1
  */
 	public static function doExecute(Client $client,$service=null,$query=FALSE,$method='GET') {
 		if(!isset($client)){
