@@ -8,6 +8,12 @@ ComproPago, PHP API client (SDK)
 - [Guía para Empezar a usar ComproPago](https://compropago.com/ayuda-y-soporte/como-comenzar-a-usar-compropago)
 - [Información de Contacto](https://compropago.com/contacto)
 
+## Requerimientos
+
+* [PHP >= 5.3](http://www.php.net/)
+* [PHP JSON extension](http://php.net/manual/en/book.json.php)
+* [PHP cURL extension](http://php.net/manual/en/book.curl.php)
+
 ## Instalación ComproPago SDK
 
 ### Instalación usando Composer
