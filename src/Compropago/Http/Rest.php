@@ -78,8 +78,7 @@ class Rest{
 		
 		$response = $curl->executeRequest($request);
 		
-		//eval aca, errors parse data, http codes fatal exceptions,etc
 		
-		return $response['responseBody'];
+		return $response;
 	}
 }

@@ -48,7 +48,7 @@ class Service{
 	 */
 	public function getProviders(){
 		$response=Rest::doExecute($this->client,'providers/true');
-		$jsonObj= json_decode($response);	
+		$jsonObj= json_decode($response['responseBody']);	
 		usort($jsonObj, function($a, $b) { 
 			return $a->rank > $b->rank ? 1 : -1; 
 		});	
@@ -63,7 +63,7 @@ class Service{
 	 */
 	public function verifyOrder( $orderId ){
 		$response=Rest::doExecute($this->client,'charges/'.$orderId);
-		return json_decode( $response );
+		return json_decode( $response['responseBody'] );
 	}
 	/**
 	 * place new order
@@ -73,7 +73,7 @@ class Service{
 	 */
 	public function placeOrder( $params ){
 		$response=Rest::doExecute($this->client,'charges/',$params,'POST');
-		return json_decode( $response);		
+		return json_decode( $response['responseBody']);		
 	}
 	
 }
