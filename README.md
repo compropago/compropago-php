@@ -130,12 +130,12 @@ $compropagoConfig= array(
 // Instancia del Client
 $compropagoClient= new Compropago\Client($compropagoConfig);
 ```
-### Llamados al los servicios del API 
+### Llamados al los servicios por SDK 
 Para utilizar los métodos se necesita tener una instancia de Service. La cual recibe de parámetro el objeto de Client. 
 ```php
 $compropagoService= new Compropago\Service($compropagoClient);
 ```
-### Métodos base del API
+### Métodos base del SDK
 **Crear una nueva orden de Pago**
 ```php
 //Campos Obligatorios para poder realizar una nueva orden
@@ -151,6 +151,47 @@ $data = array(
 $response = $compropagoService->placeOrder($data);
 
 ```
+### Llamados directos al API 
+Para conocer los servicios del API visite la documentación del [API de ComproPago] (https://compropago.com/documentacion/api)
+
+Utilice el método estático Compropago\Http\Rest::doExecute para consumir directamente el API, su estructura es la siguiente:
+
+```php
+/**
+ * @param Compropago\Client $client  // Objeto Cliente configurado
+ * @param string $service            // Servicio del API a llamar
+ * @param mixed$query                // Información a enviar: query string 'foo=bar' o Array Asociativo array( 'foo'=>'bar')
+ * @param string $method             // método para consumir 'GET' o 'POST'
+ * @returns Array                    // asociativo con responseBody, responseHeaders, responseCode
+ */
+Compropago\Http\Rest::doExecute(Client $client,$service=null,$query=FALSE,$method='GET');
+```
+
+Por ejemplo para realizar una nueva orden de pago llamando directamente al API
+
+```php
+//Campos Obligatorios para poder realizar una nueva orden
+$data = array(
+		'order_id'    	     => 'testorderid',             // string para identificar la orden
+		'order_price'        => '123.45',                  // float con el monto de la operación
+		'order_name'         => 'Test Order Name',         // nombre para la orden
+		'customer_name'      => 'Compropago Test',         // nombre del cliente
+		'customer_email'     => 'test@compropago.com',     // email del cliente
+		'payment_type'       => 'OXXO'                     // identificador de la tienda donde realizar el pago
+);
+
+$response=Rest::doExecute($this->client,'charges/',$data,'POST'); // enviamos la información de la orden y obtenemos la respuesta del API 
+
+$body = json_decode( $response['responseBody'] );   // El cuerpo de la respuesta, volvemos el objeto JSON para procesarlo
+$headers = $response['responseHeaders'];            // Los encabezados de la respuesta
+$code = $response['responseCode'];                 // el código de la respuesta, 200 = Todo OK 
+
+/**
+ * Coloque a continuación su lógica para evaluar y procesar el resultado. 
+ */
+
+```
+
 
 ## Guía de Versiones
 
