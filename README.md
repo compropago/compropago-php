@@ -1,8 +1,10 @@
 ComproPago, PHP API client (SDK)
 ==============================
 ## Índice de Contenidos
-- [Ayuda y Soporte de ComproPago](#ayuda-y-soporte-de-compropago)
-- [Requerimientos](#requerimientos)
+- [Ayuda y Soporte de ComproPago] (#ayuda-y-soporte-de-compropago)
+- [Requerimientos] (#requerimientos)
+- [Instalación ComproPago SDK] (#instalación-compropago-sdk)
+- [Guía de Versiones] (#guía-de-versiones)
 
 ## Ayuda y Soporte de ComproPago
 
