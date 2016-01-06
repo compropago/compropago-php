@@ -146,13 +146,15 @@ $compropagoClient= new Compropago\Client($compropagoConfig);
 ```
 ### Uso Básico del SDK
 
+> ###### 
+
 #### Llamados al los servicios por SDK 
 Para utilizar los métodos se necesita tener una instancia de Service. La cual recibe de parámetro el objeto de Client. 
 ```php
 $compropagoService= new Compropago\Service($compropagoClient);
 ```
 #### Métodos base del SDK
-**Crear una nueva orden de Pago**
+##### Crear una nueva orden de Pago
 ```php
 //Campos Obligatorios para poder realizar una nueva orden
 $data = array(
@@ -168,7 +170,7 @@ $response = $compropagoService->placeOrder($data);
 
 ```
 
-**Verificar el Estatus de una orden**
+##### Verificar el Estatus de una orden
 
 ```php
 //El número de orden que queremos verificar
@@ -179,18 +181,7 @@ $response = $compropagoService->verifyOrder( $orderId );
 
 ```
 
-**Verificar el Estatus de una orden**
-
-```php
-//El número de orden que queremos verificar
-$orderId= 'ch_xxxxx-xxxxx-xxxxx-xxxxx'
-
-//Obtenemos el JSON de la respuesta 
-$response = $compropagoService->verifyOrder( $orderId );
-
-```
-
-**Obtener el listado de las tiendas donde se puede realizar el Pago**
+##### Obtener el listado de las tiendas donde se puede realizar el Pago
 
 ```php
 //Obtenemos el JSON de la respuesta 
@@ -198,7 +189,7 @@ $response = $compropagoService->getProviders( );
 
 ```
 
-**Obtener el HTML con los logos para que el usuario seleccione donde pagar**
+##### Obtener el HTML con los logos para que el usuario seleccione donde pagar
 
 ```php
 <?php
