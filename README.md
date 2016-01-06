@@ -4,7 +4,10 @@ ComproPago, PHP API client (SDK)
 - [Ayuda y Soporte de ComproPago] (#ayuda-y-soporte-de-compropago)
 - [Requerimientos] (#requerimientos)
 - [Instalación ComproPago SDK] (#instalación-compropago-sdk)
+- [Documentación] (#documentación)
+- [Guía básica de Uso] (##guía-básica-de-uso)
 - [Guía de Versiones] (#guía-de-versiones)
+
 
 ## Ayuda y Soporte de ComproPago
 
@@ -101,7 +104,7 @@ $compropagoClient= new Compropago\Client($compropagoConfig);
 ```
 ### Configuración del Cliente 
 Para poder hacer llamados al API es necesario que primero configure sus Llaves de conexión y crear un instancia de Client.
-- *Sus llaves las encontrara en su Panel de ComproPago en el menú Configuración. [Consulte Aquí sus Llaves] (https://compropago.com/panel/configuracion) *
+*Sus llaves las encontrara en su Panel de ComproPago en el menú Configuración.* [Consulte Aquí sus Llaves] (https://compropago.com/panel/configuracion) 
 
 ```php
 $compropagoConfig= array(
