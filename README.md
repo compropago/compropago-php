@@ -93,10 +93,12 @@ git clone https://github.com/compropago/compropago-php.git
 
 ### Documentación de ComproPago
 **[API de ComproPago] (https://compropago.com/documentacion/api)**
+
 ComproPago te ofrece un API tipo REST para integrar pagos en efectivo en tu comercio electrónico o tus aplicaciones.
 
 
 **[General] (https://compropago.com/documentacion)**
+
 Información de Comisiones y Horarios, como Transferir tu dinero y la Seguridad que proporciona ComproPAgo
 
 
@@ -148,7 +150,8 @@ $compropagoClient= new Compropago\Client($compropagoConfig);
 ```
 ### Uso Básico del SDK
 
-> ###### 
+> ###### Consulte la documentación de la librería PHP-SDK de ComproPago para conocer más de sus capacidades, configuraciones y métodos. (docs-php-sdk-link)
+ 
 
 #### Llamados al los servicios por SDK 
 Para utilizar los métodos se necesita tener una instancia de Service. La cual recibe de parámetro el objeto de Client. 
