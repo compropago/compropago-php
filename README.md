@@ -1,5 +1,12 @@
-ComproPago, PHP API client (SDK)
+ComproPago, PHP API client (PHP-SDK)
 ==============================
+
+## Descripción
+La librería de ComproPago-PHP le permite interactuar con el API de ComproPago en su aplicación.  También cuenta con los métodos necesarios para facilitarle su desarrollo por medio de los servicios y vistas más utilizados (SDK). 
+
+Con ComproPago puede recibir pagos en OXXO, 7Eleven y muchas tiendas más en todo México.
+[Registrarse en ComproPago ] (https://compropago.com)
+
 ## Índice de Contenidos
 - [Ayuda y Soporte de ComproPago] (#ayuda-y-soporte-de-compropago)
 - [Requerimientos] (#requerimientos)
