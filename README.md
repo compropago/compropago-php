@@ -70,7 +70,7 @@ git clone -b 1.0.1 https://github.com/compropago/compropago-php.git
  #repositorio en su estado actual (*puede no ser versón estable*)
 git clone https://github.com/compropago/compropago-php.git
  ```
- Para poder hacer uso de la librería es necesario que incluya Todos los archivos contenidos en la carpeta **src/Compropago** 
+ Para poder hacer uso de la librería es necesario que incluya **Todos** los archivos contenidos en la carpeta **src/Compropago** 
 
 ## Guía de Versiones
 
