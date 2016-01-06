@@ -89,7 +89,21 @@ git clone https://github.com/compropago/compropago-php.git
  Para poder hacer uso de la librería es necesario que incluya **Todos** los archivos contenidos en la carpeta **src/Compropago** 
  
 ## Documentación
+### PHP-SDK ComproPago
 
+### Documentación de ComproPago
+**[API de ComproPago] (https://compropago.com/documentacion/api)**
+* ComproPago te ofrece un API tipo REST para integrar pagos en efectivo en tu comercio electrónico o tus aplicaciones.
+**[General] (https://compropago.com/documentacion)**
+* Comisiones y Horarios
+* Transferir tu dinero
+* Seguridad
+**[Herramientas] (https://compropago.com/documentacion/boton-pago)**
+* Botón de pago
+* Modo de pruebas/activo
+* WebHooks
+* Librerías y Plugins
+* Shopify
 
 ## Guía básica de Uso
 Se debe contar con una cuenta activa de ComproPago. [Registrarse en ComproPago ] (https://compropago.com)
@@ -115,7 +129,7 @@ $compropagoClient= new Client($compropagoConfig);
 $compropagoClient= new Compropago\Client($compropagoConfig);
 ```
 ### Configuración del Cliente 
-Para poder hacer llamados al API es necesario que primero configure sus Llaves de conexión y crear un instancia de Client.
+Para poder hacer uso del SDK y llamados al API es necesario que primero configure sus Llaves de conexión y crear un instancia de Client.
 *Sus llaves las encontrara en su Panel de ComproPago en el menú Configuración.* [Consulte Aquí sus Llaves] (https://compropago.com/panel/configuracion) 
 
 ```php
@@ -130,12 +144,14 @@ $compropagoConfig= array(
 // Instancia del Client
 $compropagoClient= new Compropago\Client($compropagoConfig);
 ```
-### Llamados al los servicios por SDK 
+### Uso Básico del SDK
+
+#### Llamados al los servicios por SDK 
 Para utilizar los métodos se necesita tener una instancia de Service. La cual recibe de parámetro el objeto de Client. 
 ```php
 $compropagoService= new Compropago\Service($compropagoClient);
 ```
-### Métodos base del SDK
+#### Métodos base del SDK
 **Crear una nueva orden de Pago**
 ```php
 //Campos Obligatorios para poder realizar una nueva orden
@@ -151,8 +167,62 @@ $data = array(
 $response = $compropagoService->placeOrder($data);
 
 ```
+
+**Verificar el Estatus de una orden**
+
+```php
+//El número de orden que queremos verificar
+$orderId= 'ch_xxxxx-xxxxx-xxxxx-xxxxx'
+
+//Obtenemos el JSON de la respuesta 
+$response = $compropagoService->verifyOrder( $orderId );
+
+```
+
+**Verificar el Estatus de una orden**
+
+```php
+//El número de orden que queremos verificar
+$orderId= 'ch_xxxxx-xxxxx-xxxxx-xxxxx'
+
+//Obtenemos el JSON de la respuesta 
+$response = $compropagoService->verifyOrder( $orderId );
+
+```
+
+**Obtener el listado de las tiendas donde se puede realizar el Pago**
+
+```php
+//Obtenemos el JSON de la respuesta 
+$response = $compropagoService->getProviders( );
+
+```
+
+**Obtener el HTML con los logos para que el usuario seleccione donde pagar**
+
+```php
+<?php
+$compropagoData['providers']=$compropagoService->getProviders(); //obtenemos el listado
+$compropagoData['showlogo']='yes';                              //(yes|no) logos o select
+$compropagoData['description']='Plugin Descriptor compropago';  // Título a mostrar
+$compropagoData['instrucciones']='Compropago Instrucciones';    // texto de instrucciones
+?>
+<html>
+<head>
+	<!-- CSS de ComproPago-->
+	<link rel="stylesheet" type="text/css" href="../assets/css/compropago.css">
+</head>
+<body>
+	<?php
+		//llamamos al controlador para mostrar el template 
+		Compropago\Controllers\Views::loadView('providers',$compropagoData);
+	?>
+</body>
+</html>
+```
+
 ### Llamados directos al API 
-Para conocer los servicios del API visite la documentación del [API de ComproPago] (https://compropago.com/documentacion/api)
+Para conocer los servicios del API visite la documentación: [API de ComproPago] (https://compropago.com/documentacion/api)
 
 Utilice el método estático Compropago\Http\Rest::doExecute para consumir directamente el API, su estructura es la siguiente:
 
@@ -162,12 +232,13 @@ Utilice el método estático Compropago\Http\Rest::doExecute para consumir direc
  * @param string $service            // Servicio del API a llamar
  * @param mixed$query                // Información a enviar: query string 'foo=bar' o Array Asociativo array( 'foo'=>'bar')
  * @param string $method             // método para consumir 'GET' o 'POST'
- * @returns Array                    // asociativo con responseBody, responseHeaders, responseCode
+ * @return Array                    // asociativo con responseBody, responseHeaders, responseCode
  */
 Compropago\Http\Rest::doExecute(Client $client,$service=null,$query=FALSE,$method='GET');
 ```
 
-Por ejemplo para realizar una nueva orden de pago llamando directamente al API
+Por ejemplo para realizar una nueva orden de pago llamando directamente al API.
+Documentación: [API:Crear un Cargo] (https://compropago.com/documentacion/api/crear-cargo)
 
 ```php
 //Campos Obligatorios para poder realizar una nueva orden
@@ -180,7 +251,7 @@ $data = array(
 		'payment_type'       => 'OXXO'                     // identificador de la tienda donde realizar el pago
 );
 
-$response=Rest::doExecute($this->client,'charges/',$data,'POST'); // enviamos la información de la orden y obtenemos la respuesta del API 
+$response=Compropago\Http\Rest::doExecute($this->client,'charges/',$data,'POST'); // enviamos la información de la orden y obtenemos la respuesta del API 
 
 $body = json_decode( $response['responseBody'] );   // El cuerpo de la respuesta, volvemos el objeto JSON para procesarlo
 $headers = $response['responseHeaders'];            // Los encabezados de la respuesta
