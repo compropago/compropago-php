@@ -62,13 +62,12 @@ require 'vendor/autoload.php';
 Puede descargar alguna de las versiones que hemos publicado en:
 - [Consultar Versiones Publicadas en GitHub](https://github.com/compropago/compropago-php/releases)
 
-O si o lo desea puede obtener el repositorio de la última versión estable 
+O si o lo desea puede obtener el repositorio
  ```bash
+ #Última Versión estable
 git clone -b 1.0.1 https://github.com/compropago/compropago-php.git
- ``` 
 
- O el repositorio en su estado actual (*puede no ser versón estable*)
-  ```bash
+ #repositorio en su estado actual (*puede no ser versón estable*)
 git clone https://github.com/compropago/compropago-php.git
  ``` 
 
