@@ -33,6 +33,9 @@ O agregando manualmente al archivo composer.json
 		"compropago/php-sdk":"^1.0"
 	}
 ```
+```bash
+composer install
+```
 
 Después de la instalación para poder hacer uso de la librería es **necesario incluir** el autoloader de Composer:
 
@@ -45,7 +48,27 @@ Para actualizar el SDK de ComproPago a la última versión estable ejecutar:
  ```bash
 composer update
  ```
+### Instalación descargando archivo ZIP
 
+Descargar y descomprimir el archivo de la versión a utilizar:
+- Última-Estable [v.1.0.1](http://ec2-54-153-109-209.us-west-1.compute.amazonaws.com/compropago-php-sdk-1-0-1.zip)
+
+Para poder hacer uso de la librería es **necesario incluir** el autoloader que se encuentra dentro de la carpeta **vendor** del archivo que descomprimió:
+```php
+require 'vendor/autoload.php';
+```
+###Instalación por GitHub
+
+Puede descargar alguna de las versiones que hemos publicado en:
+- [Consultar Versiones Publicadas en GitHub](https://github.com/compropago/compropago-php/releases)
+O si o lo desea puede obtener el repositorio de la última versión estable 
+ ```bash
+git clone -b 1.0.1 https://github.com/compropago/compropago-php.git
+ ``` 
+ O el repositorio en su estado actual (*puede no ser versón estable*)
+  ```bash
+git clone https://github.com/compropago/compropago-php.git
+ ``` 
 
 ## Guía de Versiones
 
