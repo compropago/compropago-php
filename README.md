@@ -5,7 +5,7 @@ ComproPago, PHP API client (SDK)
 - [Requerimientos] (#requerimientos)
 - [Instalación ComproPago SDK] (#instalación-compropago-sdk)
 - [Documentación] (#documentación)
-- [Guía básica de Uso] (##guía-básica-de-uso)
+- [Guía básica de Uso] (#guía-básica-de-uso)
 - [Guía de Versiones] (#guía-de-versiones)
 
 
@@ -82,7 +82,11 @@ git clone https://github.com/compropago/compropago-php.git
  
 ## Documentación
 
+
 ## Guía básica de Uso
+Se debe contar con una cuenta activa de ComproPago. [Registrarse en ComproPago ] (https://compropago.com)
+
+### General
 
 Para poder hacer uso de la librería es necesario incluir el autoloader 
 ```php
