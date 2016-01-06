@@ -51,7 +51,7 @@ composer update
 ### Instalación descargando archivo ZIP
 
 Descargar y descomprimir el archivo de la versión a utilizar:
-- Última-Estable [v.1.0.1](http://ec2-54-153-109-209.us-west-1.compute.amazonaws.com/compropago-php-sdk-1-0-1.zip)
+- [v.1.0.1] (http://ec2-54-153-109-209.us-west-1.compute.amazonaws.com/compropago-php-sdk-1-0-1.zip) Última Estable
 
 Para poder hacer uso de la librería es **necesario incluir** el autoloader que se encuentra dentro de la carpeta **vendor** del archivo que descomprimió:
 ```php
@@ -59,7 +59,7 @@ require 'vendor/autoload.php';
 ```
 ###Instalación por GitHub
 
-Puede descargar alguna de las versiones que hemos publicado en:
+Puede descargar alguna de las versiones que hemos publicado:
 - [Consultar Versiones Publicadas en GitHub](https://github.com/compropago/compropago-php/releases)
 
 O si o lo desea puede obtener el repositorio
@@ -69,7 +69,8 @@ git clone -b 1.0.1 https://github.com/compropago/compropago-php.git
 
  #repositorio en su estado actual (*puede no ser versón estable*)
 git clone https://github.com/compropago/compropago-php.git
- ``` 
+ ```
+ Para poder hacer uso de la librería es necesario que incluya Todos los archivos contenidos en la carpeta **src/Compropago** 
 
 ## Guía de Versiones
 
