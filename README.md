@@ -89,15 +89,17 @@ git clone https://github.com/compropago/compropago-php.git
  Para poder hacer uso de la librería es necesario que incluya **Todos** los archivos contenidos en la carpeta **src/Compropago** 
  
 ## Documentación
-### PHP-SDK ComproPago
+### Documentación PHP-SDK ComproPago
 
 ### Documentación de ComproPago
 **[API de ComproPago] (https://compropago.com/documentacion/api)**
-* ComproPago te ofrece un API tipo REST para integrar pagos en efectivo en tu comercio electrónico o tus aplicaciones.
+ComproPago te ofrece un API tipo REST para integrar pagos en efectivo en tu comercio electrónico o tus aplicaciones.
+
+
 **[General] (https://compropago.com/documentacion)**
-* Comisiones y Horarios
-* Transferir tu dinero
-* Seguridad
+Información de Comisiones y Horarios, como Transferir tu dinero y la Seguridad que proporciona ComproPAgo
+
+
 **[Herramientas] (https://compropago.com/documentacion/boton-pago)**
 * Botón de pago
 * Modo de pruebas/activo
