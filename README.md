@@ -76,6 +76,66 @@ git clone -b 1.0.1 https://github.com/compropago/compropago-php.git
 git clone https://github.com/compropago/compropago-php.git
  ```
  Para poder hacer uso de la librería es necesario que incluya **Todos** los archivos contenidos en la carpeta **src/Compropago** 
+ 
+## Documentación
+
+## Guía básica de Uso
+
+Para poder hacer uso de la librería es necesario incluir el autoloader 
+```php
+require 'vendor/autoload.php';
+```
+El Namespace a utilizar dentro de la librería es **Compropago**.
+```php
+use Compropago\Client; //Configuración de datos de conexión
+use Compropago\Service; //Llamados al API
+use Compropago\Controllers\Views;  //Inclusión de vistas, ej. Mostrar template de las tiendas donde pagar
+```
+Los Namespaces para los métodos se pueden ocupar a su conveniencia. Para mayor información consulte la [documentación de PHP acerca de Namespaces] (http://php.net/manual/en/language.namespaces.basics.php) . ej:
+```php
+/* Unqualified name */
+use Compropago\Client; 
+$compropagoClient= new Client($compropagoConfig);
+/* Fully qualified name */
+$compropagoClient= new Compropago\Client($compropagoConfig);
+```
+### Configuración del Cliente 
+Para poder hacer llamados al API es necesario que primero configure sus Llaves de conexión y crear un instancia de Client.
+- *Sus llaves las encontrara en su Panel de ComproPago en el menú Configuración. [Consulte Aquí sus Llaves] (https://compropago.com/panel/configuracion) *
+
+```php
+$compropagoConfig= array(
+				//Llave pública
+				'publickey'=>'pk_test_TULLAVEPUBLICA',
+				//Llave privada 
+				'privatekey'=>'sk_test_TULLAVE PRIVADA',
+				//Esta probando?, descomente la siguiente línea y utilice sus llaves de Modo Pruebas
+				//'live'=>false
+		);
+// Instancia del Client
+$compropagoClient= new Compropago\Client($compropagoConfig);
+```
+### Llamados al los servicios del API 
+Para utilizar los métodos se necesita tener una instancia de Service. La cual recibe de parámetro el objeto de Client. 
+```php
+$compropagoService= new Compropago\Service($compropagoClient);
+```
+### Métodos base del API
+**Crear una nueva orden de Pago**
+```php
+//Campos Obligatorios para poder realizar una nueva orden
+$data = array(
+		'order_id'    	     => 'testorderid',             // string para identificar la orden
+		'order_price'        => '123.45',                  // float con el monto de la operación
+		'order_name'         => 'Test Order Name',         // nombre para la orden
+		'customer_name'      => 'Compropago Test',         // nombre del cliente
+		'customer_email'     => 'test@compropago.com',     // email del cliente
+		'payment_type'       => 'OXXO'                     // identificador de la tienda donde realizar el pago
+);
+//Obtenemos el JSON de la respuesta 
+$response = $compropagoService->placeOrder($data);
+
+```
 
 ## Guía de Versiones
 
