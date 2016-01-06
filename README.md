@@ -21,7 +21,7 @@ ComproPago, PHP API client (SDK)
 La manera recomenda de instalar la SDK de ComproPago es por medio de [Composer](http://getcomposer.org).
 - [Como instalar Composer?](https://getcomposer.org/doc/00-intro.md)
 
-Para instalar la última versión Estable de la SDK, ejecuta el comando de Composer:
+Para instalar la última versión **Estable de la SDK**, ejecuta el comando de Composer:
 
 ```bash
 composer require compropago/php-sdk
