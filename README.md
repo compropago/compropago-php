@@ -144,8 +144,9 @@ $compropagoConfig= array(
 				'publickey'=>'pk_test_TULLAVEPUBLICA',
 				//Llave privada 
 				'privatekey'=>'sk_test_TULLAVE PRIVADA',
-				//Esta probando?, descomente la siguiente línea y utilice sus llaves de Modo Pruebas
-				//'live'=>false
+				//Esta probando?, utilice  'live'=>false
+				'live'=>true 
+				
 		);
 // Instancia del Client
 $compropagoClient= new Compropago\Client($compropagoConfig);
@@ -249,7 +250,7 @@ $data = array(
 		'payment_type'       => 'OXXO'                     // identificador de la tienda donde realizar el pago
 );
 
-$response=Compropago\Http\Rest::doExecute($this->client,'charges/',$data,'POST'); // enviamos la información de la orden y obtenemos la respuesta del API 
+$response=Compropago\Http\Rest::doExecute($compropagoClient,'charges/',$data,'POST'); // enviamos la información de la orden y obtenemos la respuesta del API 
 
 $body = json_decode( $response['responseBody'] );   // El cuerpo de la respuesta, volvemos el objeto JSON para procesarlo
 $headers = $response['responseHeaders'];            // Los encabezados de la respuesta
