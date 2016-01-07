@@ -74,11 +74,11 @@ class Client{
 				
 			
 			//Modo Activo o Pruebas 
-			if($params['live']==false){
-				$this->deployUri=self::API_SANDBOX_URI;
+			if($params['live']==true){
+				$this->deployUri=self::API_LIVE_URI;
 				$this->deployMode=true;
 			}else{
-				$this->deployUri=self::API_LIVE_URI;
+				$this->deployUri=self::API_SANDBOX_URI;
 				$this->deployMode=false;
 			}
 			
