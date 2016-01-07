@@ -17,8 +17,8 @@
 /**
  * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
- * @version 1.0.1
  */
+
 namespace Compropago;
 
 use Compropago\Client;
@@ -42,11 +42,11 @@ class Service{
 	/**
 	 * Validate API key
 	 * @return boolean
-	 * @retunr json responseBody
+	 * @return json responseBody
 	 * @since 1.0.2
 	 */
 	public function evalAuth(){
-		$response=Rest::doExecute($compropagoClient,'users/auth');
+		$response=Rest::doExecute($this->client,'users/auth');
 		
 		//Error Mng Imp Test
 		$httpCode=$response['responseCode'];
