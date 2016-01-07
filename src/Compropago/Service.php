@@ -39,6 +39,32 @@ class Service{
 	public function __construct(Client $client){
 		$this->client=$client;
 	}
+	/**
+	 * Validate API key
+	 * @return boolean
+	 * @retunr json responseBody
+	 * @since 1.0.2
+	 */
+	public function evalAuth(){
+		$response=Rest::doExecute($compropagoClient,'users/auth');
+		
+		//Error Mng Imp Test
+		$httpCode=$response['responseCode'];
+		switch ($httpCode){
+			case '401':
+				return false;
+			break;
+					
+			case '200':
+				return json_decode($response['responseBody']);
+			break;
+				
+			default:
+				$error= 'ComproPago Unexpected http code error';
+				throw new Exception($error, $httpCode);
+				return;	
+		}	
+	}
 	
 	/**
 	 * Get where to pay providers
