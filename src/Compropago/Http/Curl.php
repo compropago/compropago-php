@@ -70,9 +70,9 @@ class Curl{
 	 */
 	public function executeRequest(Request $request){
 		$curl = curl_init();
-		/*if ($request->getData()) {
+		if ($request->getData() && $request->getRequestMethod()=='POST') {
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getData());
-		}*/	
+		}
 		$requestHeaders = $request->getRequestHeaders();
 		if ($requestHeaders && is_array($requestHeaders)) {
 			$curlHeaders = array();
