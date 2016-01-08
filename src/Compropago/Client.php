@@ -29,9 +29,13 @@ use Compropago\Http\Request;
 class Client{
 	
 	const VERSION="1.0.1";
-	const API_LIVE_URI='https://api.compropago.com/v1/';
-	//dev-notes a https://sandbox.compropago.com/v1/
-	const API_SANDBOX_URI='https://api.compropago.com/v1/'; 
+	const API_LIVE_URI='https://api-staging-compropago.herokuapp.com/v1/';
+	const API_SANDBOX_URI='https://api-staging-compropago.herokuapp.com/v1/'; 
+	/*
+	const API_LIVE_URI='https://services-staging-compropago.herokuapp.com/';
+	const API_SANDBOX_URI='https://services-staging-compropago.herokuapp.com/';
+	*/
+	
 	const USER_AGENT_SUFFIX = "compropago-php-sdk/";
 	/**
 	 * @since 1.0.1
@@ -60,7 +64,6 @@ class Client{
 	 * @param array $params
 	 * @throws Exception Missing compropago Keys
 	 * @since 1.0.1
-	 * @version 1.0.1
 	 */
 	public function __construct($params = array()){
 		if( !array_key_exists('publickey', $params) ||
@@ -73,7 +76,7 @@ class Client{
 			$this->auth=[$params['privatekey'],$params['publickey']]; 
 				
 			
-			//Modo Activo o Pruebas 
+		//Modo Activo o Pruebas 
 			if($params['live']==true){
 				$this->deployUri=self::API_LIVE_URI;
 				$this->deployMode=true;
@@ -98,10 +101,19 @@ class Client{
 	}
 	
 	/**
+	 * Get deploy mode
+	 * @return bool
+	 * @since 1.0.2
+	 */
+	public function getMode(){
+		return $this->deployMode;
+	}
+	
+	
+	/**
 	 * Get current version
 	 * @return string 
 	 * @since 1.0.1
-	 * @version 1.0.1
 	 */
 	public function getVersion(){
 		return self::VERSION;	
@@ -110,7 +122,6 @@ class Client{
 	 * Get Request Object
 	 * @return Compropago\Http\Request
 	 * @since 1.0.1
-	 * @version 1.0.1
 	 */
 	public function getHttp(){
 		return $this->http;

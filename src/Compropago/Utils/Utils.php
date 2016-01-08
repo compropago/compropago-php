@@ -68,9 +68,11 @@ class Utils{
 			if (parse_url($query, PHP_URL_QUERY)){
 				return $query;
 			}else{
-				return false;
+				return $query;
 			}
-		}		
+		}
+		
+		
 		return http_build_query($query,$prefix);
 	}
 	

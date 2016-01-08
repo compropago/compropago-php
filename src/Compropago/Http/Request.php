@@ -34,6 +34,7 @@ class Request{
 	protected $requestHeaders;
 	protected $auth;
 	protected $serviceUrl;
+	protected $service;
 	
 	/**
 	 * 
@@ -72,6 +73,7 @@ class Request{
 	public function setServiceUrl($service){
 		if($service){
 			$this->serviceUrl=$this->url.$service;
+			$this->service=$service;
 		}
 	}
 	/**
@@ -151,7 +153,7 @@ class Request{
 				$this->data=json_encode($this->data);
 				$this->setOptions(array(
 						CURLOPT_CUSTOMREQUEST=>'PUT',
-						CURLOPT_POSTFIELDS => $this->datadata
+						CURLOPT_POSTFIELDS => $this->data
 				) );
 			break;			
 			default:
@@ -260,6 +262,7 @@ class Request{
 	    	if(!$this->data){
 	    		throw new Exception('Invalid Query String for Data');
 	    	}
+	    	$this->setServiceUrl($this->service.'?'.$this->data);
 	    	return true;
 	    }
 	    

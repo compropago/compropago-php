@@ -65,7 +65,7 @@ class Rest{
 		$request->setServiceUrl($service);
 		
 		
-		if($query && $method=='POST'){
+		if($query && ($method=='POST' || $method=='GET')){
 			//just post data, throw con query en GET?
 			$request->setData($query);
 		}

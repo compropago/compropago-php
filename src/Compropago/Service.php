@@ -42,10 +42,11 @@ class Service{
 	/**
 	 * Validate API key
 	 * @return boolean
-	 * @return json responseBody
+	 * @retunr json responseBody
 	 * @since 1.0.2
 	 */
 	public function evalAuth(){
+		
 		$response=Rest::doExecute($this->client,'users/auth');
 		
 		//Error Mng Imp Test
