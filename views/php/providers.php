@@ -16,12 +16,10 @@
 */
 /**
  * Proveedores view Donde pagar
- * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
- * @version 1.0.1
+ * @author Jonathan Coutiño <jonathan@compropago.com>
+ * @since 1.0.1
  */
-
-
 ?>
 <div id="compropagoWrapper">
 <?php echo $compropagoData['description'];?>
@@ -34,8 +32,7 @@
 	        <input id="compropago_<?php echo $provider->internal_name ?>" type="radio" name="compropagoProvider" value="<?php echo $provider->internal_name ?>" image-label="<?php echo $provider->internal_name ?>">
 	        <label for="compropago_<?php echo $provider->internal_name ?>" class="compropagoProviderDesc">
 	          <img src="<?php echo $provider->image_medium ?>" alt="<?php echo $provider->internal_name ?>">
-	        </label>
-        		
+	        </label>        		
         </li>	
 		<?php }?>
 	</ul>
@@ -45,6 +42,5 @@
 			<option value="<?php echo $provider->internal_name ?>"><?php echo $provider->name ?></option>		
 	<?php }?>
 	</select>
-<?php }?>	
-	
+<?php }?>		
 </div>

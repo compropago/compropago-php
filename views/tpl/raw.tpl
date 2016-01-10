@@ -14,9 +14,8 @@
 * limitations under the License.
 *
 * Raw printr TPL template
-* @since 1.0.1
 * @author Rolando Lucio <rolando@compropago.com>
-* @version 1.0.1
+* @since 1.0.1
 *}
 
 <div id="compropagoWrapper">

@@ -14,11 +14,10 @@
 * limitations under the License.
 *
 * Providers View TPL template
-* @since 1.0.1
 * @author Rolando Lucio <rolando@compropago.com>
-* @version 1.0.1
+* @author Jonathan Coutiño <jonathan@compropago.com>
+* @since 1.0.1
 *}
-
 <div id="compropagoWrapper">
 {$compropagoData['description']}
 <hr class="compropagoHr">
@@ -26,11 +25,11 @@
 {if $compropagoData['showlogo']=='yes' }
 	<ul>
 		{foreach from=$compropagoData['providers'] item=provider}
-		<li>	
-			<input id="compropago_{$provider->internal_name}" type="radio" name="compropagoProvider" value="{$provider->internal_name}" image-label="{$provider->internal_name}">
-            <label for="compropago_{$provider->internal_name}" class="compropagoProviderDesc" ">
-            	<img src="{$provider->image_medium}">
-           </label>       		
+		<li>	       
+	        <input id="compropago_{$provider->internal_name}" type="radio" name="compropagoProvider" value="{$provider->internal_name}" image-label="{$provider->internal_name}">
+	        <label for="compropago_{$provider->internal_name}" class="compropagoProviderDesc">
+	          <img src="{$provider->image_medium}" alt="{$provider->internal_name}">
+	        </label>        		
         </li>	
 		{/foreach}
 	</ul>
@@ -40,6 +39,5 @@
 			<option value="{$provider->internal_name}">{$provider->name}</option>		
 	{/foreach}
 	</select>
-{/if}	
-	
+{/if}		
 </div>
