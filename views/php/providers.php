@@ -43,4 +43,5 @@
 	<?php }?>
 	</select>
 <?php }?>		
+<hr class="compropagoHr">
 </div>

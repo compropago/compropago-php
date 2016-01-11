@@ -39,5 +39,6 @@
 			<option value="{$provider->internal_name}">{$provider->name}</option>		
 	{/foreach}
 	</select>
-{/if}		
+{/if}	
+<hr class="compropagoHr">	
 </div>
