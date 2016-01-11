@@ -19,7 +19,8 @@
  * @since 1.0.2
  * @author Rolando Lucio <rolando@compropago.com>
  */
-namespace Compropago\Controllers;
+namespace Compropago\Utils;
+
 
 
 use Compropago\Client;
