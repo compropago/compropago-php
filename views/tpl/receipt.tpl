@@ -14,14 +14,14 @@
 * limitations under the License.
 *
 * Receipt TPL template
-* @since 1.0.1
+* 
 * @author Rolando Lucio <rolando@compropago.com>
-* @version 1.0.1
+* @since 1.0.1
 *}
 
 <div id="compropagoWrapper">
 
-	<a href="https://www.compropago.com/comprobante/?confirmation_id={$compropagoData->id;}" target="_blank">Consulta los detalles de la orden haciendo click <b>Aquí</b></a>
+	<a href="https://www.compropago.com/comprobante/?confirmation_id={$compropagoData->id}" target="_blank">Consulta los detalles de la orden haciendo click <b>Aquí</b></a>
 	<hr class="compropagoHr">
 	
 	vence: {php echo $compropagoData->id}
