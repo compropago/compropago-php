@@ -23,6 +23,7 @@ namespace Compropago;
 
 use Compropago\Client;
 use Compropago\Http\Rest;
+use Compropago\Utils\Utils;
 
 
 class Service{
@@ -34,7 +35,6 @@ class Service{
 	/**
 	 * @param Compropago\Client $client
 	 * @since 1.0.1
-	 * @version 1.0.1
 	 */
 	public function __construct(Client $client){
 		$this->client=$client;
@@ -71,7 +71,6 @@ class Service{
 	 * Get where to pay providers
 	 * @return json
 	 * @since 1.0.1
-	 * @version 1.0.1
 	 */
 	public function getProviders(){
 		$response=Rest::doExecute($this->client,'providers/true');
@@ -86,21 +85,32 @@ class Service{
 	 * @param string $orderId
 	 * @return json
 	 * @since 1.0.1
-	 * @version 1.0.1
 	 */
 	public function verifyOrder( $orderId ){
 		$response=Rest::doExecute($this->client,'charges/'.$orderId);
-		return json_decode( $response['responseBody'] );
+		$jsonObj= json_decode($response['responseBody']);
+		
+
+		//normalize to latest api version structure if charge response
+		if($jsonObj->api_version=='1.0' &&  isset($jsonObj->data->object->id) &&  !empty($jsonObj->data->object->id))
+			$jsonObj= Utils::normalizeResponse($jsonObj);
+		
+		return $jsonObj;
 	}
 	/**
 	 * place new order
 	 * @param array $params
 	 * @since 1.0.1
-	 * @version 1.0.1
 	 */
 	public function placeOrder( $params ){
 		$response=Rest::doExecute($this->client,'charges/',$params,'POST');
-		return json_decode( $response['responseBody']);		
+		$jsonObj= json_decode($response['responseBody']);
+		
+		//normalize to latest api version structure if charge was created
+		if($jsonObj->api_version=='1.0' && $jsonObj->payment_status=='PENDING')
+			$jsonObj= Utils::normalizeResponse($jsonObj);
+		
+		return $jsonObj;	
 	}
 	
 }
