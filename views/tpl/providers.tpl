@@ -28,7 +28,7 @@
 		<li>	       
 	        <input id="compropago_{$provider->internal_name}" type="radio" name="compropagoProvider" value="{$provider->internal_name}" image-label="{$provider->internal_name}">
 	        <label for="compropago_{$provider->internal_name}" class="compropagoProviderDesc">
-	          <img src="{$provider->image_medium}" alt="{$provider->internal_name}">
+	          <img src="{$provider->image_medium}" alt="{$provider->internal_name}" class="compropagoStore" onclick="this.style.opacity=.8;">
 	        </label>        		
         </li>	
 		{/foreach}
