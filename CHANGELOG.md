@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 1.0.2 2016-01-18
+* Require: PHP >= 5.3
+* Bug Fix: Rest regresa correctament Headers, Body y Code del request
+* Bug Fix:Services procesa el body response
+* Feature: Services\evalAuth evalúa las llaves 
+* Added: Utils\Store  
+	* Evalúa el tipo de ejecución Client Keys vs Mode vs Compropago
+	* Métodos para obtener el SQL para tablas de control de ordenes y transacciones 
+* Feature: \Utils métodos para normalizar la respuesta entre diferentes versiones de API, para crear cargos y verificar cargos 
+* Bug Fix : Estandarización de TPL para uso correcto con smarty
+* Bug Fix: Request y Curl envía los query string de manera correcta
+* Added: Se incorpora Model\DataBase para esquema
+
 ## 1.0.1 2016-01-04
 Liberación de versión estable:
 * Require: PHP >= 5.3
