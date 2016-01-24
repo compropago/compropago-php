@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.3 2016-01-24
+* Feature: Iframe view 
+* Bug Fix: Tpl errors
+* Note: versión estable para plugins Woocommerce 3.0.0 y Prestashop 2.0.0
+
 ## 1.0.2 2016-01-18
 * Require: PHP >= 5.3
 * Bug Fix: Rest regresa correctament Headers, Body y Code del request
