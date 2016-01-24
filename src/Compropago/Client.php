@@ -28,7 +28,7 @@ use Compropago\Http\Request;
 
 class Client{
 	
-	const VERSION="1.0.2";
+	const VERSION="1.0.3";
 	const API_LIVE_URI='https://api.compropago.com/v1/';
 	const API_SANDBOX_URI='https://api.compropago.com/v1/';
 	
