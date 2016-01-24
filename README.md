@@ -81,9 +81,6 @@ Puede descargar alguna de las versiones que hemos publicado:
 
 O si o lo desea puede obtener el repositorio
  ```bash
- #Última Versión estable
-git clone -b 1.0.2 https://github.com/compropago/compropago-php.git
-
  #repositorio en su estado actual (*puede no ser versón estable*)
 git clone https://github.com/compropago/compropago-php.git
  ```
