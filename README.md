@@ -67,8 +67,8 @@ composer update
 ### Instalación descargando archivo ZIP
 
 Descargar y descomprimir el archivo de la versión a utilizar:
-- [v.1.0.2] (https://s3.amazonaws.com/compropago/libraries/php/compropago-php-sdk-1-0-2.zip) Última Estable
-- [v.1.0.1] (https://s3.amazonaws.com/compropago/libraries/php/compropago-php-sdk-1-0-1.zip) Soporte 
+- [Última Estable] [compropago-estable-dl]
+
 
 Para poder hacer uso de la librería es **necesario incluir** el autoloader que se encuentra dentro de la carpeta **vendor** del archivo que descomprimió:
 ```php
@@ -272,3 +272,4 @@ $code = $response['responseCode'];                 // el código de la respuesta
 
 [compropago-repo]: https://github.com/compropago/compropago-php
 [compropago-1-docs]: https://compropago.com/documentacion/api
+[compropago-estable-dl]: https://s3.amazonaws.com/compropago/libraries/php/compropago-php-sdk-1-0-3.zip
