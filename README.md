@@ -1,3 +1,5 @@
+[![Documentation Status](https://readthedocs.org/projects/compropago-php-sdk/badge/?version=latest)](http://compropago-php-sdk.readthedocs.org/es/latest/?badge=latest)
+
 ComproPago, PHP API client (PHP-SDK)
 ==============================
 
