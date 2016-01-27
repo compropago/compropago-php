@@ -43,6 +43,12 @@ Para instalar la última versión **Estable de la SDK**, ejecuta el comando de C
 composer require compropago/php-sdk
 ```
 
+Posteriormente o en caso de erro de carga de archivos, volvemos a crear el autoload:
+   
+```bash
+composer dumpautoload -o
+```
+   
 O agregando manualmente al archivo composer.json
 ```bash
 "require": { 
