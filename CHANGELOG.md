@@ -2,7 +2,7 @@
 
 ## 1.1.0-rc 2016-02-14
 * Require: PHP >= 5.5
-* Marked: Cambio de namespace de Compropago a Compropago\SDK
+* Marked: Cambio de namespace de Compropago a Compropago\Sdk
 * Note: Code Styling PSR-2
 * Note: Ajustes para optimizar PHP 5.5
 
