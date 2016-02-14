@@ -72,7 +72,7 @@ class Client
 			$error= "Se requieren las llaves del API de Compropago";
 			throw new Exception($error);
 		}else{
-			$this->auth=[$params['privatekey'],$params['publickey']]; 
+			$this->auth=array($params['privatekey'],$params['publickey']); 
 				
 			
 		//Modo Activo o Pruebas 
