@@ -19,14 +19,16 @@
  * Compropago API
  * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
- * @version 1.0.1
+ * @version 1.1.0
  */
 
 namespace Compropago;
-use Compropago\Http\Request;
+
+use Compropago\Sdk\Http\Request;
 
 
-class Client{
+class Client
+{
 	
 	const VERSION="1.0.3";
 	const API_LIVE_URI='https://api.compropago.com/v1/';
@@ -61,7 +63,8 @@ class Client{
 	 * @throws Exception Missing compropago Keys
 	 * @since 1.0.1
 	 */
-	public function __construct($params = array()){
+	public function __construct($params = array())
+	{
 		if( !array_key_exists('publickey', $params) ||
 			!array_key_exists('privatekey', $params) ||
 			empty($params['publickey']) || empty($params['privatekey'])
@@ -101,7 +104,8 @@ class Client{
 	 * @return bool
 	 * @since 1.0.2
 	 */
-	public function getMode(){
+	public function getMode()
+	{
 		return $this->deployMode;
 	}
 	
@@ -111,7 +115,8 @@ class Client{
 	 * @return string 
 	 * @since 1.0.1
 	 */
-	public function getVersion(){
+	public function getVersion()
+	{
 		return self::VERSION;	
 	}
 	/**
@@ -119,7 +124,8 @@ class Client{
 	 * @return Compropago\Http\Request
 	 * @since 1.0.1
 	 */
-	public function getHttp(){
+	public function getHttp()
+	{
 		return $this->http;
 	}
 	
