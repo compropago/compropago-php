@@ -5,6 +5,7 @@
 * Marked: Cambio de namespace de Compropago a Compropago\Sdk
 * Note: Code Styling PSR-2
 * Note: Ajustes para optimizar PHP 5.5
+* Utilizing: __DIR__ en lugar de dirname(__FILE__)
 
 ## 1.0.3 2016-01-24
 * Feature: Iframe view 
