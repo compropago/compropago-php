@@ -19,10 +19,9 @@
  * Compropago API
  * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
- * @version 1.1.0
  */
 
-namespace Compropago;
+namespace Compropago\Sdk;
 
 use Compropago\Sdk\Http\Request;
 
@@ -30,7 +29,7 @@ use Compropago\Sdk\Http\Request;
 class Client
 {
 	
-	const VERSION="1.0.3";
+	const VERSION="1.1.0";
 	const API_LIVE_URI='https://api.compropago.com/v1/';
 	const API_SANDBOX_URI='https://api.compropago.com/v1/';
 	
