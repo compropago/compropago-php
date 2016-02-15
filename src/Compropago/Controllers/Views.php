@@ -44,7 +44,7 @@ class Views
 	{
 		if($path==null){
 			//path relativo al vendor Compropago/views
-			$path=dirname(__FILE__). '/../../../views/'.$ext.'/';
+			$path= __DIR__. '/../../../views/'.$ext.'/';
 		}
 		$filename=$path.$view.'.'.$ext;
 		if( !file_exists($filename) ){

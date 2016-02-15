@@ -105,7 +105,7 @@ class Curl
 			$error = curl_error($curl);
 			$code = curl_errno($curl);
 			if ($code == 60 || $code == 77) {
-				curl_setopt($curl, CURLOPT_CAINFO, dirname(__FILE__) . '/cacerts.pem');
+				curl_setopt($curl, CURLOPT_CAINFO, __DIR__ . '/cacerts.pem');
 				$response = curl_exec($curl);
 			}
 			if($response==false){
