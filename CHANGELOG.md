@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.0 2016-02-14
+* Require: PHP >= 5.5
+* Note: Merge Master
+
 ## 1.1.0-rc 2016-02-14
 * Require: PHP >= 5.5
 * Marked: Cambio de namespace de Compropago a Compropago\Sdk
