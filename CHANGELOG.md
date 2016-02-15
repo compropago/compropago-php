@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.1.0 2016-02-14
+## 1.1.0 2016-02-15
 * Require: PHP >= 5.5
 * Note: Merge Master
 
