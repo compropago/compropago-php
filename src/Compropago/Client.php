@@ -64,10 +64,8 @@ class Client
 	 */
 	public function __construct($params = array())
 	{
-		if( !array_key_exists('publickey', $params) ||
-			!array_key_exists('privatekey', $params) ||
-			empty($params['publickey']) || empty($params['privatekey'])
-			){
+		// Retirado validacion de vacios para carga inicial de proveedores
+		if( !array_key_exists('publickey', $params) || !array_key_exists('privatekey', $params) ){
 			$error= "Se requieren las llaves del API de Compropago";
 			throw new Exception($error);
 		}else{

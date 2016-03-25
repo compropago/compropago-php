@@ -77,11 +77,27 @@ class Service{
 	public function getProviders()
 	{
 		$response=Rest::doExecute($this->client,'providers/true');
-		$jsonObj= json_decode($response['responseBody']);	
+		$jsonObj= json_decode($response['responseBody'],true);	
 		usort($jsonObj, function($a, $b) { 
-			return $a->rank > $b->rank ? 1 : -1; 
+			return $a['rank'] > $b['rank'] ? 1 : -1; 
 		});	
-		return $jsonObj;
+
+        if(!empty($filter)){
+            $filtered = array();
+
+            foreach ($jsonObj as $value){
+                foreach ($filter as $internal){
+                    if($value['internal_name'] == $internal){
+                        $filtered[] = $value;
+                    }
+                }
+            }
+
+            return json_decode(json_encode($filtered));
+        }else{
+            return json_decode(json_encode($jsonObj));
+        }
+		
 	}
 	/**
 	 * Verify order Id status
