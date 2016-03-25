@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.1.1 2016-03-25
+* Require: PHP >= 5.5
+* Feature: Agregacion de filtro para proveedores en Compropago\Sdk\Service::getProviders()
+* Feature: Eliminacion de validacion a vacios para las llaves en Compropago\Sdk\Client::__construct() (para primera carga de proveedores)
+
 ## 1.1.0 2016-02-15
 * Require: PHP >= 5.5
 * Note: Merge Master
