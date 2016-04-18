@@ -117,5 +117,18 @@ class Service{
 		
 		return $jsonObj;	
 	}
+
+
+	public function sendSmsInstructions($phoneNumber, $orderId)
+    {
+        $params = array(
+            "customer_phone" => $phoneNumber
+        );
+
+        $response = Rest::doExecute($this->client,'charges/'.$orderId.'/sms/',$params,'POST');
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
 	
 }
