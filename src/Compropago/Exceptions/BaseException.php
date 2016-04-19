@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright 2015 Compropago.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,15 +17,18 @@
 
 /**
  * Exception implementation of Compropago API
- * @since 1.0.1
- * @author Rolando Lucio <rolando@compropago.com>
+ * @since 1.1.1
+ * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
-namespace Compropago\Sdk;
+namespace Compropago\Sdk\Exceptions;
 
-use Compropago\Sdk\Exceptions\BaseException;
-
-class Exception extends BaseException
+class BaseException extends \Exception
 {
-	
+
+    public function __construct($message = null, $code = 0, \Exception $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
+
 }
