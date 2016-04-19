@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.1.1 2016-04-19
+* Rquire: PHP >= 5.5
+* Feature: Service\sendSmsInstructions() Envio de instrucciones sms
+* Feature: Service\evalAuth() Captura declarativa de error 500
+* Added: Exceptions 
+    * *Compropago\Sdk\Exceptions\BaseException*: Excepcion general Compropago
+    * *Compropago\Sdk\Exceptions\HttpException*: Excepciones de codigo Http
+
 ## 1.1.0 2016-02-15
 * Require: PHP >= 5.5
 * Note: Merge Master
