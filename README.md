@@ -286,9 +286,11 @@ $code = $response['responseCode'];                 // el código de la respuesta
 | Version | Status      | Packagist            | Namespace    | PHP | Repo                      | Docs                      | 
 |---------|-------------|----------------------|--------------|-----|---------------------------|---------------------------|
 | 1.0.x   | Maintained  | `compropago/php-sdk` | `Compropago` | 5.3 + | [v1.0.x][compropago-repo-1-0-x] | [v1][compropago-1-docs]   | 
-| 1.1.x   | Latest      | `compropago/php-sdk` | `Compropago\Sdk` | 5.5 + | [v1.1.x][compropago-repo] | [v1][compropago-1-docs]   |
+| 1.1.x   | Maintained  | `compropago/php-sdk` | `Compropago\Sdk` | 5.5 + | [v1.1.x][compropago-repo] | [v1][compropago-1-docs]   |
+| 1.1.1   | Latest      | `compropago/php-sdk` | `Compropago\Sdk` | 5.5 + | [v1.1.x][latest-repo] | [v1][compropago-1-docs]
 
 [compropago-repo]: https://github.com/compropago/compropago-php
 [compropago-repo-1-0-x]: https://github.com/compropago/compropago-php/tree/1.0.x
 [compropago-1-docs]: https://compropago.com/documentacion/api
 [compropago-estable-dl]: https://s3.amazonaws.com/compropago/libraries/php/compropago-php-sdk-1-1-0.zip
+[latest-repo]: http://github.com/compropago/compropago-php
