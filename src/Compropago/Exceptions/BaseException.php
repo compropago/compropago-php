@@ -1,6 +1,5 @@
-<?php 
-
-/*
+<?php
+/**
  * Copyright 2015 Compropago.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
- * @since 1.0.1
- * @author Rolando Lucio <rolando@compropago.com>
- * @version 1.0.1
+ * Exception implementation of Compropago API
+ * @since 1.1.1
+ * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
+namespace Compropago\Sdk\Exceptions;
 
-require_once __DIR__.'/../../../../vendor/autoload.php';
+class BaseException extends \Exception
+{
 
-?>
+    public function __construct($message = null, $code = 0, \Exception $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
+
+}

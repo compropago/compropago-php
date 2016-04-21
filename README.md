@@ -188,11 +188,23 @@ $response = $compropagoService->placeOrder($data);
 
 ```php
 //El número de orden que queremos verificar
-$orderId= 'ch_xxxxx-xxxxx-xxxxx-xxxxx'
+$orderId= 'ch_xxxxx-xxxxx-xxxxx-xxxxx';
 
 //Obtenemos el JSON de la respuesta 
 $response = $compropagoService->verifyOrder( $orderId );
 
+```
+
+##### Envio de instrucciones SMS de una orden generada
+
+```php
+// Numero celular del cluente (10 digitos)
+$phoneNumber = "55XXXXXXXX";
+// Numero de orden de la cual se enviaran las instrucciones
+$orderId = "ch_xxxxx-xxxxx-xxxxx-xxxxx";
+
+// Ontenemos el JSON de la respuesta
+$response = $compropagoService->sendSmsInstructions( $phoneNumber, $orderId );
 ```
 
 ##### Obtener el listado de las tiendas donde se puede realizar el Pago

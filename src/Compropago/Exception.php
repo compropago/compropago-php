@@ -23,7 +23,9 @@
 
 namespace Compropago\Sdk;
 
-class Exception extends \Exception
+use Compropago\Sdk\Exceptions\BaseException;
+
+class Exception extends BaseException
 {
 	
 }
