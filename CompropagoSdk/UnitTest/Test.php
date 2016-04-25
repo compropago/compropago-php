@@ -16,19 +16,30 @@
  */
 
 /**
- * Exception implementation of Compropago API
- * @since 1.1.1
+ * Compropago php-sdk
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
-namespace Compropago\Sdk\Exceptions;
+namespace CompropagoSdk\UnitTest;
 
-class BaseException extends \Exception
+require_once __DIR__."/autoload.php";
+
+use CompropagoSdk\Client;
+use CompropagoSdk\Tools\Rest;
+use CompropagoSdk\Tools\Validations;
+
+class Test
 {
-
-    public function __construct($message = null, $code = 0, \Exception $previous = null)
+    public function __construct()
     {
-        parent::__construct($message, $code, $previous);
-    }
+        $client = new Client(
+            "pk_test_8781245a88240f9cf",
+            "sk_test_56e31883637446b1b",
+            false
+        );
 
+
+    }
 }
+
+new Test();

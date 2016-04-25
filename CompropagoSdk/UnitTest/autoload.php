@@ -1,6 +1,5 @@
-<?php 
-
-/*
+<?php
+/**
  * Copyright 2015 Compropago.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +15,11 @@
  * limitations under the License.
  */
 /**
- * @since 1.0.1
- * @author Rolando Lucio <rolando@compropago.com>
- * @version 1.0.1
+ * Compropago php-sdk
+ * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
-
-require_once __DIR__.'/../../../../vendor/autoload.php';
-
-?>
+spl_autoload_register(function ($nombre_clase) {
+    $class = str_replace("\\","/",$nombre_clase);
+    require_once __DIR__."/../../".$class . '.php';
+});

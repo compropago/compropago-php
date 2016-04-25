@@ -7,8 +7,8 @@
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "Rolando Lucio",
-            "email": "rolando@compropago.com"
+            "name": "Eduardo Aguilar",
+            "email": "eduardo.aguilar@compropago.com"
         }
     ],
     "require": {
@@ -16,7 +16,7 @@
     },
     
     "autoload": {
-        "psr-4": {"Compropago\\Sdk\\": "src/"}      
+        "psr-4": {"CompropagoSdk\\": "src/"}
     }
    
 }
