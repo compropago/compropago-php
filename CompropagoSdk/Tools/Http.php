@@ -52,9 +52,11 @@ class Http
         curl_setopt($ch, CURLOPT_USERPWD, $auth);
     }
 
-    public static function setPostFields(&$ch, $fields)
+    public static function setPostFields(&$ch, $fields="")
     {
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
+        if(!empty($fields)) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+        }
     }
 
     public static function execHttp(&$ch)

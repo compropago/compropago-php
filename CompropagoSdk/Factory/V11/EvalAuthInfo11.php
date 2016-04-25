@@ -14,31 +14,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
- * Compropago php-sdk
+ * Compropago ${LIBRARI}
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
-namespace CompropagoSdk\UnitTest;
 
-require_once __DIR__."/autoload.php";
+namespace CompropagoSdk\Factory\V11;
 
-use CompropagoSdk\Client;
-use CompropagoSdk\Tools\Validations;
 
-class Test
+use CompropagoSdk\Factory\Abs\EvalAuthInfo;
+
+class EvalAuthInfo11 extends EvalAuthInfo
 {
+    public $type;
+    public $livemode;
+    public $mode_key;
+    public $message;
+    public $code;
+
     public function __construct()
     {
-        $client = new Client(
-            "pk_test_8781245a88240f9cf",
-            "sk_test_56e31883637446b1b",
-            false
-        );
+    }
 
-        var_dump(Validations::validateGateway($client));
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getLiveMode()
+    {
+        return $this->livemode;
+    }
+
+    public function getModeKey()
+    {
+        return $this->mode_key;
+    }
+
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
     }
 }
-
-new Test();

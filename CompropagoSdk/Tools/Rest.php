@@ -28,16 +28,12 @@ use CompropagoSdk\Exceptions\RestExceptions;
 class Rest
 {
 
-    public static function get($url, $auth="", $data=null)
+    public static function get($url, $auth="")
     {
         try{
             $ch = Http::initHttp($url);
             Http::setMethod($ch,'GET');
             Http::setAuth($ch,$auth);
-
-            if(!empty($data)){
-                Http::setPostFields($ch, $data);
-            }
 
             $response = Http::execHttp($ch);
 
@@ -51,8 +47,17 @@ class Rest
         }
     }
 
-    public static function post($url, $auth, $params=array())
+    public static function post($url, $auth, $data=array())
     {
 
+    }
+
+    private static function prepareFields($fields)
+    {
+        $res = null;
+        foreach($fields as $key => $value){
+            $res = empty($res) ? $key."=".$value : "&".$key."=".$value;
+        }
+        return $res;
     }
 }

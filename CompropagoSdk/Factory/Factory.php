@@ -24,6 +24,7 @@ namespace CompropagoSdk\Factory;
 
 use CompropagoSdk\Exceptions\FactoryExceptions;
 use CompropagoSdk\Factory\Abs\EvalAuthInfo;
+use CompropagoSdk\Factory\Json\Serialize;
 
 class Factory
 {
@@ -37,8 +38,10 @@ class Factory
     {
         switch(self::verifyVersion($source)){
             case '1.1':
+                return Serialize::evalAuthInfo11($source);
                 break;
             case '1.0':
+                return Serialize::evalAuthInfo10($source);
                 break;
             default:
                 throw new FactoryExceptions("Version no soportada");
