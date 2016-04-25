@@ -27,36 +27,75 @@ use CompropagoSdk\Factory\Abs\EvalAuthInfo;
 
 class EvalAuthInfo11 extends EvalAuthInfo
 {
+    /**
+     * @var string
+     */
     public $type;
+    /**
+     * @var bool
+     */
     public $livemode;
+    /**
+     * @var bool
+     */
     public $mode_key;
+    /**
+     * @var string
+     */
     public $message;
+
+    /**
+     * @var int
+     */
     public $code;
 
+    /**
+     * EvalAuthInfo10 constructor.
+     */
     public function __construct()
     {
     }
 
+    /**
+     * @override
+     * @return string
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * @override
+     * @return bool
+     */
     public function getLiveMode()
     {
         return $this->livemode;
     }
 
+    /**
+     * @override
+     * @return bool
+     */
     public function getModeKey()
     {
         return $this->mode_key;
     }
 
+    /**
+     * @override
+     * @return string
+     */
     public function getMessage()
     {
         return $this->message;
     }
 
+    /**
+     * @override
+     * @return int
+     */
     public function getCode()
     {
         return $this->code;

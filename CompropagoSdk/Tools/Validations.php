@@ -28,9 +28,21 @@ use CompropagoSdk\Exceptions\CpException;
 use CompropagoSdk\Exceptions\HttpException;
 use CompropagoSdk\Factory\Factory;
 
+
+/**
+ * Class Validations Contiene las validaciones generales para el uso de los servicios
+ * @package CompropagoSdk\Tools
+ */
 class Validations
 {
 
+    /**
+     * Evalua que el cliente pueda autentificarse correctamente
+     *
+     * @param Client $client
+     * @return \CompropagoSdk\Factory\Abs\EvalAuthInfo
+     * @throws HttpException
+     */
     public static function evalAuth( Client $client )
     {
         try{
@@ -54,6 +66,13 @@ class Validations
         }
     }
 
+    /**
+     * Valida que el cliente pueda realizar transacciones
+     *
+     * @param Client $client
+     * @return bool
+     * @throws CpException
+     */
     public static function validateGateway( Client $client )
     {
         if(empty($client)){

@@ -22,12 +22,23 @@
 
 namespace CompropagoSdk\Tools;
 
-
 use CompropagoSdk\Exceptions\RestExceptions;
 
+
+/**
+ * Class Rest Proporciona los metodos de conexion
+ * @package CompropagoSdk\Tools
+ */
 class Rest
 {
-
+    /**
+     * Ejecuta peticiones Get al API
+     *
+     * @param $url              string      Url a la cual se generara la peticion
+     * @param string $auth                  Cadena de autentificacion
+     * @return mixed
+     * @throws RestExceptions
+     */
     public static function get($url, $auth="")
     {
         try{
@@ -47,17 +58,30 @@ class Rest
         }
     }
 
-    public static function post($url, $auth, $data=array())
+    /**
+     * @param $url              string      Url a la cual se generara la peticion
+     * @param $auth             string      Cadena de autentificacion
+     * @param $data             string      Parametros a enviar
+     * @return mixed
+     * @throws RestExceptions
+     */
+    public static function post($url, $auth, $data)
     {
+        try{
+            $ch = Http::initHttp($url);
+            Http::setMethod($ch, 'POST');
+            Http::setAuth($ch, $auth);
+            Http::setPostFields($ch, $data);
 
-    }
+            $response = Http::execHttp($ch);
 
-    private static function prepareFields($fields)
-    {
-        $res = null;
-        foreach($fields as $key => $value){
-            $res = empty($res) ? $key."=".$value : "&".$key."=".$value;
+            if(empty($response)){
+                throw new RestExceptions("Respuesta vacia");
+            }else{
+                return $response;
+            }
+        }catch(\Exception $e){
+            throw new RestExceptions($e->getMessage(),$e->getCode(),$e);
         }
-        return $res;
     }
 }

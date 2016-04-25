@@ -23,6 +23,10 @@
 namespace CompropagoSdk;
 
 
+use CompropagoSdk\Exceptions\CpException;
+use CompropagoSdk\Factory\Factory;
+use CompropagoSdk\Tools\Rest;
+
 class Service
 {
     private $auth;
@@ -40,7 +44,14 @@ class Service
 
     public function getProviders()
     {
+        try{
+            $response = Rest::get($this->uri."providers/true/",$this->auth);
+            $providers = Factory::arrayProviders($response);
 
+            return $providers;
+        }catch(\Exception $e){
+            throw new CpException($e->getMessage(),$e->getCode(), $e);
+        }
     }
 
     public function verifyOrder( $orderId )

@@ -25,8 +25,19 @@ namespace CompropagoSdk\Tools;
 
 use CompropagoSdk\Exceptions\HttpException;
 
+
+/**
+ * Class Http Crea llamas Http para el consumo de servicios
+ * @package CompropagoSdk\Tools
+ */
 class Http
 {
+    /**
+     * Inicializa el objeto Http para las peticiones
+     *
+     * @param null $url
+     * @return resource
+     */
     public static function initHttp($url = null)
     {
         $ch = curl_init($url);
@@ -34,6 +45,13 @@ class Http
         return $ch;
     }
 
+    /**
+     * Define el metodo que ejecutara en la peticion
+     *
+     * @param $ch               resource    Instancia del Objeto Http
+     * @param $method           string      Tipo de peticion a ejecutar
+     * @throws HttpException
+     */
     public static function setMethod(&$ch,$method)
     {
         switch($method){
@@ -47,11 +65,25 @@ class Http
         }
     }
 
+    /**
+     * Estable las claves de autentificacion a usar
+     *
+     * @param $ch       resource    Instancia del Objeto Http
+     * @param $auth     string      Cadena de autentificacion del cliente
+     */
     public static function setAuth(&$ch, $auth)
     {
         curl_setopt($ch, CURLOPT_USERPWD, $auth);
     }
 
+    /**
+     * Carga los campos que se enviaran dentro de la peticion
+     * El formato de envio es el sieguinte:
+     * campo1=valor1&campo2=valor2&.....campox=valorx
+     *
+     * @param $ch               resource    Instancia del Objeto Http
+     * @param string $fields                Campos a incluir en la peticion
+     */
     public static function setPostFields(&$ch, $fields="")
     {
         if(!empty($fields)) {
@@ -59,6 +91,12 @@ class Http
         }
     }
 
+    /**
+     * Ejecuta la peticion Http que se le especifique
+     *
+     * @param $ch       resource    Instancia del Objeto Http
+     * @return mixed
+     */
     public static function execHttp(&$ch)
     {
         return curl_exec($ch);

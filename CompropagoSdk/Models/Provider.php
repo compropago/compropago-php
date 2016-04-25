@@ -14,30 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
- * Compropago php-sdk
+ * Compropago ${LIBRARI}
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
-namespace CompropagoSdk\UnitTest;
 
-require_once __DIR__."/autoload.php";
+namespace CompropagoSdk\Models;
 
-use CompropagoSdk\Client;
 
-class Test
+class Provider
 {
+    public $name;
+    public $store_image;
+    public $is_active;
+    public $internal_name;
+    public $image_small;
+    public $image_medium;
+    public $image_large;
+    public $rank;
+
     public function __construct()
     {
-        $client = new Client(
-            "pk_test_8781245a88240f9cf",
-            "sk_test_56e31883637446b1b",
-            false
-        );
-
-        $client->api->getProviders();
     }
 }
-
-new Test();

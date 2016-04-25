@@ -26,8 +26,17 @@ namespace CompropagoSdk\Factory\Json;
 use CompropagoSdk\Factory\V10\EvalAuthInfo10;
 use CompropagoSdk\Factory\V11\EvalAuthInfo11;
 
+
+/**
+ * Class Serialize Clase que convierte estandariza las diferentes respuestas en objetos similares
+ * @package CompropagoSdk\Factory\Json
+ */
 class Serialize
 {
+    /**
+     * @param $source           string Contenido Json
+     * @return EvalAuthInfo10
+     */
     public static function evalAuthInfo10($source)
     {
         $res = new EvalAuthInfo10();
@@ -42,6 +51,10 @@ class Serialize
         return $res;
     }
 
+    /**
+     * @param $source           string Contenido Json
+     * @return EvalAuthInfo11
+     */
     public static function evalAuthInfo11($source)
     {
         $res = new EvalAuthInfo11();

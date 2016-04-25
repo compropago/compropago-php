@@ -25,15 +25,34 @@ namespace CompropagoSdk\Factory;
 use CompropagoSdk\Exceptions\FactoryExceptions;
 use CompropagoSdk\Factory\Abs\EvalAuthInfo;
 use CompropagoSdk\Factory\Json\Serialize;
+use CompropagoSdk\Models\Provider;
 
+/**
+ * Class Factory
+ * @package CompropagoSdk\Factory
+ */
 class Factory
 {
+    /**
+     * Verifica la version de la respuesta de una peticion
+     *
+     * @param $source       string Cadena Json con el contenido de la respuesta
+     * @return string
+     */
     private static function verifyVersion($source)
     {
         $obj = json_decode($source);
         return isset($obj->api_version) ? $obj->api_version : "1.1";
     }
 
+
+    /**
+     * Constructor de objetos EvalOutInfo
+     *
+     * @param $source               string Cadena Json con el contenido a construir como objeto
+     * @return EvalAuthInfo
+     * @throws FactoryExceptions
+     */
     public static function evalAuthInfo($source)
     {
         switch(self::verifyVersion($source)){
@@ -47,5 +66,32 @@ class Factory
                 throw new FactoryExceptions("Version no soportada");
                 break;
         }
+    }
+
+    public static function arrayProviders($source)
+    {
+        $jsonObj= json_decode($source);
+        usort($jsonObj, function($a, $b) {
+            return $a->rank > $b->rank ? 1 : -1;
+        });
+
+        $res = array();
+
+        foreach($jsonObj as $val){
+            $provider = new Provider();
+
+            $provider->name = $val->name;
+            $provider->store_image = $val->store_image;
+            $provider->is_active = $val->is_active;
+            $provider->image_small = $val->image_small;
+            $provider->image_medium = $val->image_medium;
+            $provider->image_large = $val->image_large;
+            $provider->internal_name = $val->internal_name;
+            $provider->rank = $val->rank;
+
+            $res[] = $provider;
+        }
+
+        return $res;
     }
 }

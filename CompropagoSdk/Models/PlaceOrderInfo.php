@@ -14,30 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
- * Compropago php-sdk
+ * Compropago ${LIBRARI}
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
-namespace CompropagoSdk\UnitTest;
 
-require_once __DIR__."/autoload.php";
+namespace CompropagoSdk\Models;
 
-use CompropagoSdk\Client;
-
-class Test
+/**
+ * Class PlaceOrderInfo informacion de nuevas ordenes
+ * @package CompropagoSdk\Models
+ */
+class PlaceOrderInfo
 {
+    public $order_id;
+    public $order_name;
+    public $order_price;
+    public $customer_name;
+    public $customer_email;
+    public $payment_type;
+    public $image_url;
+
     public function __construct()
     {
-        $client = new Client(
-            "pk_test_8781245a88240f9cf",
-            "sk_test_56e31883637446b1b",
-            false
-        );
-
-        $client->api->getProviders();
     }
 }
-
-new Test();
