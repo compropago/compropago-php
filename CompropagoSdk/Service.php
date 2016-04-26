@@ -25,6 +25,7 @@ namespace CompropagoSdk;
 
 use CompropagoSdk\Exceptions\CpException;
 use CompropagoSdk\Factory\Factory;
+use CompropagoSdk\Models\PlaceOrderInfo;
 use CompropagoSdk\Tools\Rest;
 use CompropagoSdk\Tools\Validations;
 
@@ -78,9 +79,23 @@ class Service
         }
     }
 
-    public function placeOrder()
+    public function placeOrder(PlaceOrderInfo $neworder)
     {
         try{
+            Validations::validateGateway($this->client);
+
+            $params = "order_id=".$neworder->order_id.
+                "&order_name=".$neworder->order_name.
+                "&order_price=".$neworder->order_price.
+                "&customer_name=".$neworder->customer_name.
+                "&customer_email=".$neworder->customer_email.
+                "&payment_type=".$neworder->payment_type.
+                "&image_url=".$neworder->image_url;
+
+            $response = Rest::post($this->client->getUri()."charges/",$this->client->getAuth(),$params);
+            $obj = Factory::newOrderInfo($response);
+
+            return $obj;
 
         }catch(\Exception $e){
             throw new CpException($e->getMessage(),$e->getCode(), $e);

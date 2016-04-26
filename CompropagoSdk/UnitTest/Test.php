@@ -25,6 +25,7 @@ namespace CompropagoSdk\UnitTest;
 require_once __DIR__."/autoload.php";
 
 use CompropagoSdk\Client;
+use CompropagoSdk\Models\PlaceOrderInfo;
 
 class Test
 {
@@ -37,7 +38,18 @@ class Test
         );
 
         //$client->api->getProviders();
-        $client->api->verifyOrder("ch_a2b35233-4784-47e3-af27-3ad976342ded");
+        //$client->api->verifyOrder("ch_a2b35233-4784-47e3-af27-3ad976342ded");
+
+        $neworder = new PlaceOrderInfo(
+            "2",
+            "M4 Style",
+            1800,
+            "Eduardo Aguilar",
+            "eduardo.aguilar@compropago.com"
+        );
+
+        $response = $client->api->placeOrder($neworder);
+        var_dump($response);
     }
 }
 

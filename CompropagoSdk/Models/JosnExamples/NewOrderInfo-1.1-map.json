@@ -1,0 +1,39 @@
+{
+  "id": "ch_0991dd38-e408-4f27",
+  "short_id": "00927c",
+  "object": "charge",
+  "status": "pending",
+  "created": "1436979650",
+  "exp_date": "1437066050",
+  "live_mode": true,
+  "order_info": {
+    "order_id": "IB18S",
+    "order_name": "Samsung Galaxy Gold",
+    "order_price": "75.0",
+    "image_url": "https://test.amazon.com/5f4373"
+  },
+  "fee_details": {
+    "amount": "5.18",
+    "tax": "0.83",
+    "tax_percent": "16", // omitido
+    "currency": "mxn",
+    "type": "compropago_fee",
+    "description": "Horarios de Compropago",
+    "amount_refunded": 0
+  },
+  "instructions":{
+    "description": "Para que el pago sea valido debes pagar ...",
+    "step_1": "Ir a la caja OXXO ...",
+    "step_2": "Solicitar deposito ...",
+    "step_3": "Deposite la cantidad ...",
+    "note_extra_comition": "Las tiendas OXXO cobran en caja una comisión de 7 pe..",
+    "note_expiration_date": "Orden válida antes de 01/10/2013",
+    "note_confirmation": "Tu pago será confirmado a través de SMS y email",
+    "details":{
+      "amount": "75.0",
+      "store": "OXXO",
+      "bank_account_number": "xxxx xxxx xxxx xxxx",
+      "bank_name": "Scotiabank"
+    }
+  }
+}

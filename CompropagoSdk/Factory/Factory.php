@@ -23,7 +23,9 @@
 namespace CompropagoSdk\Factory;
 
 use CompropagoSdk\Exceptions\FactoryExceptions;
+use CompropagoSdk\Factory\Abs\CpOrderInfo;
 use CompropagoSdk\Factory\Abs\EvalAuthInfo;
+use CompropagoSdk\Factory\Abs\NewOrderInfo;
 use CompropagoSdk\Factory\Json\Serialize;
 use CompropagoSdk\Models\Provider;
 
@@ -101,6 +103,11 @@ class Factory
         return $res;
     }
 
+    /**
+     * @param $source
+     * @return CpOrderInfo
+     * @throws FactoryExceptions
+     */
     public static function cpOrderInfo($source)
     {
         switch(self::verifyVersion($source)){
@@ -109,6 +116,26 @@ class Factory
                 break;
             case '1.0':
                 return Serialize::cpOrderInfo10($source);
+                break;
+            default:
+                throw new FactoryExceptions("Version no soportada");
+                break;
+        }
+    }
+
+    /**
+     * @param $source
+     * @return NewOrderInfo
+     * @throws FactoryExceptions
+     */
+    public static function newOrderInfo($source)
+    {
+        switch(self::verifyVersion($source)){
+            case '1.1':
+                return Serialize::newOrderInfo11($source);
+                break;
+            case '1.0':
+                return Serialize::newOrderInfo10($source);
                 break;
             default:
                 throw new FactoryExceptions("Version no soportada");
