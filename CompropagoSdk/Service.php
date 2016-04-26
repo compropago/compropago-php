@@ -26,26 +26,36 @@ namespace CompropagoSdk;
 use CompropagoSdk\Exceptions\CpException;
 use CompropagoSdk\Factory\Factory;
 use CompropagoSdk\Tools\Rest;
+use CompropagoSdk\Tools\Validations;
 
+
+/**
+ * Class Service Provee de los servicios necesarios para el manejo de la API de ComproPago
+ * @package CompropagoSdk
+ */
 class Service
 {
-    private $auth;
-    private $fullAuth;
+    private $client;
 
-    private $uri;
-
+    /**
+     * Service constructor.
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
-        $this->auth = $client->getAuth();
-        $this->fullAuth = $client->getFullAuth();
-        $this->uri = $client->getUri();
+        $this->client = $client;
     }
 
-
+    /**
+     * Retorna un arreglo con los proveedores disponibles ordenados por Rank
+     *
+     * @return array
+     * @throws CpException
+     */
     public function getProviders()
     {
         try{
-            $response = Rest::get($this->uri."providers/true/",$this->auth);
+            $response = Rest::get($this->client->getUri()."providers/true/","");
             $providers = Factory::arrayProviders($response);
 
             return $providers;
@@ -56,16 +66,33 @@ class Service
 
     public function verifyOrder( $orderId )
     {
+        try{
+            Validations::validateGateway($this->client);
 
+            $response = Rest::get($this->client->getUri()."charges/$orderId/",$this->client->getAuth());
+            $obj = Factory::cpOrderInfo($response);
+
+            var_dump($obj);
+        }catch(\Exception $e){
+            throw new CpException($e->getMessage(),$e->getCode(), $e);
+        }
     }
 
     public function placeOrder()
     {
+        try{
 
+        }catch(\Exception $e){
+            throw new CpException($e->getMessage(),$e->getCode(), $e);
+        }
     }
 
     public function sendSmsInstructions($number,$orderId)
     {
+        try{
 
+        }catch(\Exception $e){
+            throw new CpException($e->getMessage(),$e->getCode(), $e);
+        }
     }
 }

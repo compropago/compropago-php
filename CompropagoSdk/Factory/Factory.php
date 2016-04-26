@@ -68,6 +68,12 @@ class Factory
         }
     }
 
+    /**
+     * Construye un arreglo de Objetos tipo \CompropagoSdk\Models\Provider
+     *
+     * @param $source   string Cadena Json con el contenido a construir
+     * @return array
+     */
     public static function arrayProviders($source)
     {
         $jsonObj= json_decode($source);
@@ -93,5 +99,20 @@ class Factory
         }
 
         return $res;
+    }
+
+    public static function cpOrderInfo($source)
+    {
+        switch(self::verifyVersion($source)){
+            case '1.1':
+                return Serialize::cpOrderInfo11($source);
+                break;
+            case '1.0':
+                return Serialize::cpOrderInfo10($source);
+                break;
+            default:
+                throw new FactoryExceptions("Version no soportada");
+                break;
+        }
     }
 }

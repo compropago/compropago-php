@@ -14,31 +14,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
- * Compropago php-sdk
+ * Compropago ${LIBRARI}
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
-namespace CompropagoSdk\UnitTest;
 
-require_once __DIR__."/autoload.php";
+namespace CompropagoSdk\Factory\Abs;
 
-use CompropagoSdk\Client;
 
-class Test
+abstract class FeeDetails
 {
-    public function __construct()
-    {
-        $client = new Client(
-            "pk_test_8781245a88240f9cf",
-            "sk_test_56e31883637446b1b",
-            false
-        );
+    /**
+     * @return string
+     */
+    public abstract function getAmount();
 
-        //$client->api->getProviders();
-        $client->api->verifyOrder("ch_a2b35233-4784-47e3-af27-3ad976342ded");
-    }
+    /**
+     * @return string
+     */
+    public abstract function getCurrency();
+
+    /**
+     * @return string
+     */
+    public abstract function getType();
+
+    /**
+     * @return string
+     */
+    public abstract function getDescription();
+
+    /**
+     * @return string
+     */
+    public abstract function getApplication();
+
+    /**
+     * @return double
+     */
+    public abstract function getAmountRefunded();
+
+    /**
+     * @return string
+     */
+    public abstract function getTax();
 }
-
-new Test();
