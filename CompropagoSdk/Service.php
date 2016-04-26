@@ -72,7 +72,7 @@ class Service
             $response = Rest::get($this->client->getUri()."charges/$orderId/",$this->client->getAuth());
             $obj = Factory::cpOrderInfo($response);
 
-            var_dump($obj);
+            return $obj;
         }catch(\Exception $e){
             throw new CpException($e->getMessage(),$e->getCode(), $e);
         }
