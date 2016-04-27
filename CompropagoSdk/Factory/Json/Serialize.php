@@ -120,7 +120,7 @@ class Serialize
         $res->failure_message = $obj->failure_message;
         $res->failure_code = $obj->failure_code;
         $res->amount_refunded = $obj->amount_refunded;
-        $res->description = $obj->descripcion;
+        $res->description = $obj->description;
         $res->dispute = $obj->dispute;
 
         return $res;

@@ -14,43 +14,145 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
  * Compropago php-sdk
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
+
 
 namespace CompropagoSdk\UnitTest;
 
 require_once __DIR__."/autoload.php";
 
 use CompropagoSdk\Client;
+use CompropagoSdk\Factory\Abs\CpOrderInfo;
+use CompropagoSdk\Factory\Abs\NewOrderInfo;
 use CompropagoSdk\Models\PlaceOrderInfo;
 
-class Test
+class Test extends \PHPUnit_Framework_TestCase
 {
-    public function __construct()
+    public function testCreateClient()
     {
-        $client = new Client(
-            "pk_test_8781245a88240f9cf",
-            "sk_test_56e31883637446b1b",
-            false
-        );
+        $client = null;
+        try{
+            $client = new Client(
+                "pk_test_8781245a88240f9cf",
+                "sk_test_56e31883637446b1b",
+                false
+            );
+            $this->assertTrue(!empty($client));
+        }catch(\Exception $e){
+            $this->assertTrue(!empty($client));
+            echo "\n".$e->getMessage()."\n";
+        }
 
-        //$client->api->getProviders();
-        //$client->api->verifyOrder("ch_a2b35233-4784-47e3-af27-3ad976342ded");
+        return $client;
+    }
 
-        $neworder = new PlaceOrderInfo(
-            "2",
-            "M4 Style",
-            1800,
-            "Eduardo Aguilar",
-            "eduardo.aguilar@compropago.com"
-        );
+    /**
+     * @depends testCreateClient
+     * @param Client $client
+     * @return array
+     */
+    public function testServiceProviders(Client $client)
+    {
+        try{
+            $res = $client->api->getProviders();
+        }catch(\Exception $e){
+            $res = array();
+            echo "\n".$e->getMessage()."\n";
+        }
 
-        $response = $client->api->placeOrder($neworder);
-        $client->api->sendSmsInstructions("5561463627",$response->getId());
+        $this->assertTrue(is_array($res) && !empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @depends testServiceProviders
+     * @param array $providers
+     * @return array
+     */
+    public function testEmptyArrayProviders(array $providers)
+    {
+        $this->assertTrue(!empty($providers));
+        return $providers;
+    }
+
+    /**
+     * @depends testEmptyArrayProviders
+     * @param array $providers
+     */
+    public function testTypeArrayProviders(array $providers)
+    {
+        $flag = true;
+        foreach($providers as $key => $value){
+            $flag = (get_class($value) == "CompropagoSdk\\Models\\Provider") ? $flag : false;
+            if(!$flag)
+                break;
+        }
+
+        $this->assertTrue($flag);
+    }
+
+    /**
+     * @depends testCreateClient
+     * @param Client $client
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrder(Client $client)
+    {
+        try{
+            $order = new PlaceOrderInfo("11","M4 Style",1800,"Eduardo Aguilar","eduardo.aguilar@compropago.com");
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @depends testServicePlaceOrder
+     * @param $neworder
+     */
+    public function testTypeServicePlaceOrder($neworder)
+    {
+        $this->assertTrue((get_parent_class($neworder) == "CompropagoSdk\\Factory\\Abs\\NewOrderInfo"));
+    }
+
+    /**
+     * @depends testServicePlaceOrder
+     * @param NewOrderInfo $order
+     * @return CpOrderInfo
+     */
+    public function testServiceVerifyOrder(NewOrderInfo $order)
+    {
+        try {
+            $client = new Client(
+                "pk_test_8781245a88240f9cf",
+                "sk_test_56e31883637446b1b",
+                false
+            );
+            $res = $client->api->verifyOrder($order->getId());
+        } catch (\Exception $e) {
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+        return $res;
+    }
+
+    /**
+     * @depends testServiceVerifyOrder
+     * @param CpOrderInfo $order
+     */
+    public function testTypeServiceVerifyOrder(CpOrderInfo $order)
+    {
+        $this->assertTrue((get_parent_class($order) == "CompropagoSdk\\Factory\\Abs\\CpOrderInfo"));
     }
 }
-
-new Test();
