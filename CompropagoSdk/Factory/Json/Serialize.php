@@ -26,9 +26,11 @@ namespace CompropagoSdk\Factory\Json;
 use CompropagoSdk\Factory\V10\CpOrderInfo10;
 use CompropagoSdk\Factory\V10\EvalAuthInfo10;
 use CompropagoSdk\Factory\V10\NewOrderInfo10;
+use CompropagoSdk\Factory\V10\SmsInfo10;
 use CompropagoSdk\Factory\V11\CpOrderInfo11;
 use CompropagoSdk\Factory\V11\EvalAuthInfo11;
 use CompropagoSdk\Factory\V11\NewOrderInfo11;
+use CompropagoSdk\Factory\V11\SmsInfo11;
 
 
 /**
@@ -254,11 +256,41 @@ class Serialize
 
         return $res;
     }
+
+    /**
+     * @param $source
+     * @return SmsInfo10
+     */
+    public static function smsInfo10($source)
+    {
+        $res = new SmsInfo10();
+        $obj = json_decode($source);
+
+        $res->type = $obj->type;
+        $res->object = $obj->object;
+
+        $res->payment->id = $obj->payment->id;
+        $res->payment->short_id = $obj->payment->short_id;
+
+        return $res;
+    }
+
+    /**
+     * @param $source
+     * @return SmsInfo11
+     */
+    public static function smsInfo11($source)
+    {
+        $res = new SmsInfo11();
+        $obj = json_decode($source);
+
+        $res->type = $obj->type;
+        $res->object = $obj->object;
+
+        $res->data->object->id = $obj->data->object->id;
+        $res->data->object->short_id = $obj->data->object->short_id;
+        $res->data->object->object = $obj->data->object->object;
+
+        return $res;
+    }
 }
-
-
-
-
-
-
-

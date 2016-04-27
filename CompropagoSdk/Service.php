@@ -29,7 +29,6 @@ use CompropagoSdk\Models\PlaceOrderInfo;
 use CompropagoSdk\Tools\Rest;
 use CompropagoSdk\Tools\Validations;
 
-
 /**
  * Class Service Provee de los servicios necesarios para el manejo de la API de ComproPago
  * @package CompropagoSdk
@@ -65,6 +64,11 @@ class Service
         }
     }
 
+    /**
+     * @param $orderId
+     * @return Factory\Abs\CpOrderInfo
+     * @throws CpException
+     */
     public function verifyOrder( $orderId )
     {
         try{
@@ -79,6 +83,11 @@ class Service
         }
     }
 
+    /**
+     * @param PlaceOrderInfo $neworder
+     * @return Factory\Abs\NewOrderInfo
+     * @throws CpException
+     */
     public function placeOrder(PlaceOrderInfo $neworder)
     {
         try{
@@ -102,10 +111,23 @@ class Service
         }
     }
 
+    /**
+     * @param $number
+     * @param $orderId
+     * @return Factory\Abs\SmsInfo
+     * @throws CpException
+     */
     public function sendSmsInstructions($number,$orderId)
     {
         try{
+            Validations::validateGateway($this->client);
 
+            $params = "customer_phone=".$number;
+
+            $response = Rest::post($this->client->getUri()."charges/".$orderId."/sms/",$this->client->getAuth(),$params);
+            $obj = Factory::smsInfo($response);
+
+            return $obj;
         }catch(\Exception $e){
             throw new CpException($e->getMessage(),$e->getCode(), $e);
         }

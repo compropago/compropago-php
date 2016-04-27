@@ -49,7 +49,7 @@ class Test
         );
 
         $response = $client->api->placeOrder($neworder);
-        var_dump($response);
+        $client->api->sendSmsInstructions("5561463627",$response->getId());
     }
 }
 

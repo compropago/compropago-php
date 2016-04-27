@@ -142,4 +142,24 @@ class Factory
                 break;
         }
     }
+
+    /**
+     * @param $source
+     * @return Abs\SmsInfo
+     * @throws FactoryExceptions
+     */
+    public static function smsInfo($source)
+    {
+        switch(self::verifyVersion($source)){
+            case '1.1':
+                return Serialize::smsInfo11($source);
+                break;
+            case '1.0':
+                return Serialize::smsInfo10($source);
+                break;
+            default:
+                throw new FactoryExceptions("Version no soportada");
+                break;
+        }
+    }
 }

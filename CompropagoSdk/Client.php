@@ -22,10 +22,13 @@
 
 namespace CompropagoSdk;
 
-
+/**
+ * Class Client Clase principal que procee acceso a los servicios de API
+ * @package CompropagoSdk
+ */
 class Client
 {
-    const VERSION="1.1.1";
+    const VERSION="2.0.0-alfa";
     const API_LIVE_URI='https://api.compropago.com/v1/';
     const API_SANDBOX_URI='https://api.compropago.com/v1/';
     const USER_AGENT_SUFFIX = "compropago-php-sdk/";
@@ -52,21 +55,33 @@ class Client
         $this->api = new Service($this);
     }
 
+    /**
+     * @return string
+     */
     public function getAuth()
     {
         return $this->privatekey.":";
     }
 
+    /**
+     * @return string
+     */
     public function getFullAuth()
     {
         return $this->privatekey.":".$this->publickey;
     }
 
+    /**
+     * @return bool
+     */
     public function getMode()
     {
         return $this->live;
     }
 
+    /**
+     * @return string
+     */
     public function getUri()
     {
         return $this->deployUri;

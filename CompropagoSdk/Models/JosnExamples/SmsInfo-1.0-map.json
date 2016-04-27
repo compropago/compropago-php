@@ -1,0 +1,8 @@
+{
+  "type": "charge_sms.success",
+  "object": "event",
+  "payment": {
+    "id": "f4172ff7-9125-4206-99c7-151480",
+    "short_id": "04c651"
+  }
+}
