@@ -27,17 +27,22 @@ require_once __DIR__."/autoload.php";
 use CompropagoSdk\Client;
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
+use CompropagoSdk\Factory\Abs\SmsInfo;
 use CompropagoSdk\Models\PlaceOrderInfo;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
+    private $publickey = "pk_test_8781245a88240f9cf";
+    private $privatekey = "sk_test_56e31883637446b1b";
+    private $phonenumber = "5561463627";
+
     public function testCreateClient()
     {
         $client = null;
         try{
             $client = new Client(
-                "pk_test_8781245a88240f9cf",
-                "sk_test_56e31883637446b1b",
+                $this->publickey,
+                $this->privatekey,
                 false
             );
             $this->assertTrue(!empty($client));
@@ -133,8 +138,8 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         try {
             $client = new Client(
-                "pk_test_8781245a88240f9cf",
-                "sk_test_56e31883637446b1b",
+                $this->publickey,
+                $this->privatekey,
                 false
             );
             $res = $client->api->verifyOrder($order->getId());
@@ -154,5 +159,38 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testTypeServiceVerifyOrder(CpOrderInfo $order)
     {
         $this->assertTrue((get_parent_class($order) == "CompropagoSdk\\Factory\\Abs\\CpOrderInfo"));
+    }
+
+    /**
+     * @depends testServicePlaceOrder
+     * @param NewOrderInfo $order
+     * @return SmsInfo
+     */
+    public function testServiceSms(NewOrderInfo $order)
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                false
+            );
+
+            $res = $client->api->sendSmsInstructions($this->phonenumber, $order->getId());
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+        return $res;
+    }
+
+    /**
+     * @depends testServiceSms
+     * @param SmsInfo $info
+     */
+    public function testTypeServiceSms(SmsInfo $info)
+    {
+        $this->assertTrue((get_parent_class($info) == "CompropagoSdk\\Factory\\Abs\\SmsInfo"));
     }
 }
