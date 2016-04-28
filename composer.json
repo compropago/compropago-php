@@ -16,7 +16,9 @@
     },
     
     "autoload": {
-        "psr-4": {"CompropagoSdk\\": ""}
+        "psr-4": {
+            "CompropagoSdk\\": "CompropagoSdk"
+        }
     }
    
 }
