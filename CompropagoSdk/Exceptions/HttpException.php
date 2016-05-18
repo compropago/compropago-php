@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 /**
- * Compropago ${LIBRARI}
+ * Compropago php-sdk
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 

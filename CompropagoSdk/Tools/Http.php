@@ -22,9 +22,7 @@
 
 namespace CompropagoSdk\Tools;
 
-
 use CompropagoSdk\Exceptions\HttpException;
-
 
 /**
  * Class Http Crea llamas Http para el consumo de servicios
@@ -94,11 +92,31 @@ class Http
     /**
      * Ejecuta la peticion Http que se le especifique
      *
-     * @param $ch       resource    Instancia del Objeto Http
+     * @param $ch
      * @return mixed
+     * @throws HttpException
      */
     public static function execHttp(&$ch)
     {
-        return curl_exec($ch);
+        $response = curl_exec($ch);
+
+        if(empty($response)){
+            $code = curl_errno($ch);
+
+            if ($code == 60 || $code == 77) {
+                curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/cacerts.pem');
+                $response = curl_exec($ch);
+            }
+
+
+
+            if(empty($response)){
+                $error = curl_error($ch);
+                $code = curl_errno($ch);
+                throw new HttpException($error, $code);
+            }
+        }
+
+        return $response;
     }
 }
