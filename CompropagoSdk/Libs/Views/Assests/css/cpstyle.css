@@ -1,0 +1,298 @@
+/**
+ * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
+ */
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.cpbutton,
+a.cpbutton{
+    display: inline-block;
+    height: 38px;
+    padding: 0 30px;
+    color: #555 !important;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+
+.cpbutton:hover,
+.cpbutton:focus,
+a.cpbutton:hover,
+a.cpbutton:focus {
+    color: #333 !important;
+    border-color: #888;
+    outline: 0;
+}
+
+.cpbutton.cpbutton-primary,
+a.cpbutton.cpbutton-primary{
+    color: #FFF !important;
+    background-color: #33C3F0;
+    border-color: #33C3F0;
+}
+
+.cpbutton.cpbutton-primary:hover,
+.cpbutton.cpbutton-primary:focus,
+a.cpbutton.cpbutton-primary:hover,
+a.cpbutton.cpbutton-primary:focus{
+    color: #FFF !important;
+    background-color: #1EAEDB;
+    border-color: #1EAEDB;
+}
+
+
+/* Links
+-------------------------------------------------- */
+.cprow a, .cpcontainer a{
+    color: #33C3F0;
+}
+
+
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.cpcontainer {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box; }
+.cpcolumn,
+.cpcolumns {
+    width: 100%;
+    float: left;
+    box-sizing: border-box; }
+
+/* For devices larger than 400px */
+@media (min-width: 400px) {
+    .cpcontainer {
+        width: 85%;
+        padding: 0; }
+}
+
+/* For devices larger than 550px */
+@media (min-width: 550px) {
+    .cpcontainer {
+        width: 80%; }
+    .cpcolumn,
+    .cpcolumns {
+        margin-left: 4%; }
+    .cpcolumn:first-child,
+    .cpcolumns:first-child {
+        margin-left: 0; }
+
+    .one.cpcolumn,
+    .one.cpcolumns                    { width: 4.66666666667%; }
+    .two.cpcolumns                    { width: 13.3333333333%; }
+    .three.cpcolumns                  { width: 22%;            }
+    .four.cpcolumns                   { width: 30.6666666667%; }
+    .five.cpcolumns                   { width: 39.3333333333%; }
+    .six.cpcolumns                    { width: 48%;            }
+    .seven.cpcolumns                  { width: 56.6666666667%; }
+    .eight.cpcolumns                  { width: 65.3333333333%; }
+    .nine.cpcolumns                   { width: 74.0%;          }
+    .ten.cpcolumns                    { width: 82.6666666667%; }
+    .eleven.cpcolumns                 { width: 91.3333333333%; }
+    .twelve.cpcolumns                 { width: 100%; margin-left: 0; }
+
+    .one-third.cpcolumn               { width: 30.6666666667%; }
+    .two-thirds.cpcolumn              { width: 65.3333333333%; }
+
+    .one-half.cpcolumn                { width: 48%; }
+
+    /* Offsets */
+    .offset-by-one.cpcolumn,
+    .offset-by-one.cpcolumns          { margin-left: 8.66666666667%; }
+    .offset-by-two.cpcolumn,
+    .offset-by-two.cpcolumns          { margin-left: 17.3333333333%; }
+    .offset-by-three.cpcolumn,
+    .offset-by-three.cpcolumns        { margin-left: 26%;            }
+    .offset-by-four.cpcolumn,
+    .offset-by-four.cpcolumns         { margin-left: 34.6666666667%; }
+    .offset-by-five.cpcolumn,
+    .offset-by-five.cpcolumns         { margin-left: 43.3333333333%; }
+    .offset-by-six.cpcolumn,
+    .offset-by-six.cpcolumns          { margin-left: 52%;            }
+    .offset-by-seven.cpcolumn,
+    .offset-by-seven.cpcolumns        { margin-left: 60.6666666667%; }
+    .offset-by-eight.cpcolumn,
+    .offset-by-eight.cpcolumns        { margin-left: 69.3333333333%; }
+    .offset-by-nine.cpcolumn,
+    .offset-by-nine.cpcolumns         { margin-left: 78.0%;          }
+    .offset-by-ten.cpcolumn,
+    .offset-by-ten.cpcolumns          { margin-left: 86.6666666667%; }
+    .offset-by-eleven.cpcolumn,
+    .offset-by-eleven.cpcolumns       { margin-left: 95.3333333333%; }
+
+    .offset-by-one-third.cpcolumn,
+    .offset-by-one-third.cpcolumns    { margin-left: 34.6666666667%; }
+    .offset-by-two-thirds.cpcolumn,
+    .offset-by-two-thirds.cpcolumns   { margin-left: 69.3333333333%; }
+
+    .offset-by-one-half.cpcolumn,
+    .offset-by-one-half.cpcolumns     { margin-left: 52%; }
+
+}
+
+/* Utilities
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.cp-u-full-width {
+    width: 100%;
+    box-sizing: border-box; }
+.cp-u-max-full-width {
+    max-width: 100%;
+    box-sizing: border-box; }
+.cp-u-pull-right {
+    float: right; }
+.cp-u-pull-left {
+    float: left; }
+
+/* Clearing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Self Clearing Goodness */
+.cpcontainer:after,
+.cprow:after,
+.cp-u-cf {
+    content: "";
+    display: table;
+    clear: both; }
+
+
+/* Tables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+table.cptable {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+td,
+th {
+    padding: 0; }
+
+table.cptable {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 0px; }
+table.cptable thead,
+table.cptable tbody,
+table.cptable tfoot {
+    border: 1px solid #f1f1f1;
+    background-color: #fefefe; }
+table.cptable caption {
+    font-weight: bold;
+    padding: 0.5rem 0.625rem 0.625rem; }
+table.cptable thead,
+table.cptable tfoot {
+    background: #f8f8f8;
+    color: #0a0a0a; }
+table.cptable thead tr,
+table.cptable tfoot tr {
+    background: transparent; }
+table.cptable thead th,
+table.cptable thead td,
+table.cptable tfoot th,
+table.cptable tfoot td {
+    padding: 0.5rem 0.625rem 0.625rem;
+    font-weight: bold;
+    text-align: left; }
+table.cptable tbody tr:nth-child(even) {
+    background-color: #f1f1f1; }
+table.cptable tbody th,
+table.cptable tbody td {
+    padding: 0.5rem 0.625rem 0.625rem; }
+
+@media screen and (max-width: 63.9375em) {
+    table.cptable.stack thead {
+        display: none; }
+    table.cptable.stack tfoot {
+        display: none; }
+    table.cptable.stack tr,
+    table.cptable.stack th,
+    table.cptable.stack td {
+        display: block; }
+    table.cptable.stack td {
+        border-top: 0; } }
+
+table.cptable.scroll {
+    display: block;
+    width: 100%;
+    overflow-x: auto; }
+
+table.cptable.hover tr:hover {
+    background-color: #f9f9f9; }
+
+table.cptable.hover tr:nth-of-type(even):hover {
+    background-color: #ececec; }
+
+
+
+/* Blockquotes
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+blockquote.cpblok {
+    border-left: 0.3rem solid #33C3F0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 1rem 1.5rem;
+    background-color: #F4F5F6;
+    color: #000 !important;
+}
+blockquote.cpblok *:last-child {
+    margin: 0;
+}
+
+/* Alerts
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+
+/* Specific styling Views
+---------------------------------------------------- */
+#cpWrapper li{
+    display:inline-block; padding:5px;
+}
+
+#cpWrapper input {
+    position:absolute;
+    display:none;
+}
+
+#cpWrapper input[type="radio"]:checked + label img{
+    cursor: pointer;
+    opacity: 1;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    box-shadow: 0px 0px 2px 4px rgba(0,170,239,1);
+    -webkit-box-shadow: 0px 0px 2px 4px rgba(0,170,239,1);
+    -moz-box-shadow: 0px 0px 2px 4px rgba(0,170,239,1);
+}
+
+#cpWrapper input[type="radio"] + label img{
+    cursor: pointer;
+    opacity: .6;
+}
+
+#cpWrapper img{
+    width:80px;
+}
+
+#cpWrapper input[type="radio"] + label img{
+    cursor: pointer;
+}
+
+
+#cpWrapper input[type="radio"]:indeterminate + label img{
+    opacity: 1;
+}

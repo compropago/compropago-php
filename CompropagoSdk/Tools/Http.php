@@ -108,8 +108,6 @@ class Http
                 $response = curl_exec($ch);
             }
 
-
-
             if(empty($response)){
                 $error = curl_error($ch);
                 $code = curl_errno($ch);

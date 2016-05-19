@@ -22,8 +22,6 @@
 
 namespace CompropagoSdk\UnitTest;
 
-require_once __DIR__."/autoload.php";
-
 use CompropagoSdk\Client;
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
