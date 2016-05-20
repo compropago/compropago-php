@@ -19,8 +19,9 @@
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
-
 namespace CompropagoSdk\UnitTest;
+
+require_once __DIR__. "/../../../../autoload.php";
 
 use CompropagoSdk\Client;
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
@@ -112,6 +113,8 @@ class Test extends \PHPUnit_Framework_TestCase
             $res = null;
             echo "\n".$e->getMessage()."\n";
         }
+
+        
 
         $this->assertTrue(!empty($res));
 
