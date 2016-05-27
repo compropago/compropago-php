@@ -23,7 +23,12 @@
 namespace CompropagoSdk\Models;
 
 
-class NewWebhookInfo
+class Webhook
 {
+    public $id;
+    public $url;
+    public $mode;
+    public $status;
 
+    public function __constructor(){}
 }

@@ -25,5 +25,5 @@ namespace CompropagoSdk\Models;
 
 class WebhookError
 {
-
+    
 }

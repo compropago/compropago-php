@@ -24,8 +24,6 @@ namespace CompropagoSdk\Tools;
 
 
 use CompropagoSdk\Client;
-use CompropagoSdk\Exceptions\CpException;
-use CompropagoSdk\Exceptions\HttpException;
 use CompropagoSdk\Factory\Factory;
 
 
@@ -41,7 +39,7 @@ class Validations
      *
      * @param Client $client
      * @return \CompropagoSdk\Factory\Abs\EvalAuthInfo
-     * @throws HttpException
+     * @throws \Exception
      */
     public static function evalAuth( Client $client )
     {
@@ -51,18 +49,18 @@ class Validations
 
             switch($info->getCode()){
                 case '401':
-                    throw new CpException("CODE 401: ".$info->getMessage(),401);
+                    throw new \Exception("CODE 401: ".$info->getMessage(),401);
                     break;
                 case '500':
-                    throw new CpException("CODE 500: ".$info->getMessage(),500);
+                    throw new \Exception("CODE 500: ".$info->getMessage(),500);
                     break;
                 case '200':
                     return $info;
                 default:
-                    throw new HttpException("CODE {$info->getCode()}: ".$info->getMessage(),$info->getCode());
+                    throw new \Exception("CODE {$info->getCode()}: ".$info->getMessage(),$info->getCode());
             }
         }catch(\Exception $e){
-            throw new HttpException($e->getMessage(),$e->getCode());
+            throw new \Exception($e->getMessage(),$e->getCode());
         }
     }
 
@@ -71,12 +69,12 @@ class Validations
      *
      * @param Client $client
      * @return bool
-     * @throws CpException
+     * @throws \Exception
      */
     public static function validateGateway( Client $client )
     {
         if(empty($client)){
-            throw new CpException("El objecto Client no es valido");
+            throw new \Exception("El objecto Client no es valido");
         }
 
         $clientMode = $client->getMode();
@@ -85,18 +83,18 @@ class Validations
             $authinfo = self::evalAuth($client);
 
             if($authinfo->getModeKey() != $authinfo->getLiveMode()){
-                throw new CpException("Las llaves no corresponden a modo de la tienda");
+                throw new \Exception("Las llaves no corresponden a modo de la tienda");
             }
 
             if($clientMode != $authinfo->getLiveMode()){
-                throw new CpException("El modo del cliente no corresponde al de la tienda");
+                throw new \Exception("El modo del cliente no corresponde al de la tienda");
             }
 
             if($clientMode != $authinfo->getModeKey()){
-                throw new CpException("El modo del cliente no corresponde al de las llaves");
+                throw new \Exception("El modo del cliente no corresponde al de las llaves");
             }
         }catch(\Exception $e){
-            throw new CpException($e->getMessage(),$e->getCode(),$e);
+            throw new \Exception($e->getMessage(),$e->getCode(),$e);
         }
 
         return true;

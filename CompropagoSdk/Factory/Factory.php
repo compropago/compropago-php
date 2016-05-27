@@ -22,11 +22,11 @@
 
 namespace CompropagoSdk\Factory;
 
-use CompropagoSdk\Exceptions\FactoryExceptions;
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
 use CompropagoSdk\Factory\Abs\EvalAuthInfo;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
 use CompropagoSdk\Factory\Json\Serialize;
+use CompropagoSdk\Models\Webhook;
 use CompropagoSdk\Models\Provider;
 
 /**
@@ -53,7 +53,7 @@ class Factory
      *
      * @param $source               string Cadena Json con el contenido a construir como objeto
      * @return EvalAuthInfo
-     * @throws FactoryExceptions
+     * @throws \Exception
      */
     public static function evalAuthInfo($source)
     {
@@ -65,7 +65,7 @@ class Factory
                 return Serialize::evalAuthInfo10($source);
                 break;
             default:
-                throw new FactoryExceptions("Version no soportada");
+                throw new \Exception("Version no soportada");
                 break;
         }
     }
@@ -106,7 +106,7 @@ class Factory
     /**
      * @param $source
      * @return CpOrderInfo
-     * @throws FactoryExceptions
+     * @throws \Exception
      */
     public static function cpOrderInfo($source)
     {
@@ -118,7 +118,7 @@ class Factory
                 return Serialize::cpOrderInfo10($source);
                 break;
             default:
-                throw new FactoryExceptions("Version no soportada");
+                throw new \Exception("Version no soportada");
                 break;
         }
     }
@@ -126,7 +126,7 @@ class Factory
     /**
      * @param $source
      * @return NewOrderInfo
-     * @throws FactoryExceptions
+     * @throws \Exception
      */
     public static function newOrderInfo($source)
     {
@@ -138,7 +138,7 @@ class Factory
                 return Serialize::newOrderInfo10($source);
                 break;
             default:
-                throw new FactoryExceptions("Version no soportada");
+                throw new \Exception("Version no soportada");
                 break;
         }
     }
@@ -146,7 +146,7 @@ class Factory
     /**
      * @param $source
      * @return Abs\SmsInfo
-     * @throws FactoryExceptions
+     * @throws \Exception
      */
     public static function smsInfo($source)
     {
@@ -158,8 +158,47 @@ class Factory
                 return Serialize::smsInfo10($source);
                 break;
             default:
-                throw new FactoryExceptions("Version no soportada");
+                throw new \Exception("Version no soportada");
                 break;
         }
+    }
+
+    /**
+     * @param $source
+     * @return Webhook
+     * @throws \Exception
+     */
+    public static function webhook($source)
+    {
+        $json = json_decode($source);
+        
+        if(isset($json->type) && $json->type == 'error'){
+            throw new \Exception($json->message, $json->code);
+        }
+        
+        $object = new Webhook();
+        
+        $object->id = $json->id;
+        $object->url = isset($json->url) ? $json->url : null ;
+        $object->mode = isset($json->mode) ? $json->mode : null ;
+        $object->status = isset($json->status) ? $json->status : null ;
+        
+        return $object;
+    }
+
+    /**
+     * @param $source
+     * @return array
+     * @throws \Exception
+     */
+    public static function listWebhooks($source)
+    {
+        $final = array();
+
+        foreach (json_decode($source,true) as $value){
+            $final[] = self::webhook(json_encode($value));
+        }
+
+        return $final;
     }
 }

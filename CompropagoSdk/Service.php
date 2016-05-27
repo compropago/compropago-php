@@ -22,8 +22,6 @@
 
 namespace CompropagoSdk;
 
-
-use CompropagoSdk\Exceptions\CpException;
 use CompropagoSdk\Factory\Factory;
 use CompropagoSdk\Models\PlaceOrderInfo;
 use CompropagoSdk\Tools\Rest;
@@ -50,7 +48,7 @@ class Service
      * Retorna un arreglo con los proveedores disponibles ordenados por Rank
      *
      * @return array
-     * @throws CpException
+     * @throws \Exception
      */
     public function getProviders()
     {
@@ -60,14 +58,14 @@ class Service
 
             return $providers;
         }catch(\Exception $e){
-            throw new CpException($e->getMessage(),$e->getCode(), $e);
+            throw new \Exception($e->getMessage(),$e->getCode(), $e);
         }
     }
 
     /**
      * @param $orderId
      * @return Factory\Abs\CpOrderInfo
-     * @throws CpException
+     * @throws \Exception
      */
     public function verifyOrder( $orderId )
     {
@@ -79,14 +77,14 @@ class Service
 
             return $obj;
         }catch(\Exception $e){
-            throw new CpException($e->getMessage(),$e->getCode(), $e);
+            throw new \Exception($e->getMessage(),$e->getCode(), $e);
         }
     }
 
     /**
      * @param PlaceOrderInfo $neworder
      * @return Factory\Abs\NewOrderInfo
-     * @throws CpException
+     * @throws \Exception
      */
     public function placeOrder(PlaceOrderInfo $neworder)
     {
@@ -107,7 +105,7 @@ class Service
             return $obj;
 
         }catch(\Exception $e){
-            throw new CpException($e->getMessage(),$e->getCode(), $e);
+            throw new \Exception($e->getMessage(),$e->getCode(), $e);
         }
     }
 
@@ -115,7 +113,7 @@ class Service
      * @param $number
      * @param $orderId
      * @return Factory\Abs\SmsInfo
-     * @throws CpException
+     * @throws \Exception
      */
     public function sendSmsInstructions($number,$orderId)
     {
@@ -124,12 +122,94 @@ class Service
 
             $params = "customer_phone=".$number;
 
-            $response = Rest::post($this->client->getUri()."charges/".$orderId."/sms/",$this->client->getAuth(),$params);
+            $response= Rest::post($this->client->getUri()."charges/".$orderId."/sms/",$this->client->getAuth(),$params);
             $obj = Factory::smsInfo($response);
 
             return $obj;
         }catch(\Exception $e){
-            throw new CpException($e->getMessage(),$e->getCode(), $e);
+            throw new \Exception($e->getMessage(),$e->getCode(), $e);
+        }
+    }
+
+    /**
+     * @param $url
+     * @return Models\Webhook
+     * @throws \Exception
+     */
+    public function createWebhook($url)
+    {
+        try{
+            Validations::validateGateway($this->client);
+            
+            $params = "url=".$url;
+            
+            $response = Rest::post($this->client->getUri()."webhooks/stores/", $this->client->getFullAuth(), $params);
+            $obj = Factory::webhook($response);
+
+            return $obj;
+        }catch(\Exception $e){
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    public function getWebhooks()
+    {
+        try{
+            Validations::validateGateway($this->client);
+            
+            $response = Rest::get($this->client->getUri()."webhooks/stores/",$this->client->getFullAuth());
+            $obj = Factory::listWebhooks($response);
+            
+            return $obj;
+        }catch(\Exception $e){
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * @param $webhookId
+     * @param $url
+     * @return Models\Webhook
+     * @throws \Exception
+     */
+    public function updateWebhook($webhookId, $url)
+    {
+        try{
+            Validations::validateGateway($this->client);
+            
+            $params = "url=".$url;
+            
+            $response = Rest::put($this->client->getUri()."webhooks/stores/$webhookId/",
+                $this->client->getFullAuth(), $params);
+
+            $obj = Factory::webhook($response);
+            
+            return $obj;
+        }catch(\Exception $e){
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * @param $webhookId
+     * @return Models\Webhook
+     * @throws \Exception
+     */
+    public function deleteWebhook($webhookId)
+    {
+        try{
+            Validations::validateGateway($this->client);
+
+            $response=Rest::delete($this->client->getUri()."webhooks/stores/$webhookId/", $this->client->getFullAuth());
+            $obj = Factory::webhook($response);
+            
+            return $obj;
+        }catch(\Exception $e){
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

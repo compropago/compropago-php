@@ -28,11 +28,13 @@ use CompropagoSdk\Factory\Abs\CpOrderInfo;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
 use CompropagoSdk\Factory\Abs\SmsInfo;
 use CompropagoSdk\Models\PlaceOrderInfo;
+use CompropagoSdk\Models\Webhook;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
     private $publickey = "pk_test_8781245a88240f9cf";
     private $privatekey = "sk_test_56e31883637446b1b";
+    private $mode = false;
     private $phonenumber = "5561463627";
 
     public function testCreateClient()
@@ -42,7 +44,7 @@ class Test extends \PHPUnit_Framework_TestCase
             $client = new Client(
                 $this->publickey,
                 $this->privatekey,
-                false
+                $this->mode
             );
             $this->assertTrue(!empty($client));
         }catch(\Exception $e){
@@ -141,7 +143,7 @@ class Test extends \PHPUnit_Framework_TestCase
             $client = new Client(
                 $this->publickey,
                 $this->privatekey,
-                false
+                $this->mode
             );
             $res = $client->api->verifyOrder($order->getId());
         } catch (\Exception $e) {
@@ -173,7 +175,7 @@ class Test extends \PHPUnit_Framework_TestCase
             $client = new Client(
                 $this->publickey,
                 $this->privatekey,
-                false
+                $this->mode
             );
 
             $res = $client->api->sendSmsInstructions($this->phonenumber, $order->getId());
@@ -193,5 +195,107 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testTypeServiceSms(SmsInfo $info)
     {
         $this->assertTrue((get_parent_class($info) == "CompropagoSdk\\Factory\\Abs\\SmsInfo"));
+    }
+
+    /**
+     * @depends testCreateClient
+     * @param Client $client
+     */
+    public function testGetWebhooks(Client $client)
+    {
+        try{
+            $res = $client->api->getWebhooks();
+            if(is_array($res)){
+                if(count($res) > 0 && get_class($res[0]) == "CompropagoSdk\\Models\\Webhook"){
+                    $flag = true;
+                }else{
+                    $flag = false;
+                }
+            }else{
+                $flag = false;
+            }
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+            $flag = false;
+        }
+
+        $this->assertTrue($flag);
+    }
+
+    /**
+     * @depends testCreateClient
+     * @param Client $client
+     * @return Webhook | null
+     */
+    public function testCreateWebhook(Client $client)
+    {
+        $flag = false;
+        $res = null;
+        try{
+            $res = $client->api->createWebhook("http://prueba.com");
+            if(get_class($res) == "CompropagoSdk\\Models\\Webhook" &&
+                ($res->status == 'new' || $res->status == 'exists')){
+                $flag = true;
+            }
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue($flag);
+        return $res;
+    }
+
+    /**
+     * @depends testCreateWebhook
+     * @param Webhook $webhook
+     */
+    public function testUpdateWebhook(Webhook $webhook)
+    {
+        $flag = false;
+        $res = null;
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+
+            $res = $client->api->updateWebhook($webhook->id, "prueba2.com");
+
+            if(get_class($res) == "CompropagoSdk\\Models\\Webhook" && $res->status == 'updated'){
+                $flag = true;
+            }
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue($flag);
+    }
+
+    /**
+     * @depends testCreateWebhook
+     * @param Webhook $webhook
+     */
+    public function testDeleteWebhook(Webhook $webhook)
+    {
+        $flag = false;
+        $res = null;
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+
+            $res = $client->api->deleteWebhook($webhook->id);
+
+            if(get_class($res) == "CompropagoSdk\\Models\\Webhook" && $res->status == 'deleted'){
+                $flag = true;
+            }
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue($flag);
     }
 }

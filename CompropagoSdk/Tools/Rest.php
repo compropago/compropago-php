@@ -22,8 +22,6 @@
 
 namespace CompropagoSdk\Tools;
 
-use CompropagoSdk\Exceptions\RestExceptions;
-
 
 /**
  * Class Rest Proporciona los metodos de conexion
@@ -37,7 +35,7 @@ class Rest
      * @param $url              string      Url a la cual se generara la peticion
      * @param string $auth                  Cadena de autentificacion
      * @return mixed
-     * @throws RestExceptions
+     * @throws \Exception
      */
     public static function get($url, $auth="")
     {
@@ -49,12 +47,12 @@ class Rest
             $response = Http::execHttp($ch);
 
             if(empty($response)){
-                throw new RestExceptions("Respuesta vacia");
+                throw new \Exception("Respuesta vacia");
             }else{
                 return $response;
             }
         }catch(\Exception $e){
-            throw new RestExceptions($e->getMessage(),$e->getCode(),$e);
+            throw new \Exception($e->getMessage(),$e->getCode(),$e);
         }
     }
 
@@ -63,7 +61,7 @@ class Rest
      * @param $auth             string      Cadena de autentificacion
      * @param $data             string      Parametros a enviar
      * @return mixed
-     * @throws RestExceptions
+     * @throws \Exception
      */
     public static function post($url, $auth, $data)
     {
@@ -76,12 +74,57 @@ class Rest
             $response = Http::execHttp($ch);
 
             if(empty($response)){
-                throw new RestExceptions("Respuesta vacia");
+                throw new \Exception("Respuesta vacia");
             }else{
                 return $response;
             }
         }catch(\Exception $e){
-            throw new RestExceptions($e->getMessage(),$e->getCode(),$e);
+            throw new \Exception($e->getMessage(),$e->getCode(),$e);
+        }
+    }
+
+    /**
+     * @param $url              string      Url a la cual se generara la peticion
+     * @param $auth             string      Cadena de autentificacion
+     * @param $data             string      Parametros a enviar
+     * @return mixed
+     * @throws \Exception
+     */
+    public static function put($url, $auth, $data)
+    {
+        try{
+            $ch = Http::initHttp($url);
+            Http::setMethod($ch, 'PUT');
+            Http::setAuth($ch, $auth);
+            Http::setPostFields($ch, $data);
+
+            $response = Http::execHttp($ch);
+
+            if(empty($response)){
+                throw new \Exception("Respuesta vacia");
+            }else{
+                return $response;
+            }
+        }catch(\Exception $e){
+            throw new \Exception($e->getMessage(),$e->getCode(),$e);
+        }
+    }
+
+    public static function delete($url, $auth, $data = null)
+    {
+        $ch = Http::initHttp($url);
+        Http::setMethod($ch, 'DELETE');
+        Http::setAuth($ch, $auth);
+
+        if(!empty($data))
+            Http::setPostFields($ch, $data);
+
+        $response = Http::execHttp($ch);
+
+        if(empty($response)){
+            throw new \Exception("Respuesta vacia");
+        }else{
+            return $response;
         }
     }
 }

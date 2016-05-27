@@ -22,7 +22,6 @@
 
 namespace CompropagoSdk\Tools;
 
-use CompropagoSdk\Exceptions\HttpException;
 
 /**
  * Class Http Crea llamas Http para el consumo de servicios
@@ -48,17 +47,19 @@ class Http
      *
      * @param $ch               resource    Instancia del Objeto Http
      * @param $method           string      Tipo de peticion a ejecutar
-     * @throws HttpException
+     * @throws \Exception
      */
     public static function setMethod(&$ch,$method)
     {
         switch($method){
             case 'GET':
             case 'POST':
+            case 'PUT':
+            case 'DELETE':
                 curl_setopt($ch,CURLOPT_CUSTOMREQUEST, $method);
                 break;
             default:
-                throw new HttpException("Metodo no soportado");
+                throw new \Exception("Metodo no soportado");
                 break;
         }
     }
@@ -94,7 +95,7 @@ class Http
      *
      * @param $ch
      * @return mixed
-     * @throws HttpException
+     * @throws \Exception
      */
     public static function execHttp(&$ch)
     {
@@ -111,7 +112,7 @@ class Http
             if(empty($response)){
                 $error = curl_error($ch);
                 $code = curl_errno($ch);
-                throw new HttpException($error, $code);
+                throw new \Exception($error, $code);
             }
         }
 
