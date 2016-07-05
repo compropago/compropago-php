@@ -237,7 +237,7 @@ class Serialize
         $res->fee_details->amount = $obj->fee_details->amount;
         $res->fee_details->tax = $obj->fee_details->tax;
         $res->fee_details->currency = $obj->fee_details->currency;
-        $res->fee_details->type = $obj->fee_details->type;
+        $res->fee_details->type = isset($obj->fee_details->type) ? $obj->fee_details->type : null;
         $res->fee_details->description = $obj->fee_details->description;
         $res->fee_details->amount_refunded = $obj->fee_details->amount_refunded;
 

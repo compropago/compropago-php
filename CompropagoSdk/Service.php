@@ -34,7 +34,8 @@ use CompropagoSdk\Tools\Validations;
 class Service
 {
     private $client;
-
+    private $headers;
+    
     /**
      * Service constructor.
      * @param Client $client
@@ -42,6 +43,9 @@ class Service
     public function __construct(Client $client)
     {
         $this->client = $client;
+        $this->headers = array(
+            'useragent: '.$client->getContained()
+        );
     }
 
     /**
@@ -50,10 +54,31 @@ class Service
      * @return array
      * @throws \Exception
      */
-    public function getProviders()
+    public function getProviders($auth = false, $limit = 0, $fetch = false)
     {
         try{
-            $response = Rest::get($this->client->getUri()."providers/true/","");
+
+            if($auth){
+                $uri = $this->client->getUri()."providers";
+                $keys = $this->client->getFullAuth();
+            }else{
+                $uri = $this->client->getUri()."providers/true";
+                $keys = "";
+            }
+
+            if(is_numeric($limit) && $limit > 0){
+                $uri .= "?order_total=$limit";
+            }
+
+            if(is_bool($fetch) && $fetch){
+                if(is_numeric($limit) && $limit > 0){
+                    $uri .= "&fetch=true";
+                }else{
+                    $uri .= "?fetch=true";
+                }
+            }
+
+            $response = Rest::get($uri,$keys,$this->headers);
             $providers = Factory::arrayProviders($response);
 
             return $providers;
@@ -72,7 +97,7 @@ class Service
         try{
             Validations::validateGateway($this->client);
 
-            $response = Rest::get($this->client->getUri()."charges/$orderId/",$this->client->getAuth());
+            $response = Rest::get($this->client->getUri()."charges/$orderId/",$this->client->getAuth(),$this->headers);
             $obj = Factory::cpOrderInfo($response);
 
             return $obj;
@@ -99,7 +124,7 @@ class Service
                 "&payment_type=".$neworder->payment_type.
                 "&image_url=".$neworder->image_url;
 
-            $response = Rest::post($this->client->getUri()."charges/",$this->client->getAuth(),$params);
+            $response = Rest::post($this->client->getUri()."charges/",$this->client->getAuth(),$params,$this->headers);
             $obj = Factory::newOrderInfo($response);
 
             return $obj;
@@ -122,7 +147,8 @@ class Service
 
             $params = "customer_phone=".$number;
 
-            $response= Rest::post($this->client->getUri()."charges/".$orderId."/sms/",$this->client->getAuth(),$params);
+            $response= Rest::post($this->client->getUri()."charges/".$orderId."/sms/",$this->client->getAuth(),$params,
+                $this->headers);
             $obj = Factory::smsInfo($response);
 
             return $obj;
@@ -143,7 +169,8 @@ class Service
             
             $params = "url=".$url;
             
-            $response = Rest::post($this->client->getUri()."webhooks/stores/", $this->client->getFullAuth(), $params);
+            $response = Rest::post($this->client->getUri()."webhooks/stores/", $this->client->getFullAuth(), $params,
+                $this->headers);
             $obj = Factory::webhook($response);
 
             return $obj;
@@ -161,7 +188,8 @@ class Service
         try{
             Validations::validateGateway($this->client);
             
-            $response = Rest::get($this->client->getUri()."webhooks/stores/",$this->client->getFullAuth());
+            $response = Rest::get($this->client->getUri()."webhooks/stores/",$this->client->getFullAuth(),
+                $this->headers);
             $obj = Factory::listWebhooks($response);
             
             return $obj;
@@ -184,7 +212,7 @@ class Service
             $params = "url=".$url;
             
             $response = Rest::put($this->client->getUri()."webhooks/stores/$webhookId/",
-                $this->client->getFullAuth(), $params);
+                $this->client->getFullAuth(), $params,$this->headers);
 
             $obj = Factory::webhook($response);
             
@@ -204,7 +232,8 @@ class Service
         try{
             Validations::validateGateway($this->client);
 
-            $response=Rest::delete($this->client->getUri()."webhooks/stores/$webhookId/", $this->client->getFullAuth());
+            $response=Rest::delete($this->client->getUri()."webhooks/stores/$webhookId/", $this->client->getFullAuth(),
+                null,$this->headers);
             $obj = Factory::webhook($response);
             
             return $obj;

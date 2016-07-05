@@ -23,6 +23,7 @@ namespace CompropagoSdk\UnitTest;
 
 require_once __DIR__. "/../../../../autoload.php";
 
+use Compropago\Sdk\Exception;
 use CompropagoSdk\Client;
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
@@ -35,6 +36,7 @@ class Test extends \PHPUnit_Framework_TestCase
     private $publickey = "pk_test_8781245a88240f9cf";
     private $privatekey = "sk_test_56e31883637446b1b";
     private $mode = false;
+    
     private $phonenumber = "5561463627";
 
     public function testCreateClient()
@@ -75,6 +77,96 @@ class Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @depends testCreateClient
+     * @param Client $client
+     */
+    public function testServiceProvidersLimit(Client $client)
+    {
+        try{
+            $res = $client->api->getProviders(false, 15000);
+
+            $flag = true;
+            foreach ($res as $provider){
+                if($provider->transaction_limit < 15000){
+                    $flag = false;
+                    break;
+                }
+            }
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(isset($flag) && $flag);
+    }
+
+    /**
+     * @depends testCreateClient
+     * @param Client $client
+     */
+    public function testServiceProviderAuth(Client $client)
+    {
+        try{
+            $res = $client->api->getProviders(true);
+
+            if($res){
+                $res = $client->api->getProviders(true);
+            }
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(isset($res) && is_array($res) && !empty($res));
+    }
+
+
+    /**
+     * @depends testCreateClient
+     * @param Client $client
+     */
+    public function testServiceProviderAuthLimit(Client $client)
+    {
+        try{
+            $res = $client->api->getProviders(true, 15000);
+
+            $flag = true;
+            foreach ($res as $provider){
+                if($provider->transaction_limit < 15000){
+                    $flag = false;
+                    break;
+                }
+            }
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(isset($flag) && $flag);
+    }
+
+    /**
+     * @depends testCreateClient
+     * @param Client $client
+     */
+    public function testServiceProvidersAuthFetch(Client $client)
+    {
+        try{
+            $res = $client->api->getProviders(true, 15000, true);
+
+            $flag = true;
+            foreach ($res as $provider){
+                if($provider->transaction_limit < 15000){
+                    $flag = false;
+                    break;
+                }
+            }
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(isset($flag) && $flag);
+    }
+    
+
+    /**
      * @depends testServiceProviders
      * @param array $providers
      * @return array
@@ -109,14 +201,12 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testServicePlaceOrder(Client $client)
     {
         try{
-            $order = new PlaceOrderInfo("11","M4 Style",1800,"Eduardo Aguilar","eduardo.aguilar@compropago.com");
+            $order = new PlaceOrderInfo("12","M4 Style",180,"Eduardo Aguilar","eduardo.aguilar@compropago.com");
             $res = $client->api->placeOrder($order);
         }catch(\Exception $e){
             $res = null;
             echo "\n".$e->getMessage()."\n";
         }
-
-        
 
         $this->assertTrue(!empty($res));
 

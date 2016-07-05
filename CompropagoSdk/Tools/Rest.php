@@ -32,17 +32,19 @@ class Rest
     /**
      * Ejecuta peticiones Get al API
      *
-     * @param $url              string      Url a la cual se generara la peticion
+     * @param string $url                   Url a la cual se generara la peticion
      * @param string $auth                  Cadena de autentificacion
+     * @param array  $headers               Arreglo de headers http
      * @return mixed
      * @throws \Exception
      */
-    public static function get($url, $auth="")
+    public static function get($url, $auth="", $headers = array())
     {
         try{
             $ch = Http::initHttp($url);
             Http::setMethod($ch,'GET');
             Http::setAuth($ch,$auth);
+            Http::setHeaders($ch, $headers);
 
             $response = Http::execHttp($ch);
 
@@ -60,16 +62,18 @@ class Rest
      * @param $url              string      Url a la cual se generara la peticion
      * @param $auth             string      Cadena de autentificacion
      * @param $data             string      Parametros a enviar
+     * @param array  $headers               Arreglo de headers http
      * @return mixed
      * @throws \Exception
      */
-    public static function post($url, $auth, $data)
+    public static function post($url, $auth, $data, $headers = array())
     {
         try{
             $ch = Http::initHttp($url);
             Http::setMethod($ch, 'POST');
             Http::setAuth($ch, $auth);
             Http::setPostFields($ch, $data);
+            Http::setHeaders($ch, $headers);
 
             $response = Http::execHttp($ch);
 
@@ -87,16 +91,18 @@ class Rest
      * @param $url              string      Url a la cual se generara la peticion
      * @param $auth             string      Cadena de autentificacion
      * @param $data             string      Parametros a enviar
+     * @param array  $headers               Arreglo de headers http
      * @return mixed
      * @throws \Exception
      */
-    public static function put($url, $auth, $data)
+    public static function put($url, $auth, $data, $headers = array())
     {
         try{
             $ch = Http::initHttp($url);
             Http::setMethod($ch, 'PUT');
             Http::setAuth($ch, $auth);
             Http::setPostFields($ch, $data);
+            Http::setHeaders($ch, $headers);
 
             $response = Http::execHttp($ch);
 
@@ -110,14 +116,25 @@ class Rest
         }
     }
 
-    public static function delete($url, $auth, $data = null)
+    /**
+     * @param $url              string      Url a la cual se generara la peticion
+     * @param $auth             string      Cadena de autentificacion
+     * @param $data             string      Parametros a enviar
+     * @param array  $headers               Arreglo de headers http
+     * @return mixed
+     * @throws \Exception
+     */
+    public static function delete($url, $auth, $data = null, $headers = array())
     {
         $ch = Http::initHttp($url);
         Http::setMethod($ch, 'DELETE');
         Http::setAuth($ch, $auth);
 
-        if(!empty($data))
+        if(!empty($data)) {
             Http::setPostFields($ch, $data);
+        }
+
+        Http::setHeaders($ch, $headers);
 
         $response = Http::execHttp($ch);
 

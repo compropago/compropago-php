@@ -22,6 +22,7 @@
 
 namespace CompropagoSdk\Factory;
 
+use Compropago\Sdk\Exception;
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
 use CompropagoSdk\Factory\Abs\EvalAuthInfo;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
@@ -74,14 +75,16 @@ class Factory
      * Construye un arreglo de Objetos tipo \CompropagoSdk\Models\Provider
      *
      * @param $source   string Cadena Json con el contenido a construir
+     * @throws \Exception
      * @return array
      */
     public static function arrayProviders($source)
     {
         $jsonObj= json_decode($source);
-        usort($jsonObj, function($a, $b) {
-            return $a->rank > $b->rank ? 1 : -1;
-        });
+
+        if(isset($jsonObj->type) && $jsonObj->type == "error"){
+            throw new \Exception($jsonObj->message, $jsonObj->code);
+        }
 
         $res = array();
 
@@ -96,6 +99,7 @@ class Factory
             $provider->image_large = $val->image_large;
             $provider->internal_name = $val->internal_name;
             $provider->rank = $val->rank;
+            $provider->transaction_limit = isset($val->transaction_limit) ? $val->transaction_limit : null;
 
             $res[] = $provider;
         }

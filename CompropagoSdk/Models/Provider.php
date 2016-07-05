@@ -32,6 +32,7 @@ class Provider
     public $image_small;
     public $image_medium;
     public $image_large;
+    public $transaction_limit;
     public $rank;
 
     public function __construct()

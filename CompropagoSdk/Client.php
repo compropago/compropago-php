@@ -29,9 +29,17 @@ namespace CompropagoSdk;
 class Client
 {
     const VERSION="2.0.0-alfa";
-    const API_LIVE_URI='https://api.compropago.com/v1/';
-    const API_SANDBOX_URI='https://api.compropago.com/v1/';
-    const USER_AGENT_SUFFIX = "compropago-php-sdk/";
+
+    #const API_LIVE_URI='http://api-staging-compropago.herokuapp.com/v1/';
+    #const API_SANDBOX_URI='http://api-staging-compropago.herokuapp.com/v1/';
+
+    #const API_LIVE_URI='https://node-test-cp.herokuapp.com/v1/';
+    //const API_SANDBOX_URI='https://node-test-cp.herokuapp.com/v1/';
+
+    const API_LIVE_URI='http://api.compropago.com/v1/';
+    const API_SANDBOX_URI='http://api.compropago.com/v1/';
+
+    const USER_AGENT_SUFFIX = "compropago-php-sdk";
 
     public $api;
 
@@ -85,5 +93,13 @@ class Client
     public function getUri()
     {
         return $this->deployUri;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getContained()
+    {
+        return $this->contained;
     }
 }

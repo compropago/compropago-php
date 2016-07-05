@@ -91,6 +91,17 @@ class Http
     }
 
     /**
+     * Carga los headers que se enviaran en la peticion http
+     *
+     * @param $ch
+     * @param array $headers
+     */
+    public static function setHeaders(&$ch, array $headers)
+    {
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    }
+
+    /**
      * Ejecuta la peticion Http que se le especifique
      *
      * @param $ch
