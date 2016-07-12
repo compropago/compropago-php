@@ -17,7 +17,7 @@
 /**
  * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
- * @version 1.0.1
+ * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 namespace Compropago\Sdk\Http;
 
@@ -26,7 +26,6 @@ use Compropago\Sdk\Exceptions\BaseException;
 
 class Request
 {
-
 	protected $userAgent;
 	protected $requestMethod;
 	protected $url;
@@ -38,15 +37,14 @@ class Request
 	protected $service;
 
 	/**
-	 * @param string $url
+	 * Request constructor.
+	 * @param $url
 	 * @param string $method
 	 * @param array $headers
-	 * @param mixed $data
-	 * @throws Compropago\Sdk\Exceptions\BaseException
-	 * @since 1.0.1
-	 * @version 1.0.1
+	 * @param array $data
+	 * @throws BaseException
 	 */
-	public function __construct($url,$method = 'GET',$headers = array(),$data = null)
+	public function __construct($url,$method = 'GET',$headers = array(),$data = array())
 	{
 		if(empty($url)){
 			throw new BaseException('Missing Url');
@@ -56,6 +54,8 @@ class Request
 		$this->setRequestHeaders($headers);
 		$this->setData($data);
 	}
+	
+	
 	/**
 	 * set url
 	 * @param string $url
@@ -66,6 +66,8 @@ class Request
 	{
 		$this->url=$url;
 	}
+    
+    
 	/**
 	 * set service to request
 	 * @param unknown $service
@@ -79,6 +81,8 @@ class Request
 			$this->service=$service;
 		}
 	}
+    
+    
 	/**
 	 * get service url
 	 * @return request url
@@ -89,6 +93,8 @@ class Request
 	{
 		return (isset($this->serviceUrl) && !empty($this->serviceUrl)) ? $this->serviceUrl : $this->url;
 	}
+    
+    
 	/**
 	 * set auth
 	 * @param array $arr
@@ -104,6 +110,8 @@ class Request
 		//eval keys reg express
 		$this->auth= $arr[0] . ":" . $arr[1];
 	}
+    
+    
 	/**
 	 * @return string auth
 	 * @since 1.0.1
@@ -124,6 +132,8 @@ class Request
 	{
 		$this->options = array_merge($options, $this->options);
 	}
+    
+    
 	/**
 	 * @return array options
 	 * @since 1.0.1
@@ -134,13 +144,11 @@ class Request
 		return $this->options;
 	}
 
-	/**
-	 * Set Method Options
-	 * @param string $method
-	 * @throws Compropago\Sdk\Exceptions\BaseException
-	 * @since 1.0.1
-	 * @version 1.0.1
-	 */
+    /**
+     * @param $method
+     * @throws BaseException
+     * @throws Exception
+     */
 	public function setMethodOptions($method)
 	{
 		switch ($method){
@@ -148,7 +156,12 @@ class Request
 				$this->setOptions(array(CURLOPT_HTTPGET=>1));
 				break;
 			case 'DELETE':
-				$this->setOptions(array(CURLOPT_CUSTOMREQUEST=>'DELETE'));
+                $this->data=json_encode($this->data);
+				$this->setOptions(array(
+                        CURLOPT_CUSTOMREQUEST=>'DELETE',
+                        CURLOPT_POSTFIELDS => $this->data
+                    )
+                );
 				break;
 			case 'POST':
 				$this->data=json_encode($this->data);
@@ -172,16 +185,19 @@ class Request
 			throw new BaseException('Method require Data');
 		}
 	}
-	/**
-	 * @param string $method
-	 * @since 1.0.1
-	 * @version 1.0.1
-	 */
+
+    
+    /**
+     * @param $method
+     * @return bool
+     */
 	public function setRequestMethod($method)
 	{
 		$this->requestMethod = strtoupper($method);
 		return true;
 	}
+    
+    
 	/**
 	 * normalize header
 	 * @param array $headers
@@ -196,6 +212,8 @@ class Request
 		}
 		$this->requestHeaders = $headers;
 	}
+    
+    
 	/**
 	 * @return array
 	 * @since 1.0.1
@@ -205,6 +223,8 @@ class Request
 	{
 		return $this->requestHeaders;
 	}
+    
+    
 	/**
 	 * set user agent
 	 * @param string $suffix
@@ -217,6 +237,8 @@ class Request
 	{
 		$this->userAgent= ($contained) ? $suffix.$prefix.' ('.$contained.')' : $suffix.$prefix;
 	}
+    
+    
 	/**
 	 * @return string useragent
 	 * @since 1.0.1
@@ -226,6 +248,8 @@ class Request
 	{
 		return $this->userAgent;
 	}
+    
+    
 	/**
 	 * @return string method
 	 * @since 1.0.1
@@ -252,13 +276,11 @@ class Request
 		return $this->data;
 	}
 
-	/**
-	 * Check if data is going to be sent or no data
-	 * @return boolean
-	 * @throws Compropago\Sdk\Exceptions\BaseException
-	 * @since 1.0.1
-	 * @version 1.0.1
-	 */
+    /**
+     * @return bool
+     * @throws BaseException
+     * @throws \Exception
+     */
 	public function evalData()
 	{
 		if (($this->getRequestMethod() == "POST" || $this->getRequestMethod() == "PUT" ) && !empty($this->data)) {
@@ -279,14 +301,14 @@ class Request
 
 			$this->data=Utils::encodeQueryString($this->data);
 			if(!$this->data){
-				throw new Exception('Invalid Query String for Data');
+				throw new \Exception('Invalid Query String for Data');
 			}
 			$this->setServiceUrl($this->service.'?'.$this->data);
 			return true;
 		}
 
 		if(!empty($this->data)){
-			throw new Exception('Method should be defined');
+			throw new \Exception('Method should be defined');
 		}
 		//no data
 		return false;

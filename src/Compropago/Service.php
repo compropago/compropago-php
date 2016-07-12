@@ -1,51 +1,55 @@
 <?php
-/*
-* Copyright 2015 Compropago.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+/**
+ * Copyright 2015 Compropago.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /**
  * @since 1.0.1
  * @author Rolando Lucio <rolando@compropago.com>
+ * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
 namespace Compropago\Sdk;
 
-use Compropago\Sdk\Client;
 use Compropago\Sdk\Http\Rest;
 use Compropago\Sdk\Utils\Utils;
 use Compropago\Sdk\Exceptions\HttpException;
 
 
-class Service{
+class Service
+{
     /**
-     * @var Compropago|Sdk\Client client
+     * @var Client client
      */
     private $client;
 
     /**
-     * @param Compropago\Sdk\Client $client
-     * @since 1.0.1
+     * Service constructor.
+     * @param Client $client
      */
     public function __construct(Client $client)
     {
         $this->client=$client;
     }
+
+
     /**
-     * Validate API key
-     * @return boolean
-     * @retunr json responseBody
-     * @since 1.0.2
+     * Valida las llaves
+     *
+     * @return mixed|void
+     * @throws Exceptions\BaseException
+     * @throws HttpException
      */
     public function evalAuth()
     {
@@ -76,25 +80,41 @@ class Service{
     }
 
     /**
-     * Get where to pay providers
-     * @return json
-     * @since 1.0.1
+     * Get to pay providers
+     * @return mixed
+     * @throws Exceptions\BaseException
      */
-    public function getProviders()
+    public function getProviders($auth = false, $limit = 0, $fetch = false)
     {
-        $response=Rest::doExecute($this->client,'providers/true');
-        $jsonObj= json_decode($response['responseBody']);
+        if($auth){
+            $uri = "providers";
+        }else{
+            $uri = "providers/true";
+        }
 
-        usort($jsonObj, function($a, $b) {
-            return $a->rank > $b->rank ? 1 : -1;
-        });
+        if(is_numeric($limit) && $limit > 0){
+            $uri .= "?order_total=$limit";
+        }
+
+        if(is_bool($fetch) && $fetch){
+            if(is_numeric($limit) && $limit > 0){
+                $uri .= "&fetch=true";
+            }else{
+                $uri .= "?fetch=true";
+            }
+        }
+
+        $response=Rest::doExecute($this->client, $uri);
+        $jsonObj= json_decode($response['responseBody']);
 
         return $jsonObj;
     }
+
     /**
      * Verify order Id status
+     *
      * @param string $orderId
-     * @return json
+     * @return mixed
      * @since 1.0.1
      */
     public function verifyOrder( $orderId )
@@ -108,10 +128,14 @@ class Service{
 
         return $jsonObj;
     }
+
+
     /**
-     * place new order
-     * @param array $params
-     * @since 1.0.1
+     * Genera una orden de compra
+     *
+     * @param $params
+     * @return mixed|object
+     * @throws Exceptions\BaseException
      */
     public function placeOrder( $params )
     {
@@ -126,6 +150,14 @@ class Service{
     }
 
 
+    /**
+     * Envia un SMS con las instrucciones de pago
+     *
+     * @param $phoneNumber
+     * @param $orderId
+     * @return mixed
+     * @throws Exceptions\BaseException
+     */
     public function sendSmsInstructions($phoneNumber, $orderId)
     {
         $params = array(
@@ -138,4 +170,68 @@ class Service{
         return $jsonObj;
     }
 
+    /**
+     * Crear un nuevo webhook
+     *
+     * @param $url
+     * @return mixed
+     */
+    public function createWebhook($url)
+    {
+        $params = array(
+            "url" => $url
+        );
+
+        $response = Rest::doExecute($this->client, 'webhooks/stores/', $params, 'POST');
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
+
+
+    /**
+     * Eliminar un webhook
+     *
+     * @param $webhookId
+     * @return mixed
+     */
+    public function deleteWebhook($webhookId)
+    {
+        $response = Rest::doExecute($this->client, "webhooks/stores/$webhookId/", null, 'DELETE');
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
+
+    /**
+     * Actualiza un webhook
+     *
+     * @param $webhookId
+     * @param $url
+     * @return mixed
+     */
+    public function updateWebhook($webhookId, $url)
+    {
+        $params = array(
+            "url" => $url
+        );
+
+        $response = Rest::doExecute($this->client, "webhooks/stores/$webhookId/", $params, 'PUT');
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
+
+    /**
+     * Obtiene el listado de webhooks registrados en una cuenta
+     *
+     * @return mixed
+     */
+    public function getWebhooks()
+    {
+        $response = Rest::doExecute($this->client, "webhooks/stores/");
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
 }

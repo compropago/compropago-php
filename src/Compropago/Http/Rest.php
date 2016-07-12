@@ -23,27 +23,21 @@
 
 namespace Compropago\Sdk\Http;
 
-use Compropago\Sdk\Http\Curl;
 use Compropago\Sdk\Client;
 use Compropago\Sdk\Exceptions\BaseException;
 
 
-
 class Rest
 {
-
 	/**
-	 * Base Rest Request
-	 * @param Compropago\Sdk\Client $client
-	 * @param string $service
-	 * @param string $query
+	 * @param Client $client
+	 * @param null $service
+	 * @param bool $query
 	 * @param string $method
-	 * @returns Array
-	 * @throws Compropago\Sdk\Exceptions\BaseException
-	 * @since 1.0.1
-	 * @version 1.0.1
+	 * @return array
+	 * @throws BaseException
 	 */
-	public static function doExecute(Client $client,$service=null,$query=FALSE,$method='GET')
+	public static function doExecute(Client $client, $service=null, $query=FALSE, $method='GET')
 	{
 		if(!isset($client)){
 			throw new BaseException('Client Required');
@@ -54,6 +48,8 @@ class Rest
 
 			case 'GET':
 			case 'POST':
+            case 'PUT':
+            case 'DELETE':
 				//supp rest methods
 				$request->setRequestMethod($method);
 				break;
@@ -64,13 +60,12 @@ class Rest
 
 		$request->setServiceUrl($service);
 
-		if($query && ($method=='POST' || $method=='GET')){
+		if($query && ($method=='POST' || $method=='GET' || $method=='PUT' || $method=='DELETE')){
 			//just post data, throw con query en GET?
 			$request->setData($query);
 		}
 
 		$request->setMethodOptions($method);
-		//$request->setOptions($addopts);
 
 		$curl= new Curl();
 
