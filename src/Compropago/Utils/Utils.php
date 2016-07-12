@@ -16,6 +16,7 @@
  */
 /**
  * @author Rolando Lucio <rolando@compropago.com>
+ * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  * @since 1.0.1
  */
 namespace Compropago\Sdk\Utils;
@@ -26,6 +27,7 @@ class Utils
 {
 	/**
 	 * Normalize all keys in an array to lower-case.
+	 *
 	 * @param array $arr
 	 * @return array Normalized array.
 	 * @since 1.0.1
@@ -43,6 +45,7 @@ class Utils
 	}
 	/**
 	 * Convert a string to camelCase
+	 *
 	 * @param  string $value
 	 * @return string
 	 * @since 1.0.1
@@ -57,9 +60,10 @@ class Utils
 
 	/**
 	 * Convert Array to QueryString or validate string
-	 * @param array $query | string QueryString
-	 * @param string $prefix
-	 * @since 1.0.1
+	 *
+	 * @param $query
+	 * @param null $prefix
+	 * @return string
 	 */
 	public static function encodeQueryString( $query, $prefix=null)
 	{
@@ -77,10 +81,10 @@ class Utils
 
 	/**
 	 * Append & normalize old Api versions response to latest
-	 * @param mixed $json array or json object
-	 * @return object JSON
-	 * @throws Compropago\Sdk\Exceptions\BaseException
-	 * @since 1.0.2
+	 *
+	 * @param $json
+	 * @return object
+	 * @throws BaseException
 	 */
 	public static function normalizeResponse($json)
 	{
@@ -110,13 +114,15 @@ class Utils
 				return $json;
 		}
 	}
+
+
 	/**
 	 * Verify Normalize
 	 * Append current Api response for old ones
-	 * @param mixed $json array or json object
-	 * @return object JSON
-	 * @throws Compropago\Sdk\Exceptions\BaseException
-	 * @since 1.0.2
+	 *
+	 * @param $json
+	 * @return mixed
+	 * @throws BaseException
 	 */
 	private static function normalizeVerify($json)
 	{
@@ -160,14 +166,16 @@ class Utils
 		}
 		return $json;
 	}
-	/**
-	 * Charge Normalize
-	 * Append current Api response for old ones
-	 * @param mixed $json array or json object
-	 * @return object JSON
-	 * @throws Compropago\Sdk\Exceptions\BaseException
-	 * @since 1.0.2
-	 */
+
+
+    /**
+     * Charge Normalize
+     * Append current Api response for old ones
+     *
+     * @param $json
+     * @return mixed
+     * @throws BaseException
+     */
 	private static function normalizeCharge($json)
 	{
 		if(!json_encode($json)){

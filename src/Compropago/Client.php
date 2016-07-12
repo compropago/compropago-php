@@ -28,7 +28,6 @@ use Compropago\Sdk\Exceptions\BaseException;
 
 class Client
 {
-
 	const VERSION="1.1.1";
 	const API_LIVE_URI='https://api.compropago.com/v1/';
 	const API_SANDBOX_URI='https://api.compropago.com/v1/';
@@ -51,7 +50,7 @@ class Client
 	private $auth;
 	/**
 	 * @since 1.0.1
-	 * @var Compropago\Sdk\Http\Request $http
+	 * @var Request $http
 	 */
 	private $http;
 
@@ -59,7 +58,7 @@ class Client
 	/**
 	 * Compropago Client Constructor
 	 * @param array $params
-	 * @throws Compropago\Sdk\Exceptions\BaseException Missing compropago Keys
+	 * @throws BaseException Missing compropago Keys
 	 * @since 1.0.1
 	 */
 	public function __construct($params = array())

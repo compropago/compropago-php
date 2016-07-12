@@ -46,7 +46,7 @@ class Curl
 	);
 
 	/**
-	 * @throws Compropago\Sdk\Exceptions\BaseException en error de librerias
+	 * @throws BaseException en error de librerias
 	 * @since 1.0.1
 	 * @version 1.0.1
 	 */
@@ -62,9 +62,9 @@ class Curl
 
 	/**
 	 * format and make curl response
-	 * @param Compropago\Sdk\Http\Request $request objet with valida request parameters
+	 * @param Request $request objet with valida request parameters
 	 * @return array  ASSOC responseBody responseHeaders responseCode
-	 * @throws Compropago\Sdk\Exceptions\BaseException Curl exception
+	 * @throws BaseException Curl exception
 	 * @since 1.0.1
 	 * @version 1.0.1
 	 */
