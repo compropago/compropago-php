@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 /**
- * Compropago $Library
+ * Compropago
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
