@@ -71,7 +71,7 @@ class Curl
 	public function executeRequest(Request $request)
 	{
 		$curl = curl_init();
-		if ($request->getData() && $request->getRequestMethod()=='POST') {
+		if ($request->getData() && ($request->getRequestMethod()=='POST' || $request->getRequestMethod()=='PUT')) {
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getData());
 		}
 		$requestHeaders = $request->getRequestHeaders();

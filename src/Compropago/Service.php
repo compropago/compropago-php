@@ -81,16 +81,16 @@ class Service
 
     /**
      * Get to pay providers
-     *
-     * @param bool $auth
-     * @param int $limit
-     * @param bool $fetch
      * @return mixed
      * @throws Exceptions\BaseException
      */
     public function getProviders($auth = false, $limit = 0, $fetch = false)
     {
-        $uri = $auth ? "providers" : "providers/true";
+        if($auth){
+            $uri = "providers";
+        }else{
+            $uri = "providers/true";
+        }
 
         if(is_numeric($limit) && $limit > 0){
             $uri .= "?order_total=$limit";
@@ -170,4 +170,68 @@ class Service
         return $jsonObj;
     }
 
+    /**
+     * Crear un nuevo webhook
+     *
+     * @param $url
+     * @return mixed
+     */
+    public function createWebhook($url)
+    {
+        $params = array(
+            "url" => $url
+        );
+
+        $response = Rest::doExecute($this->client, 'webhooks/stores/', $params, 'POST');
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
+
+
+    /**
+     * Eliminar un webhook
+     *
+     * @param $webhookId
+     * @return mixed
+     */
+    public function deleteWebhook($webhookId)
+    {
+        $response = Rest::doExecute($this->client, "webhooks/stores/$webhookId/", null, 'DELETE');
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
+
+    /**
+     * Actualiza un webhook
+     *
+     * @param $webhookId
+     * @param $url
+     * @return mixed
+     */
+    public function updateWebhook($webhookId, $url)
+    {
+        $params = array(
+            "url" => $url
+        );
+
+        $response = Rest::doExecute($this->client, "webhooks/stores/$webhookId/", $params, 'PUT');
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
+
+    /**
+     * Obtiene el listado de webhooks registrados en una cuenta
+     *
+     * @return mixed
+     */
+    public function getWebhooks()
+    {
+        $response = Rest::doExecute($this->client, "webhooks/stores/");
+        $jsonObj = json_decode($response['responseBody']);
+
+        return $jsonObj;
+    }
 }
