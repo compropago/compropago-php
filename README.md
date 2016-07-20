@@ -80,7 +80,7 @@ Se debe contar con una cuenta activa de ComproPago. [Registrarse en ComproPago](
 
 ### General
 
-Para poder hacer uso de la librería es necesario incluir la libreria principales de la gema
+Para poder hacer uso de la librería es necesario incluir la libreria principales del SDK
 
 ```php
 <?php
@@ -113,7 +113,7 @@ $client = new Client(
 
 ### Uso Básico de la gema
 
-> Consulte la documentación de la librería Ruby de ComproPago para conocer más de sus capacidades, configuraciones y métodos.
+> Consulte la documentación de la librería PHP de ComproPago para conocer más de sus capacidades, configuraciones y métodos.
 
 
 #### Llamados al los servicios por SDK
