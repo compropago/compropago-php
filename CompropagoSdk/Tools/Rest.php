@@ -40,22 +40,19 @@ class Rest
      */
     public static function get($url, $auth="", $headers = array())
     {
-        try{
-            $ch = Http::initHttp($url);
-            Http::setMethod($ch,'GET');
-            Http::setAuth($ch,$auth);
-            Http::setHeaders($ch, $headers);
+        $ch = Http::initHttp($url);
+        Http::setMethod($ch,'GET');
+        Http::setAuth($ch,$auth);
+        Http::setHeaders($ch, $headers);
 
-            $response = Http::execHttp($ch);
+        $response = Http::execHttp($ch);
 
-            if(empty($response)){
-                throw new \Exception("Respuesta vacia");
-            }else{
-                return $response;
-            }
-        }catch(\Exception $e){
-            throw new \Exception($e->getMessage(),$e->getCode(),$e);
+        if(empty($response)){
+            throw new \Exception("Respuesta vacia");
+        }else{
+            return $response;
         }
+
     }
 
     /**
@@ -68,22 +65,18 @@ class Rest
      */
     public static function post($url, $auth, $data, $headers = array())
     {
-        try{
-            $ch = Http::initHttp($url);
-            Http::setMethod($ch, 'POST');
-            Http::setAuth($ch, $auth);
-            Http::setPostFields($ch, $data);
-            Http::setHeaders($ch, $headers);
+        $ch = Http::initHttp($url);
+        Http::setMethod($ch, 'POST');
+        Http::setAuth($ch, $auth);
+        Http::setPostFields($ch, $data);
+        Http::setHeaders($ch, $headers);
 
-            $response = Http::execHttp($ch);
+        $response = Http::execHttp($ch);
 
-            if(empty($response)){
-                throw new \Exception("Respuesta vacia");
-            }else{
-                return $response;
-            }
-        }catch(\Exception $e){
-            throw new \Exception($e->getMessage(),$e->getCode(),$e);
+        if(empty($response)){
+            throw new \Exception("Respuesta vacia");
+        }else{
+            return $response;
         }
     }
 
@@ -97,22 +90,18 @@ class Rest
      */
     public static function put($url, $auth, $data, $headers = array())
     {
-        try{
-            $ch = Http::initHttp($url);
-            Http::setMethod($ch, 'PUT');
-            Http::setAuth($ch, $auth);
-            Http::setPostFields($ch, $data);
-            Http::setHeaders($ch, $headers);
+        $ch = Http::initHttp($url);
+        Http::setMethod($ch, 'PUT');
+        Http::setAuth($ch, $auth);
+        Http::setPostFields($ch, $data);
+        Http::setHeaders($ch, $headers);
 
-            $response = Http::execHttp($ch);
+        $response = Http::execHttp($ch);
 
-            if(empty($response)){
-                throw new \Exception("Respuesta vacia");
-            }else{
-                return $response;
-            }
-        }catch(\Exception $e){
-            throw new \Exception($e->getMessage(),$e->getCode(),$e);
+        if(empty($response)){
+            throw new \Exception("Respuesta vacia");
+        }else{
+            return $response;
         }
     }
 

@@ -39,41 +39,6 @@ use CompropagoSdk\Factory\V11\SmsInfo11;
  */
 class Serialize
 {
-    /**
-     * @param $source           string Contenido Json
-     * @return EvalAuthInfo10
-     */
-    public static function evalAuthInfo10($source)
-    {
-        $res = new EvalAuthInfo10();
-        $obj = json_decode($source);
-
-        $res->type = $obj->type;
-        $res->livemode = $obj->livemode;
-        $res->mode_key = $obj->mode_key;
-        $res->message = $obj->message;
-        $res->code = $obj->code;
-
-        return $res;
-    }
-
-    /**
-     * @param $source           string Contenido Json
-     * @return EvalAuthInfo11
-     */
-    public static function evalAuthInfo11($source)
-    {
-        $res = new EvalAuthInfo11();
-        $obj = json_decode($source);
-
-        $res->type = $obj->type;
-        $res->livemode = $obj->livemode;
-        $res->mode_key = $obj->mode_key;
-        $res->message = $obj->message;
-        $res->code = $obj->code;
-
-        return $res;
-    }
 
     /**
      * @param $source
@@ -151,7 +116,7 @@ class Serialize
         $res->data->object->fee_details->currency = $obj->data->object->fee_details->currency;
         $res->data->object->fee_details->type = $obj->data->object->fee_details->type;
         $res->data->object->fee_details->description = $obj->data->object->fee_details->description;
-        $res->data->object->fee_details->appication = $obj->data->object->fee_details->appication;
+        $res->data->object->fee_details->application = $obj->data->object->fee_details->application;
         $res->data->object->fee_details->amount_refunded = $obj->data->object->fee_details->amount_refunded;
 
         $res->data->object->payment_details->object = $obj->data->object->payment_details->object;

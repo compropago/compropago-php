@@ -14,18 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
  * Compropago php-sdk
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
-namespace CompropagoSdk\Factory\Abs;
 
-abstract class EvalAuthInfo
+
+namespace CompropagoSdk\Factory\V10;
+
+
+class SmsPayment
 {
-    public abstract function getType();
-    public abstract function getLiveMode();
-    public abstract function getModeKey();
-    public abstract function getMessage();
-    public abstract function getCode();
+    public $id;
+    public $short_id;
+
+    public function __construct()
+    {
+    }
 }

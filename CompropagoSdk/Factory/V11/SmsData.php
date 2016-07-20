@@ -15,28 +15,20 @@
  * limitations under the License.
  */
 /**
- * Compropago ${LIBRARI}
+ * Compropago php-sdk
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
 
-namespace CompropagoSdk\Factory\Abs;
+namespace CompropagoSdk\Factory\V11;
 
 
-abstract class Customer
+class SmsData
 {
-    /**
-     * @return string
-     */
-    public abstract function getCustomerName();
+    public $object;
 
-    /**
-     * @return string
-     */
-    public abstract function getCustomerEmail();
-
-    /**
-     * @return string
-     */
-    public abstract function getCustomerPhone();
+    public function __construct()
+    {
+        $this->object = new SmsObject();
+    }
 }

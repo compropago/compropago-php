@@ -76,7 +76,7 @@ abstract class CpOrderInfo
     public abstract function getOrderInfo();
 
     /**
-     * @return \CompropagoSdk\Factory\Abs\Customer
+     * @return \CompropagoSdk\Models\Customer
      */
     public abstract function getCustomer();
 

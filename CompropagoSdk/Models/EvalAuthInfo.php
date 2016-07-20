@@ -15,38 +15,42 @@
  * limitations under the License.
  */
 /**
- * Compropago ${LIBRARI}
+ * Compropago php-sdk
  * @author Eduardo Aguilar <eduardo.aguilar@compropago.com>
  */
 
 
-namespace CompropagoSdk\Factory\V11;
+namespace CompropagoSdk\Models;
 
 
-use CompropagoSdk\Factory\Abs\Customer;
-
-class Customer11 extends Customer
+class EvalAuthInfo
 {
-    public $customer_name;
-    public $customer_email;
-    public $customer_phone;
+    /**
+     * @var string
+     */
+    public $type;
+    /**
+     * @var bool
+     */
+    public $livemode;
+    /**
+     * @var bool
+     */
+    public $mode_key;
+    /**
+     * @var string
+     */
+    public $message;
 
+    /**
+     * @var int
+     */
+    public $code;
+
+    /**
+     * EvalAuthInfo10 constructor.
+     */
     public function __construct()
     {
-    }
-
-    public function getCustomerName()
-    {
-        return $this->customer_name;
-    }
-
-    public function getCustomerEmail()
-    {
-        return $this->customer_email;
-    }
-
-    public function getCustomerPhone()
-    {
-        return $this->customer_phone;
     }
 }

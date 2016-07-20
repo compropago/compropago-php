@@ -38,29 +38,19 @@ class Validations
      * Evalua que el cliente pueda autentificarse correctamente
      *
      * @param Client $client
-     * @return \CompropagoSdk\Factory\Abs\EvalAuthInfo
+     * @return \CompropagoSdk\Models\EvalAuthInfo
      * @throws \Exception
      */
     public static function evalAuth( Client $client )
     {
-        try{
-            $response = Rest::get($client->getUri()."users/auth/", $client->getFullAuth());
-            $info = Factory::evalAuthInfo($response);
+        $response = Rest::get($client->getUri()."users/auth/", $client->getFullAuth());
+        $info = Factory::evalAuthInfo($response);
 
-            switch($info->getCode()){
-                case '401':
-                    throw new \Exception("CODE 401: ".$info->getMessage(),401);
-                    break;
-                case '500':
-                    throw new \Exception("CODE 500: ".$info->getMessage(),500);
-                    break;
-                case '200':
-                    return $info;
-                default:
-                    throw new \Exception("CODE {$info->getCode()}: ".$info->getMessage(),$info->getCode());
-            }
-        }catch(\Exception $e){
-            throw new \Exception($e->getMessage(),$e->getCode());
+        switch($info->code){
+            case '200':
+                return $info;
+            default:
+                throw new \Exception("CODE {$info->getCode()}: ".$info->getMessage(),$info->getCode());
         }
     }
 
@@ -79,22 +69,18 @@ class Validations
 
         $clientMode = $client->getMode();
 
-        try{
-            $authinfo = self::evalAuth($client);
+        $authinfo = self::evalAuth($client);
 
-            if($authinfo->getModeKey() != $authinfo->getLiveMode()){
-                throw new \Exception("Las llaves no corresponden a modo de la tienda");
-            }
+        if($authinfo->mode_key != $authinfo->livemode){
+            throw new \Exception("Las llaves no corresponden a modo de la tienda");
+        }
 
-            if($clientMode != $authinfo->getLiveMode()){
-                throw new \Exception("El modo del cliente no corresponde al de la tienda");
-            }
+        if($clientMode != $authinfo->livemode){
+            throw new \Exception("El modo del cliente no corresponde al de la tienda");
+        }
 
-            if($clientMode != $authinfo->getModeKey()){
-                throw new \Exception("El modo del cliente no corresponde al de las llaves");
-            }
-        }catch(\Exception $e){
-            throw new \Exception($e->getMessage(),$e->getCode(),$e);
+        if($clientMode != $authinfo->mode_key){
+            throw new \Exception("El modo del cliente no corresponde al de las llaves");
         }
 
         return true;

@@ -31,7 +31,7 @@ class FeeDetails10 extends FeeDetails
     public $currency;
     public $type;
     public $description;
-    public $appication;
+    public $application;
     public $amount_refunded;
 
     public function __construct()
@@ -75,7 +75,7 @@ class FeeDetails10 extends FeeDetails
      */
     public function getApplication()
     {
-        return $this->appication;
+        return $this->application;
     }
 
     /**

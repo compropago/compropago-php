@@ -20,12 +20,13 @@
  */
 
 
-namespace CompropagoSdk\Factory\V10;
+namespace CompropagoSdk\Factory\V11;
 
 
-class SmsPayment10
+class SmsObject
 {
     public $id;
+    public $object;
     public $short_id;
 
     public function __construct()

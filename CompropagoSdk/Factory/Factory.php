@@ -22,9 +22,8 @@
 
 namespace CompropagoSdk\Factory;
 
-use Compropago\Sdk\Exception;
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
-use CompropagoSdk\Factory\Abs\EvalAuthInfo;
+use CompropagoSdk\Models\EvalAuthInfo;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
 use CompropagoSdk\Factory\Json\Serialize;
 use CompropagoSdk\Models\Webhook;
@@ -45,7 +44,7 @@ class Factory
     private static function verifyVersion($source)
     {
         $obj = json_decode($source);
-        return isset($obj->api_version) ? $obj->api_version : "1.1";
+        return isset($obj->api_version) ? $obj->api_version : null;
     }
 
 
@@ -53,22 +52,21 @@ class Factory
      * Constructor de objetos EvalOutInfo
      *
      * @param $source               string Cadena Json con el contenido a construir como objeto
-     * @return EvalAuthInfo
+     * @return \CompropagoSdk\Models\EvalAuthInfo
      * @throws \Exception
      */
     public static function evalAuthInfo($source)
     {
-        switch(self::verifyVersion($source)){
-            case '1.1':
-                return Serialize::evalAuthInfo11($source);
-                break;
-            case '1.0':
-                return Serialize::evalAuthInfo10($source);
-                break;
-            default:
-                throw new \Exception("Version no soportada");
-                break;
-        }
+        $res = new EvalAuthInfo();
+        $obj = json_decode($source);
+
+        $res->type = $obj->type;
+        $res->livemode = $obj->livemode;
+        $res->mode_key = $obj->mode_key;
+        $res->message = $obj->message;
+        $res->code = $obj->code;
+
+        return $res;
     }
 
     /**
@@ -117,13 +115,8 @@ class Factory
         switch(self::verifyVersion($source)){
             case '1.1':
                 return Serialize::cpOrderInfo11($source);
-                break;
-            case '1.0':
-                return Serialize::cpOrderInfo10($source);
-                break;
             default:
-                throw new \Exception("Version no soportada");
-                break;
+                return Serialize::cpOrderInfo10($source);
         }
     }
 
@@ -137,13 +130,8 @@ class Factory
         switch(self::verifyVersion($source)){
             case '1.1':
                 return Serialize::newOrderInfo11($source);
-                break;
-            case '1.0':
-                return Serialize::newOrderInfo10($source);
-                break;
             default:
-                throw new \Exception("Version no soportada");
-                break;
+                return Serialize::newOrderInfo10($source);
         }
     }
 
@@ -154,16 +142,10 @@ class Factory
      */
     public static function smsInfo($source)
     {
-        switch(self::verifyVersion($source)){
-            case '1.1':
-                return Serialize::smsInfo11($source);
-                break;
-            case '1.0':
-                return Serialize::smsInfo10($source);
-                break;
-            default:
-                throw new \Exception("Version no soportada");
-                break;
+        if(array_key_exists('payment', json_decode($source))){
+            return Serialize::smsInfo10($source);
+        }else{
+            return Serialize::smsInfo11($source);
         }
     }
 

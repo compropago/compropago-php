@@ -33,7 +33,7 @@ class SmsInfo11 extends SmsInfo
 
     public function __construct()
     {
-        $this->data = new SmsData11();
+        $this->data = new SmsData();
     }
 
     /**

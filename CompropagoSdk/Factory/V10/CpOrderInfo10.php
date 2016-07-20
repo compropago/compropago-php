@@ -24,6 +24,7 @@ namespace CompropagoSdk\Factory\V10;
 
 
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
+use CompropagoSdk\Models\Customer;
 
 class CpOrderInfo10 extends CpOrderInfo
 {
@@ -129,13 +130,13 @@ class CpOrderInfo10 extends CpOrderInfo
     }
 
     /**
-     * @return \CompropagoSdk\Factory\Abs\Customer
+     * @return \CompropagoSdk\Models\Customer
      */
     public function getCustomer()
     {
-        $customer = new Customer10();
+        $customer = new Customer();
 
-        $customer->customer_name = $this->data->object->payment_details->customer_name;
+        $customer->customer_name  = $this->data->object->payment_details->customer_name;
         $customer->customer_email = $this->data->object->payment_details->customer_email;
         $customer->customer_phone = $this->data->object->payment_details->customer_phone;
 

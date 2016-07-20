@@ -23,18 +23,18 @@ namespace CompropagoSdk\UnitTest;
 
 require_once __DIR__. "/../../../../autoload.php";
 
-use Compropago\Sdk\Exception;
 use CompropagoSdk\Client;
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
 use CompropagoSdk\Factory\Abs\SmsInfo;
 use CompropagoSdk\Models\PlaceOrderInfo;
 use CompropagoSdk\Models\Webhook;
+use CompropagoSdk\Tools\Validations;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
-    private $publickey = "pk_test_8781245a88240f9cf";
-    private $privatekey = "sk_test_56e31883637446b1b";
+    private $publickey = "pk_test_5989d8209974e2d62";
+    private $privatekey = "sk_test_6ff4e982253c44c42";
     private $mode = false;
     
     private $phonenumber = "5561463627";
@@ -60,12 +60,43 @@ class Test extends \PHPUnit_Framework_TestCase
     /**
      * @depends testCreateClient
      * @param Client $client
+     * @return \CompropagoSdk\Models\EvalAuthInfo|null
+     */
+    public function testEvalAuth(Client $client)
+    {
+        $res = null;
+        try{
+            $res = Validations::evalAuth($client);
+        }catch(\Exception $e){
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @depends testEvalAuth
+     * @param $info
+     */
+    public function testEvalAuthClass($info)
+    {
+        $this->assertTrue(
+            (get_class($info) == "CompropagoSdk\\Models\\EvalAuthInfo")
+        );
+    }
+    
+
+    /**
+     * @depends testCreateClient
+     * @param Client $client
      * @return array
      */
     public function testServiceProviders(Client $client)
     {
         try{
-            $res = $client->api->getProviders();
+            $res = $client->api->listProviders();
         }catch(\Exception $e){
             $res = array();
             echo "\n".$e->getMessage()."\n";
@@ -83,7 +114,7 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testServiceProvidersLimit(Client $client)
     {
         try{
-            $res = $client->api->getProviders(false, 15000);
+            $res = $client->api->listProviders(false, 15000);
 
             $flag = true;
             foreach ($res as $provider){
@@ -106,10 +137,10 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testServiceProviderAuth(Client $client)
     {
         try{
-            $res = $client->api->getProviders(true);
+            $res = $client->api->listProviders(true);
 
             if($res){
-                $res = $client->api->getProviders(true);
+                $res = $client->api->listProviders(true);
             }
         }catch(\Exception $e){
             echo "\n".$e->getMessage()."\n";
@@ -126,7 +157,7 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testServiceProviderAuthLimit(Client $client)
     {
         try{
-            $res = $client->api->getProviders(true, 15000);
+            $res = $client->api->listProviders(true, 15000);
 
             $flag = true;
             foreach ($res as $provider){
@@ -149,7 +180,7 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testServiceProvidersAuthFetch(Client $client)
     {
         try{
-            $res = $client->api->getProviders(true, 15000, true);
+            $res = $client->api->listProviders(true, 15000, true);
 
             $flag = true;
             foreach ($res as $provider){
@@ -294,7 +325,7 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testGetWebhooks(Client $client)
     {
         try{
-            $res = $client->api->getWebhooks();
+            $res = $client->api->listWebhooks();
             if(is_array($res)){
                 if(count($res) > 0 && get_class($res[0]) == "CompropagoSdk\\Models\\Webhook"){
                     $flag = true;

@@ -20,14 +20,14 @@
  */
 
 
-namespace CompropagoSdk\Factory\V11;
+namespace CompropagoSdk\Models;
 
 
-class SmsObject11
+class Customer
 {
-    public $id;
-    public $object;
-    public $short_id;
+    public $customer_name;
+    public $customer_email;
+    public $customer_phone;
 
     public function __construct()
     {

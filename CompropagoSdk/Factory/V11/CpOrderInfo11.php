@@ -24,6 +24,7 @@ namespace CompropagoSdk\Factory\V11;
 
 
 use CompropagoSdk\Factory\Abs\CpOrderInfo;
+use CompropagoSdk\Models\Customer;
 
 class CpOrderInfo11 extends CpOrderInfo
 {
@@ -51,7 +52,7 @@ class CpOrderInfo11 extends CpOrderInfo
     {
         $this->fee_details = new FeeDetails11();
         $this->order_info = new OrderInfo11();
-        $this->customer = new Customer11();
+        $this->customer = new Customer();
     }
 
     public function getId()
