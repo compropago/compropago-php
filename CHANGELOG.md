@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2.0.0 2016-07-20
+* Feature: cambio a patron Factory para manejo de versionamiénto API
+* Feature: separación de vistas del SDK
+* Note: renombrameinto de metodo **getProviders** por **listProviders**
+* Note: renombrameinto de metodo **getWebhooks** por **listWebhooks**
+
+## 1.2.0 2016-07-12
+* Require: PHP >= 5.5
+* Feature: CRUD de administracion de Webhooks
+    * getWebhooks
+    * createWebhook
+    * updateWebhook
+    * deleteWebhook
+* Feature: Agregacion de caracteristicas al metodo getProviders
+    * Forzar autentificación
+    * Filtrado por limite de transaccion
+    * Forzar recoleccion de proveedores desde base de datos
+
 ## 1.1.1 2016-04-19
 * Rquire: PHP >= 5.5
 * Feature: Service\sendSmsInstructions() Envio de instrucciones sms

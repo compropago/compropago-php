@@ -365,11 +365,17 @@ public function listWebhooks(){}
 ```
 
 
-### Gui de versiones
-| Version | Status     | Branch                 |
-|---------|------------|------------------------|
-| 0.1.2   | Deprecated | [0.1.2][branch-1-0-0]  |
-| 2.0.0   | Latest     | [2.0.0][branch-latest] |
+## Guía de Versiones
 
-[branch-1-0-0]: https://github.com/compropago/compropago-ruby/tree/v0.1.2
-[branch-latest]: https://github.com/compropago/compropago-ruby/
+| Version | Status      | Packagist            | Namespace        | PHP   | Repo                            | Docs                    |
+|---------|-------------|----------------------|------------------|-------|---------------------------------|-------------------------|
+| 1.0.x   | Deprecated  | `compropago/php-sdk` | `Compropago`     | 5.3 + | v1.0.x                          | [v1][compropago-1-docs] |
+| 1.1.x   | Deprecated  | `compropago/php-sdk` | `Compropago\Sdk` | 5.5 + | v1.1.x                          | [v1][compropago-1-docs] |
+| 1.1.1   | Deprecated  | `compropago/php-sdk` | `Compropago\Sdk` | 5.5 + | v1.1.x                          | [v1][compropago-1-docs] |
+| 1.2.0   | Maintained  | `compropago/php-sdk` | `Compropago\Sdk` | 5.5 + | v1.2.0                          | [v1][compropago-1-docs] |
+| 2.0.0   | Latest      | `compropago/php-sdk` | `CompropagoSdk`  | 5.5 + | [v2.0.0][latest-repo]           | [v1][compropago-1-docs] |
+
+
+[compropago-1-docs]: https://compropago.com/documentacion/api
+
+[latest-repo]: http://github.com/compropago/compropago-php
