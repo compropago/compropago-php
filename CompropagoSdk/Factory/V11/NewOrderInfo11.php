@@ -24,7 +24,7 @@ namespace CompropagoSdk\Factory\V11;
 
 
 use CompropagoSdk\Factory\Abs\FeeDetails;
-use CompropagoSdk\Factory\Abs\Instructions;
+use CompropagoSdk\Models\Instructions;
 use CompropagoSdk\Factory\Abs\NewOrderInfo;
 use CompropagoSdk\Factory\Abs\OrderInfo;
 
@@ -45,7 +45,7 @@ class NewOrderInfo11 extends NewOrderInfo
     {
         $this->order_info = new OrderInfo11();
         $this->fee_details = new FeeDetails11();
-        $this->instructions = new Instructions11();
+        $this->instructions = new Instructions();
     }
 
     /**
