@@ -33,8 +33,8 @@ use CompropagoSdk\Tools\Validations;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
-    private $publickey = "pk_test_5989d8209974e2d62";
-    private $privatekey = "sk_test_6ff4e982253c44c42";
+    private $publickey  = "pk_test_638e8b14112423a086";
+    private $privatekey = "sk_test_9c95e149614142822f";
     private $mode = false;
     
     private $phonenumber = "5561463627";
@@ -113,10 +113,10 @@ class Test extends \PHPUnit_Framework_TestCase
      */
     public function testServiceProvidersLimit(Client $client)
     {
+        $flag = true;
         try{
             $res = $client->api->listProviders(false, 15000);
 
-            $flag = true;
             foreach ($res as $provider){
                 if($provider->transaction_limit < 15000){
                     $flag = false;
@@ -125,9 +125,10 @@ class Test extends \PHPUnit_Framework_TestCase
             }
         }catch(\Exception $e){
             echo "\n".$e->getMessage()."\n";
+            $flag = false;
         }
 
-        $this->assertTrue(isset($flag) && $flag);
+        $this->assertTrue($flag);
     }
 
     /**
@@ -225,14 +226,61 @@ class Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @depends testCreateClient
-     * @param Client $client
      * @return NewOrderInfo
      */
-    public function testServicePlaceOrder(Client $client)
+    public function testServicePlaceOrderDefault()
     {
         try{
-            $order = new PlaceOrderInfo("12","M4 Style",180,"Eduardo Aguilar","eduardo.aguilar@compropago.com");
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+
+
+    ##############################################################################
+    #                  PRUEBAS DE TRANSACCIONALIDAD EN TIENDAS                   #
+    ##############################################################################
+
+
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderOxxo()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "OXXO"
+            );
             $res = $client->api->placeOrder($order);
         }catch(\Exception $e){
             $res = null;
@@ -245,16 +293,296 @@ class Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @depends testServicePlaceOrder
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrder7Eleven()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "SEVEN_ELEVEN"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderCoppel()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "COPPEL"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderExtra()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "EXTRA"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderFarmaciaEsquivar()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "FARMACIA_ESQUIVAR"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderElektra()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "ELEKTRA"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderCasaLey()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "CASA_LEY"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderPitico()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "PITICO"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderTelecomm()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "TELECOMM"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+    /**
+     * @return NewOrderInfo
+     */
+    public function testServicePlaceOrderFarmaciaABC()
+    {
+        try{
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $order = new PlaceOrderInfo(
+                "12",
+                "M4 Style",
+                180,
+                "Eduardo Aguilar",
+                "eduardo.aguilar@compropago.com",
+                "FARMACIA_ABC"
+            );
+            $res = $client->api->placeOrder($order);
+        }catch(\Exception $e){
+            $res = null;
+            echo "\n".$e->getMessage()."\n";
+        }
+
+        $this->assertTrue(!empty($res));
+
+        return $res;
+    }
+
+
+
+    ##############################################################################
+    #                FIN PRUEBAS DE TRANSACCIONALIDAD EN TIENDAS                 #
+    ##############################################################################
+
+
+
+    /**
+     * @depends testServicePlaceOrderDefault
      * @param $neworder
      */
     public function testTypeServicePlaceOrder($neworder)
     {
-        $this->assertTrue((get_parent_class($neworder) == "CompropagoSdk\\Factory\\Abs\\NewOrderInfo"));
+        $this->assertTrue(
+            get_parent_class($neworder) == "CompropagoSdk\\Factory\\Abs\\NewOrderInfo"
+        );
     }
 
     /**
-     * @depends testServicePlaceOrder
+     * @depends testServicePlaceOrderDefault
      * @param NewOrderInfo $order
      * @return CpOrderInfo
      */
@@ -282,11 +610,13 @@ class Test extends \PHPUnit_Framework_TestCase
      */
     public function testTypeServiceVerifyOrder(CpOrderInfo $order)
     {
-        $this->assertTrue((get_parent_class($order) == "CompropagoSdk\\Factory\\Abs\\CpOrderInfo"));
+        $this->assertTrue(
+            get_parent_class($order) == "CompropagoSdk\\Factory\\Abs\\CpOrderInfo"
+        );
     }
 
     /**
-     * @depends testServicePlaceOrder
+     * @depends testServicePlaceOrderDefault
      * @param NewOrderInfo $order
      * @return SmsInfo
      */
@@ -315,14 +645,16 @@ class Test extends \PHPUnit_Framework_TestCase
      */
     public function testTypeServiceSms(SmsInfo $info)
     {
-        $this->assertTrue((get_parent_class($info) == "CompropagoSdk\\Factory\\Abs\\SmsInfo"));
+        $this->assertTrue(
+            get_parent_class($info) == "CompropagoSdk\\Factory\\Abs\\SmsInfo"
+        );
     }
 
     /**
      * @depends testCreateClient
      * @param Client $client
      */
-    public function testGetWebhooks(Client $client)
+    public function testListWebhooks(Client $client)
     {
         try{
             $res = $client->api->listWebhooks();

@@ -22,6 +22,8 @@
 
 namespace CompropagoSdk\Models;
 
+use CompropagoSdk\Client;
+
 /**
  * Class PlaceOrderInfo informacion de nuevas ordenes
  * @package CompropagoSdk\Models
@@ -38,7 +40,17 @@ class PlaceOrderInfo
     public $app_client_name;
     public $app_client_version;
 
-    public function __construct($order_id, $order_name, $order_price, $customer_name, $customer_email, $payment_type="OXXO", $image_url=null, $app_client_name="phpsdk", $app_client_version="2.0.0-alfa")
+    public function __construct(
+        $order_id, 
+        $order_name, 
+        $order_price, 
+        $customer_name, 
+        $customer_email, 
+        $payment_type="OXXO", 
+        $image_url=null, 
+        $app_client_name="phpsdk", 
+        $app_client_version=Client::VERSION
+    )
     {
         $this->order_id           = $order_id;
         $this->order_name         = $order_name;
