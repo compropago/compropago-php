@@ -120,6 +120,30 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->assertTrue($flag);
     }
 
+    public function testServiceProvidersCurrency()
+    {
+        $flag = true;
+        try {
+            $client = new Client(
+                $this->publickey,
+                $this->privatekey,
+                $this->mode
+            );
+            $provs = $client->api->listProviders(true, 700, 'USD');
+
+            foreach ($provs as $prov) {
+                if ($prov->transaction_limit < 14000) {
+                    $flag = false;
+                    break;
+                }
+            }
+        } catch(\Exception $e) {
+            echo "====>>".$e->getMessage()."\n";
+            $flag = false;
+        }
+        $this->assertTrue($flag);
+    }
+
     public function testServiceProviderAuth()
     {
         try{
