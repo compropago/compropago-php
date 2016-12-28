@@ -1,6 +1,6 @@
 <?php
 
-namespace CompropagoSdk\Models;
+namespace CompropagoSdk\Factory\Models;
 
 class Instructions
 {
