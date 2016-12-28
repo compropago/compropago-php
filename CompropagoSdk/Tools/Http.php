@@ -34,7 +34,7 @@ class Http
         if (array_key_exists('user', $auth) && array_key_exists('pass', $auth)) {
             $this->auth = $auth['user'].':'.$auth['pass'];
         }else{
-            throw new \Exception('Auth is not valid.');
+            $this->auth = array();
         }
     }
 
@@ -67,9 +67,12 @@ class Http
         }
 
         $headers = [
-            'content-type' => 'application/json',
-            'cache-control' => 'no-cache'
+            'Content-Type' => 'application/json',
+            'Cache-Control' => 'no-cache',
+            'Content-Length' => strlen($this->data)
         ];
+
+        $final_headers = [];
 
         if (!empty($this->extra_headers)) {
             foreach ($this->extra_headers as $key => $value) {
@@ -77,7 +80,11 @@ class Http
             }
         }
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        foreach ($headers as $key => $value) {
+            $final_headers[] = $key.': '.$value;
+        }
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $final_headers);
 
         $response = curl_exec($ch);
 

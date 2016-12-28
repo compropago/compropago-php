@@ -90,14 +90,14 @@ class Serialize
         } else {
             $obj = new FeeDetails();
 
-            $obj->amount = $data['amount'];
-            $obj->currency = $data['currency'];
-            $obj->type = $data['type'];
-            $obj->description = $data['description'];
-            $obj->application = $data['application'];
-            $obj->tax_percent = $data['tax_percent'];
-            $obj->amount_refunded = $data['amount_refunded'];
-            $obj->tax = $data['tax'];
+            $obj->amount = isset($data['amount']) ? $data['amount'] : null;
+            $obj->currency = isset($data['currency']) ? $data['currency'] : null;
+            $obj->type = isset($data['type']) ? $data['type'] : null;
+            $obj->description = isset($data['description']) ? $data['description'] : null;
+            $obj->application = isset($data['application']) ? $data['application'] : null;
+            $obj->tax_percent = isset($data['tax_percent']) ? $data['tax_percent'] : null;
+            $obj->amount_refunded = isset($data['amount_refunded']) ? $data['amount_refunded'] : null;
+            $obj->tax = isset($data['tax']) ? $data['tax'] : null;
 
             return $obj;
         }
@@ -176,14 +176,14 @@ class Serialize
         } else {
             $obj = new OrderInfo();
 
-            $obj->order_id = $data['order_id'];
-            $obj->order_price = $data['order_price'];
-            $obj->order_name = $data['order_name'];
-            $obj->payment_method = $data['payment_method'];
-            $obj->store = $data['store'];
-            $obj->country = $data['country'];
-            $obj->image_url = $data['image_url'];
-            $obj->success_url = $data['success_url'];
+            $obj->order_id = isset($data['order_id']) ? $data['order_id'] : null;
+            $obj->order_price = isset($data['order_price']) ? $data['order_price'] : null;
+            $obj->order_name = isset($data['order_name']) ? $data['order_name'] : null;
+            $obj->payment_method = isset($data['payment_method']) ? $data['payment_method'] : null;
+            $obj->store = isset($data['store']) ? $data['store'] : null;
+            $obj->country = isset($data['country']) ? $data['country'] : null;
+            $obj->image_url = isset($data['image_url']) ? $data['image_url'] : null;
+            $obj->success_url = isset($data['success_url']) ? $data['success_url'] : null;
 
             return $obj;
         }

@@ -201,7 +201,7 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->assertTrue(!empty($res));
     }
 
-    public function testServiceSms(NewOrderInfo $order)
+    public function testServiceSms()
     {
         try{
             $client = new Client(
