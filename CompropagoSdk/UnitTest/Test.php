@@ -132,7 +132,7 @@ class Test extends \PHPUnit_Framework_TestCase
             $provs = $client->api->listProviders(true, 700, 'USD');
 
             foreach ($provs as $prov) {
-                if ($prov->transaction_limit < 14000) {
+                if ($prov->transaction_limit < 15000) {
                     $flag = false;
                     break;
                 }
