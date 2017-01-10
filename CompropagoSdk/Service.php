@@ -15,7 +15,7 @@ class Service
         $this->client = $client;
     }
 
-    public function listProviders($auth = false, $limit = 0)
+    public function listProviders($auth = false, $limit = 0, $currency='MXN')
     {
         if ($auth) {
             $url = $this->client->deployUri.'providers/';
@@ -27,6 +27,10 @@ class Service
 
         if ($limit > 0) {
             $url .= '?order_total='.$limit;
+        }
+
+        if ($limit > 0 && !empty($currency) && $currency != 'MXN') {
+            $url .= '&currency='.$currency;
         }
 
         $response = Request::get($url, $keys);

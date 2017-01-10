@@ -9,6 +9,9 @@ class Client
     const API_LIVE_URI='http://api.compropago.com/v1/';
     const API_SANDBOX_URI='http://api.compropago.com/v1/';
 
+    #const API_LIVE_URI='http://api-staging-compropago.herokuapp.com/v1/';
+    #const API_SANDBOX_URI='http://api-staging-compropago.herokuapp.com/v1/';
+
     public $publickey;
     public $privatekey;
     public $live;
