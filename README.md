@@ -247,12 +247,12 @@ $providers = $client->api->listProviders();
 <?php
 /**
  * @param bool $auth
- * @param int $limit
- * @param bool $fetch
+ * @param float $limit
+ * @param string $currency (Default="MXN") Supported Currencies "USD", "EUR" & "GBP"
  * @return array
  * @throws \Exception
  */
-public function listProviders($auth = false, $limit = 0){}
+public function listProviders($auth = false, $limit = 0, $currency="MXN"){}
 ```
 
 ##### Envio de instrucciones SMS
