@@ -202,6 +202,7 @@ class Serialize
                 $data['customer_email'],
                 empty($data['payment_type']) ? 'OXXO' : $data['payment_type'],
                 empty($data['currency']) ? 'MXN' : $data['currency'],
+                empty($data['expiration_time']) ? null : $data['expiration_time'],
                 empty($data['image_url']) ? '': $data['image_url'],
                 empty($data['app_client_name']) ? 'php-sdk' : $data['app_client_name'],
                 empty($data['app_client_version']) ? Client::VERSION : $data['app_client_version']

@@ -9,9 +9,6 @@ class Client
     const API_LIVE_URI='http://api.compropago.com/v1/';
     const API_SANDBOX_URI='http://api.compropago.com/v1/';
 
-    #const API_LIVE_URI='http://api-staging-compropago.herokuapp.com/v1/';
-    #const API_SANDBOX_URI='http://api-staging-compropago.herokuapp.com/v1/';
-
     public $publickey;
     public $privatekey;
     public $live;
@@ -39,10 +36,5 @@ class Client
     public function getPass()
     {
         return $this->publickey;
-    }
-
-    public function getFullAuth()
-    {
-        return $this->privatekey.':'.$this->publickey;
     }
 }

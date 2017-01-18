@@ -15,6 +15,12 @@ class Service
         $this->client = $client;
     }
 
+    /**
+     * @param bool $auth
+     * @param int $limit
+     * @param string $currency
+     * @return array
+     */
     public function listProviders($auth = false, $limit = 0, $currency='MXN')
     {
         if ($auth) {
@@ -38,6 +44,10 @@ class Service
         return Factory::getInstanceOf('ListProviders', $response);
     }
 
+    /**
+     * @param $orderId
+     * @return \CompropagoSdk\Factory\Models\CpOrderInfo
+     */
     public function verifyOrder( $orderId )
     {
         $response = Request::get(
@@ -48,6 +58,10 @@ class Service
         return Factory::getInstanceOf('CpOrderInfo', $response);
     }
 
+    /**
+     * @param PlaceOrderInfo $neworder
+     * @return \CompropagoSdk\Factory\Models\NewOrderInfo
+     */
     public function placeOrder(PlaceOrderInfo $neworder)
     {
         $params = [
@@ -58,6 +72,7 @@ class Service
             'customer_email' => $neworder->customer_email,
             'payment_type' => $neworder->payment_type,
             'currency' => $neworder->currency,
+            'expiration_time' => $neworder->expiration_time,
             'image_url' => $neworder->image_url,
             'app_client_name' => $neworder->app_client_name,
             'app_client_version' => $neworder->app_client_version
@@ -72,6 +87,11 @@ class Service
         return Factory::getInstanceOf('NewOrderInfo', $response);
     }
 
+    /**
+     * @param $number
+     * @param $orderId
+     * @return \CompropagoSdk\Factory\Models\SmsInfo
+     */
     public function sendSmsInstructions($number,$orderId)
     {
         $params = ['customer_phone' => $number];
@@ -85,6 +105,10 @@ class Service
         return Factory::getInstanceOf('SmsInfo', $response);
     }
 
+    /**
+     * @param $url
+     * @return \CompropagoSdk\Factory\Models\Webhook
+     */
     public function createWebhook($url)
     {
         $params = ['url' => $url];
@@ -98,6 +122,9 @@ class Service
         return Factory::getInstanceOf('Webhook', $response);
     }
 
+    /**
+     * @return array
+     */
     public function listWebhooks()
     {
         $response = Request::get(
@@ -108,6 +135,11 @@ class Service
         return Factory::getInstanceOf('ListWebhooks', $response);
     }
 
+    /**
+     * @param $webhookId
+     * @param $url
+     * @return \CompropagoSdk\Factory\Models\Webhook
+     */
     public function updateWebhook($webhookId, $url)
     {
         $params = ['url' => $url];
@@ -121,6 +153,10 @@ class Service
         return Factory::getInstanceOf('Webhook', $response);
     }
 
+    /**
+     * @param $webhookId
+     * @return \CompropagoSdk\Factory\Models\Webhook
+     */
     public function deleteWebhook($webhookId)
     {
         $response = Request::delete(
