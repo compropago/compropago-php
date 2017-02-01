@@ -242,8 +242,8 @@ $providers = $client->api->listProviders();
 ```php
 <?php
 /**
- * @param int    $limit
- * @param string $currency
+ * @param $limit
+ * @param $currency (Default="MXN") Supported Currencies "USD", "EUR" & "GBP"
  * @return array
  * @throws \Exception
  */
