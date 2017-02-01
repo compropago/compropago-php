@@ -93,7 +93,7 @@ class Test extends \PHPUnit_Framework_TestCase
         $flag = true;
         try {
             $client = new Client($this->publickey, $this->privatekey, $this->mode);
-            $res = $client->api->listProviders(false, $this->limit);
+            $res = $client->api->listProviders($this->limit);
 
             foreach ($res as $provider) {
                 if ($provider->transaction_limit < $this->limit) {
@@ -113,7 +113,7 @@ class Test extends \PHPUnit_Framework_TestCase
         $flag = true;
         try {
             $client = new Client($this->publickey, $this->privatekey, $this->mode);
-            $provs = $client->api->listProviders(true, 700, 'USD');
+            $provs = $client->api->listProviders(700, 'USD');
 
             foreach ($provs as $prov) {
                 if ($prov->transaction_limit < $this->limit) {
@@ -126,41 +126,6 @@ class Test extends \PHPUnit_Framework_TestCase
             $flag = false;
         }
         $this->assertTrue($flag);
-    }
-
-    public function testProviderAuth()
-    {
-        $res = false;
-        try {
-            $client = new Client($this->publickey, $this->privatekey, $this->mode);
-            $response = $client->api->listProviders(true);
-
-            $res = $response[0] instanceof Provider;
-        } catch(\Exception $e) {
-            echo "====>>".$e->getMessage()."\n";
-        }
-
-        $this->assertTrue($res);
-    }
-
-    public function testProviderAuthLimit()
-    {
-        $res = true;
-        try {
-            $client = new Client($this->publickey, $this->privatekey, $this->mode);
-            $providers = $client->api->listProviders(true, $this->limit);
-
-            foreach ($providers as $provider){
-                if ($provider->transaction_limit < $this->limit) {
-                    $res = false;
-                    break;
-                }
-            }
-        } catch(\Exception $e) {
-            echo "====>>".$e->getMessage()."\n";
-        }
-
-        $this->assertTrue($res);
     }
 
     public function testPlaceOrder()
