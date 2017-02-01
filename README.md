@@ -137,10 +137,6 @@ $client = new Client(
 
 ### Uso Básico de la Libreria
 
-> Consulte la documentación de la librería PHP de ComproPago para conocer más de sus capacidades, configuraciones y 
-métodos.
-
-
 #### Llamados al los servicios por SDK
 
 Para poder hacer uso de los servicos de ComproPago, solo debe de llamar a los metodos contenidos en la propiedad **api**
@@ -246,13 +242,12 @@ $providers = $client->api->listProviders();
 ```php
 <?php
 /**
- * @param bool $auth
- * @param float $limit
- * @param string $currency (Default="MXN") Supported Currencies "USD", "EUR" & "GBP"
+ * @param $limit
+ * @param $currency (Default="MXN") Supported Currencies "USD", "EUR" & "GBP"
  * @return array
  * @throws \Exception
  */
-public function listProviders($auth = false, $limit = 0, $currency="MXN"){}
+public function listProviders($limit = 0, $currency = 'MXN'){}
 ```
 
 ##### Envio de instrucciones SMS
@@ -299,7 +294,7 @@ logica de aprobacion en su tienda en linea. El proceso que siguenes el siguiente
 ```php
 <?php
 # $cadena_obtenida es un String
-$info = \CompropagoSdk\Factory\Factory::getInstanceOf('CpOrderInfo', $cadena_obtenida);
+$info = Factory::getInstanceOf('CpOrderInfo', $cadena_obtenida);
 ```
 
 3. Generar la logica de aprovacion correspondiente al estatus de la orden.
@@ -334,7 +329,7 @@ atributo **api** del objeto **Client** y el cual regresa una instancia de tipo *
 
 ```php
 <?php
-$updated_webhook = $client->api->updateWebhook($webhook->getId(), 'http://sitio.com/nuevo_webhook');
+$updated_webhook = $client->api->updateWebhook($webhook->id, 'http://sitio.com/nuevo_webhook');
 ```
 
 ###### Prototipo del metodo updateWebhook()

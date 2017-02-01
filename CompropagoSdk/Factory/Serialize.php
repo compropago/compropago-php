@@ -219,6 +219,7 @@ class Serialize
 
             $obj->name = $data['name'];
             $obj->store_image = $data['store_image'];
+            $obj->availability = $data['availability'];
             $obj->is_active = $data['is_active'];
             $obj->internal_name = $data['internal_name'];
             $obj->image_small = $data['image_small'];
