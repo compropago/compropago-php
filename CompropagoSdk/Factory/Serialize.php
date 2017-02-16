@@ -6,6 +6,7 @@ use CompropagoSdk\Client;
 use CompropagoSdk\Factory\Models\CpOrderInfo;
 use CompropagoSdk\Factory\Models\Customer;
 use CompropagoSdk\Factory\Models\EvalAuthInfo;
+use CompropagoSdk\Factory\Models\Exchange;
 use CompropagoSdk\Factory\Models\FeeDetails;
 use CompropagoSdk\Factory\Models\InstructionDetails;
 use CompropagoSdk\Factory\Models\Instructions;
@@ -46,6 +47,7 @@ class Serialize
             $obj->amount_refunded = $data['amount_refunded'];
             $obj->description = $data['description'];
             $obj->dispute = $data['dispute'];
+            $obj->api_version = $data['api_version'];
 
             return $obj;
         }
@@ -164,6 +166,26 @@ class Serialize
             $obj->order_info = self::orderInfo($data['order_info']);
             $obj->fee_details = self::feeDetails($data['fee_details']);
             $obj->instructions = self::instructions($data['instructions']);
+            $obj->api_version = $data['api_version'];
+
+            return $obj;
+        }
+    }
+
+    public static function exchange($data=array())
+    {
+        if (empty($data)) {
+            return new Exchange();
+        } else {
+            $obj = new Exchange();
+
+            $obj->rate = $data['rate'];
+            $obj->request = $data['request'];
+            $obj->origin_amount = $data['origin_amount'];
+            $obj->final_amount = $data['final_amount'];
+            $obj->origin_currency = $data['origin_currency'];
+            $obj->final_currency = $data['final_currency'];
+            $obj->exchange_id = $data['exchange_id'];
 
             return $obj;
         }
@@ -177,13 +199,10 @@ class Serialize
             $obj = new OrderInfo();
 
             $obj->order_id = isset($data['order_id']) ? $data['order_id'] : null;
-            $obj->order_price = isset($data['order_price']) ? $data['order_price'] : null;
             $obj->order_name = isset($data['order_name']) ? $data['order_name'] : null;
-            $obj->payment_method = isset($data['payment_method']) ? $data['payment_method'] : null;
-            $obj->store = isset($data['store']) ? $data['store'] : null;
-            $obj->country = isset($data['country']) ? $data['country'] : null;
+            $obj->order_price = isset($data['order_price']) ? $data['order_price'] : null;
             $obj->image_url = isset($data['image_url']) ? $data['image_url'] : null;
-            $obj->success_url = isset($data['success_url']) ? $data['success_url'] : null;
+            $obj->exchage = self::exchange($data['exchange']);
 
             return $obj;
         }
