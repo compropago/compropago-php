@@ -26,6 +26,14 @@ class Service
         ];
     }
 
+    public function listDefaultProviders()
+    {
+        $url = $this->client->deployUri . 'providers/true';
+        $response = Request::get($url);
+
+        return Factory::getInstanceOf('ListProviders', $response);
+    }
+
     /**
      * @param int $limit
      * @param string $currency
