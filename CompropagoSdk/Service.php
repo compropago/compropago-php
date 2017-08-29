@@ -16,7 +16,11 @@ class Service
     }
 
     /**
+     * Get auth info
+     *
      * @return array
+     * 
+     * @author Eduardo Aguilar <dante.aguilar@gmail.com>
      */
     private function getAuth()
     {
@@ -26,6 +30,13 @@ class Service
         ];
     }
 
+    /**
+     * Get default Providers
+     *
+     * @return array<CompropagoSdk\Factory\Models\Provider>
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+     */
     public function listDefaultProviders()
     {
         $url = $this->client->deployUri . 'providers/true';
@@ -35,9 +46,13 @@ class Service
     }
 
     /**
-     * @param int $limit
+     * Get list providers by account
+     *
+     * @param integer $limit
      * @param string $currency
-     * @return array
+     * @return array<CompropagoSdk\Factory\Models\Provider>
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public function listProviders($limit = 0, $currency='MXN')
     {
@@ -57,22 +72,29 @@ class Service
     }
 
     /**
-     * @param $orderId
-     * @return \CompropagoSdk\Factory\Models\CpOrderInfo
+     * Get info of an order
+     *
+     * @param string $orderId
+     * @return CompropagoSdk\Factory\Models\CpOrderInfo
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
-    public function verifyOrder( $orderId )
+    public function verifyOrder($orderId)
     {
         $response = Request::get($this->client->deployUri.'charges/'.$orderId.'/', $this->getAuth());
         return Factory::getInstanceOf('CpOrderInfo', $response);
     }
 
     /**
-     * @param PlaceOrderInfo $neworder
-     * @return \CompropagoSdk\Factory\Models\NewOrderInfo
+     * Create new order
+     *
+     * @param CompropagoSdk\Factory\Models\PlaceOrderInfo $neworder
+     * @return CompropagoSdk\Factory\Models\NewOrderInfo
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
-    public function placeOrder(PlaceOrderInfo $neworder)
+    public function placeOrder($neworder)
     {
-        $ip = self::getIp();
         $params = [
             'order_id' => $neworder->order_id,
             'order_name' => $neworder->order_name,
@@ -84,20 +106,7 @@ class Service
             'expiration_time' => $neworder->expiration_time,
             'image_url' => $neworder->image_url,
             'app_client_name' => $neworder->app_client_name,
-            'app_client_version' => $neworder->app_client_version,
-            'customer' => [
-                'name'=> $neworder->customer_name,
-                'email'=> $neworder->customer_email,
-                'phone'=> $neworder->cutomer_phone,
-                'cp'=> $neworder->cp,
-                'ip_address'=> $ip,
-                'glocation' => [
-                    'lat'=> $neworder->latitude,
-                    'lon'=> $neworder->longitude
-                ]
-                        
-            ]
-            
+            'app_client_version' => $neworder->app_client_version,        
         ];
 
         $response = Request::post($this->client->deployUri.'charges/', $params, $this->getAuth());
@@ -105,9 +114,13 @@ class Service
     }
 
     /**
-     * @param $number
-     * @param $orderId
-     * @return \CompropagoSdk\Factory\Models\SmsInfo
+     * Send SMS instructions for an order
+     *
+     * @param string $number
+     * @param string $orderId
+     * @return CompropagoSdk\Factory\Models\SmsInfo
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public function sendSmsInstructions($number,$orderId)
     {
@@ -118,8 +131,12 @@ class Service
     }
 
     /**
-     * @param $url
-     * @return \CompropagoSdk\Factory\Models\Webhook
+     * Create new webhook Url
+     *
+     * @param string $url
+     * @return CompropagoSdk\Factory\Models\Webhook
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public function createWebhook($url)
     {
@@ -130,7 +147,11 @@ class Service
     }
 
     /**
-     * @return array
+     * Get list of webhooks
+     *
+     * @return array<CompropagoSdk\Factory\Models\Webhook>
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public function listWebhooks()
     {
@@ -139,11 +160,16 @@ class Service
     }
 
     /**
-     * @param $webhookId
-     * @param $url
-     * @return \CompropagoSdk\Factory\Models\Webhook
+     * Update a webhook url
+     *
+     * @param string $webhookId
+     * @param string $url
+     * @param string $type (secondary | primary)
+     * @return CompropagoSdk\Factory\Models\Webhook
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
-    public function updateWebhook($webhookId, $url)
+    public function updateWebhook($webhookId, $url=null, $type=null)
     {
         $params = ['url' => $url];
 
@@ -152,26 +178,32 @@ class Service
     }
 
     /**
-     * @param $webhookId
-     * @return \CompropagoSdk\Factory\Models\Webhook
+     * Deactive a webhook URL
+     *
+     * @param string $webhookId
+     * @return CompropagoSdk\Factory\Models\Webhook
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+     */
+    public function deactiveWebhook($webhookId)
+    {
+        $url = $this->client->deployUri.'webhooks/stores/'.$webhookId.'/deactive';
+
+        $response = Request::delete($url, null, $this->getAuth());
+        return Factory::getInstanceOf('Webhook', $response);
+    }
+
+    /**
+     * Delete a webhook URL
+     *
+     * @param string $webhookId
+     * @return CompropagoSdk\Factory\Models\Webhook
+     * 
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public function deleteWebhook($webhookId)
     {
         $response = Request::delete($this->client->deployUri.'webhooks/stores/'.$webhookId.'/', null, $this->getAuth());
         return Factory::getInstanceOf('Webhook', $response);
-    }
-
-    private function getIp(){
-        if(isset($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else if(isset($_SERVER['REMOTE_ADDR'])) {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        } else{
-            $ip = '';
-        }
-        
-        return $ip;
     }
 }

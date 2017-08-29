@@ -8,4 +8,5 @@ class Webhook
     public $url;
     public $mode;
     public $status;
+    public $type;
 }
