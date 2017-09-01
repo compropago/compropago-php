@@ -3,10 +3,13 @@
 namespace CompropagoSdk\Factory\Models;
 
 use CompropagoSdk\Client;
-use CompropagoSdk\Service;
 
-
-
+/**
+ * Class PlaceOrderInfo
+ * @package CompropagoSdk\Factory\Models
+ *
+ * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+ */
 class PlaceOrderInfo
 {
     public $order_id;
@@ -35,6 +38,8 @@ class PlaceOrderInfo
      * @param string $image_url
      * @param string $app_client_name
      * @param string $app_client_version
+     *
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public function __construct(
         $order_id, 
