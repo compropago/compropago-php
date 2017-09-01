@@ -3,13 +3,25 @@
 namespace CompropagoSdk;
 
 use CompropagoSdk\Factory\Factory;
-use CompropagoSdk\Factory\Models\PlaceOrderInfo;
 use CompropagoSdk\Tools\Request;
 
+/**
+ * Class Service
+ * @package CompropagoSdk
+ *
+ * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+ */
 class Service
 {
     private $client;
 
+    /**
+     * Service constructor.
+     *
+     * @param Client $client
+     *
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -33,7 +45,7 @@ class Service
     /**
      * Get default Providers
      *
-     * @return array<CompropagoSdk\Factory\Models\Provider>
+     * @return array
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
@@ -48,13 +60,13 @@ class Service
     /**
      * Get list providers by account
      *
-     * @param integer $limit
+     * @param float $limit
      * @param string $currency
-     * @return array<CompropagoSdk\Factory\Models\Provider>
+     * @return array
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
-    public function listProviders($limit = 0, $currency='MXN')
+    public function listProviders($limit = 0.0, $currency='MXN')
     {
         $url = $this->client->deployUri . 'providers/';
 
@@ -75,7 +87,7 @@ class Service
      * Get info of an order
      *
      * @param string $orderId
-     * @return CompropagoSdk\Factory\Models\CpOrderInfo
+     * @return \CompropagoSdk\Factory\Models\CpOrderInfo
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
@@ -88,8 +100,8 @@ class Service
     /**
      * Create new order
      *
-     * @param CompropagoSdk\Factory\Models\PlaceOrderInfo $neworder
-     * @return CompropagoSdk\Factory\Models\NewOrderInfo
+     * @param \CompropagoSdk\Factory\Models\PlaceOrderInfo $neworder
+     * @return \CompropagoSdk\Factory\Models\NewOrderInfo
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
@@ -118,7 +130,7 @@ class Service
      *
      * @param string $number
      * @param string $orderId
-     * @return CompropagoSdk\Factory\Models\SmsInfo
+     * @return \CompropagoSdk\Factory\Models\SmsInfo
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
@@ -134,7 +146,7 @@ class Service
      * Create new webhook Url
      *
      * @param string $url
-     * @return CompropagoSdk\Factory\Models\Webhook
+     * @return \CompropagoSdk\Factory\Models\Webhook
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
@@ -149,7 +161,7 @@ class Service
     /**
      * Get list of webhooks
      *
-     * @return array<CompropagoSdk\Factory\Models\Webhook>
+     * @return array
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
@@ -165,13 +177,16 @@ class Service
      * @param string $webhookId
      * @param string $url
      * @param string $type (secondary | primary)
-     * @return CompropagoSdk\Factory\Models\Webhook
+     * @return \CompropagoSdk\Factory\Models\Webhook
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public function updateWebhook($webhookId, $url=null, $type=null)
     {
-        $params = ['url' => $url];
+        $params = [
+            'url' => $url,
+            'webhookType' => $type
+        ];
 
         $response = Request::put($this->client->deployUri.'webhooks/stores/'.$webhookId.'/', $params, $this->getAuth());
         return Factory::getInstanceOf('Webhook', $response);
@@ -181,7 +196,7 @@ class Service
      * Deactive a webhook URL
      *
      * @param string $webhookId
-     * @return CompropagoSdk\Factory\Models\Webhook
+     * @return \CompropagoSdk\Factory\Models\Webhook
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
@@ -197,7 +212,7 @@ class Service
      * Delete a webhook URL
      *
      * @param string $webhookId
-     * @return CompropagoSdk\Factory\Models\Webhook
+     * @return \CompropagoSdk\Factory\Models\Webhook
      * 
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */

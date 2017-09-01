@@ -2,7 +2,12 @@
 
 namespace CompropagoSdk\Factory\Models;
 
-
+/**
+ * Class Exchange
+ * @package CompropagoSdk\Factory\Models
+ *
+ * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+ */
 class Exchange
 {
     public $rate;

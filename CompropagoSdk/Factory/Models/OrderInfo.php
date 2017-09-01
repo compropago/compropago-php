@@ -2,6 +2,12 @@
 
 namespace CompropagoSdk\Factory\Models;
 
+/**
+ * Class OrderInfo
+ * @package CompropagoSdk\Factory\Models
+ *
+ * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+ */
 class OrderInfo
 {
     public $order_id;

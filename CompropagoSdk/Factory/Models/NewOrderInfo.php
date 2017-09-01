@@ -1,14 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Arthur
- * Date: 27/12/16
- * Time: 11:38
- */
 
 namespace CompropagoSdk\Factory\Models;
 
-
+/**
+ * Class NewOrderInfo
+ * @package CompropagoSdk\Factory\Models
+ *
+ * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+ */
 class NewOrderInfo
 {
     public $id;
@@ -27,6 +26,7 @@ class NewOrderInfo
     public $fee_details;
     public $order_info;
     public $customer;
+    public $instructions;
     public $api_version;
 
     public function __construct()

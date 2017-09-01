@@ -19,14 +19,20 @@ use CompropagoSdk\Factory\Models\SmsInfo;
 use CompropagoSdk\Factory\Models\SmsObject;
 use CompropagoSdk\Factory\Models\Webhook;
 
+/**
+ * Class Serialize
+ * @package CompropagoSdk\Factory
+ *
+ * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
+ */
 class Serialize
 {
     /**
-     * Get instance of CpOrderInfo
+     * Create an instance of CpOrderInfo Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\CpOrderInfo
-     * 
+     * @return CpOrderInfo
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function cpOrderInfo($data=array())
@@ -59,11 +65,11 @@ class Serialize
     }
 
     /**
-     * Get instance of Customer
+     * Create an instance of Customer Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\Customer
-     * 
+     * @return Customer
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function customer($data=array())
@@ -82,11 +88,11 @@ class Serialize
     }
 
     /**
-     * Get instance of EvalAuthInfo
+     * Create an instance of EvalAuthInfo Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\EvalAuthInfo
-     * 
+     * @return EvalAuthInfo
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function evalAuthInfo($data=array())
@@ -107,11 +113,11 @@ class Serialize
     }
 
     /**
-     * Get instance of FeeDetails
+     * Create an instance FeeDetails Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\FeeDetails
-     * 
+     * @return FeeDetails
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function feeDetails($data=array())
@@ -133,11 +139,11 @@ class Serialize
     }
 
     /**
-     * Get instance of InstructionDetails
+     * Create an instance of InstructionDetails Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\InstructionDetails
-     * 
+     * @return InstructionDetails
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function instructionDetails($data=array())
@@ -165,11 +171,11 @@ class Serialize
     }
 
     /**
-     * Get instance of Instructions
+     * Create an instance of Instructions Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\Instructions
-     * 
+     * @return Instructions
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function instructions($data=array())
@@ -193,11 +199,11 @@ class Serialize
     }
 
     /**
-     * Get instance of NewOrderInfo
+     * Create an instance of NewOrderInfo Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\NewOrderInfo
-     * 
+     * @return NewOrderInfo
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function newOrderInfo($data=array())
@@ -231,11 +237,11 @@ class Serialize
     }
 
     /**
-     * Get instance of Exchange
+     * Create an instance of Exchange Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\Exchange
-     * 
+     * @return Exchange
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function exchange($data=array())
@@ -258,11 +264,11 @@ class Serialize
     }
 
     /**
-     * Get instance of OrderInfo
+     * Create an instance of OrderInfo Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\OrderInfo
-     * 
+     * @return OrderInfo
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function orderInfo($data=array())
@@ -289,11 +295,11 @@ class Serialize
     }
 
     /**
-     * Get instance of PlaceOrderInfo
+     * Create an instance of PlaceOrderInfo Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\PlaceOrderInfo
-     * 
+     * @return PlaceOrderInfo
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function placeOrderInfo($data=array())
@@ -318,11 +324,11 @@ class Serialize
     }
 
     /**
-     * Get instance of Provider
+     * Create an instance of Provider Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\Provider
-     * 
+     * @return Provider
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function provider($data=array())
@@ -332,27 +338,27 @@ class Serialize
         } else {
             $obj = new Provider();
 
-            $obj->name = $data['name'];
-            $obj->store_image = $data['store_image'];
-            $obj->availability = $data['availability'];
-            $obj->is_active = $data['is_active'];
             $obj->internal_name = $data['internal_name'];
+            $obj->availability = $data['availability'];
+            $obj->name = $data['name'];
+            $obj->rank = $data['rank'];
+            $obj->transaction_limit = $data['transaction_limit'];
+            $obj->commission = $data['commission'];
+            $obj->is_active = $data['is_active'];
+            $obj->store_image = $data['store_image'];
             $obj->image_small = $data['image_small'];
             $obj->image_medium = $data['image_medium'];
-            $obj->image_large = $data['image_large'];
-            $obj->transaction_limit = $data['transaction_limit'];
-            $obj->rank = $data['rank'];
 
             return $obj;
         }
     }
 
     /**
-     * Get instance of SmsData
+     * Create an instance of SmsData Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\SmsData
-     * 
+     * @return SmsData
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function smsData($data=array())
@@ -369,12 +375,12 @@ class Serialize
     }
 
     /**
-     * Get instance of SmsInfo
+     * Create an instance of SmsInfo Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\SmsInfo
-     * 
-     * @author Eduardo Agular <dante.aguilar41@gmail.com>
+     * @return SmsInfo
+     *
+     * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function smsInfo($data=array())
     {
@@ -392,11 +398,11 @@ class Serialize
     }
 
     /**
-     * Get instance of SmsObject
+     * Create an instance of SmsObject Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\SmsObject
-     * 
+     * @return SmsObject
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function smsObject($data=array())
@@ -415,11 +421,11 @@ class Serialize
     }
 
     /**
-     * Get instance of Webhook
+     * Create an instance of Webhook Object
      *
      * @param array $data
-     * @return CompropagoSdk\Factory\Models\Webhook
-     * 
+     * @return Webhook
+     *
      * @author Eduardo Aguilar <dante.aguilar41@gmail.com>
      */
     public static function webhook($data=array())
