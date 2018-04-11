@@ -1,5 +1,7 @@
 # ComproPago PHP SDK
 
+[![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges) 
+
 ## Descripción
 
 La librería de `ComproPago PHP SDK` le permite interactuar con el API de ComproPago en su aplicación.
@@ -30,10 +32,9 @@ Con ComproPago puede recibir pagos en 7Eleven, Extra y muchas tiendas más en to
 ## Requerimientos
 
 * Composer
-* PHP >= 5.5
+* PHP >= 5.6
 * CURL Extension
 * JSON Extension
-
 
 ## Instalación ComproPago PHP SDK
 
@@ -50,14 +51,16 @@ O si o lo desea puede obtener el repositorio
 git clone https://github.com/compropago/compropago-php.git
 ```
 
-Despues debara de incluir en su proyecto el archivo `CompropagoSdk\UnitTest\autoload.php`, el cual le proporcionara
-el acceso a todas las clases del SDK.
+Despues debara de incluir en su proyecto el archivo `CompropagoSdk\Client.php`, el cual contiene la funcion
+**register_autoload** que cargara automaticamente todos los archivos del SDK.
 
 ```php
 <?php
-require_once 'CompropagoSdk/UnitTest/autoload.php';
+require_once 'path_to/CompropagoSdk/Client.php';
 
 use CompropagoSdk\Client;
+Client::register_autoload();
+
 use CompropagoSdk\Factory\Factory;
 ```
 
@@ -72,7 +75,7 @@ O si lo prefiere puede incluirlo directamente en su archivo composer.json
 ```json
 {
   "require": {
-    "compropago/php-sdk": "3.0.0"
+    "compropago/php-sdk": "*"
   }
 }
 ```

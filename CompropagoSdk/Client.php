@@ -4,19 +4,23 @@ namespace CompropagoSdk;
 
 class Client
 {
-    const VERSION="3.0.6.1";
+    const VERSION = "3.1.0.0";
 
-    const API_LIVE_URI='http://api.compropago.com/v1/';
-    const API_SANDBOX_URI='http://api.compropago.com/v1/';
+    const API_LIVE_URI = 'https://api.compropago.com/v1/';
+    const API_SANDBOX_URI = 'https://api.compropago.com/v1/';
 
     public $publickey;
     public $privatekey;
     public $live;
-
     public $deployUri;
-
     public $api;
 
+    /**
+     * Client constructor.
+     * @param $publickey
+     * @param $privatekey
+     * @param $live
+     */
     public function __construct($publickey, $privatekey, $live)
     {
         $this->publickey = $publickey;
@@ -28,13 +32,42 @@ class Client
         $this->api = new Service($this);
     }
 
+    /**
+     * Return the user of the API
+     * @return string mixed
+     */
     public function getUser()
     {
         return $this->privatekey;
     }
 
+    /**
+     * Return the password for the API
+     * @return string mixed
+     */
     public function getPass()
     {
         return $this->publickey;
+    }
+
+
+    /**
+     * Regist autload function to load classes
+     */
+    public static function register_autoload()
+    {
+        spl_autoload_register(function ($class) {
+            if (strpos($class, 'CompropagoSdk') !== 0) {
+                return;
+            }
+
+            $class = str_replace('\\', '/', $class);
+
+            $path = __DIR__ . '/../' . $class . '.php';
+
+            if (file_exists($path)) {
+                require_once $path;
+            }
+        });
     }
 }
