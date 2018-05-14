@@ -4,7 +4,7 @@
   "description": "PHP SDK for Compropago API",
   "keywords": ["pagos internet","payment gateway"],
   "homepage": "https://compropago.com/documentacion/librerias",
-  "version": "4.0.1.0",
+  "version": "4.0.1.1",
   "license": "Apache-2.0",
   "authors": [
     {

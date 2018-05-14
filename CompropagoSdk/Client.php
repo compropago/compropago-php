@@ -5,9 +5,13 @@ namespace CompropagoSdk;
 
 class Client
 {
-    const VERSION = "4.0.1.0";
+    const VERSION = "4.0.1.1";
+
     const API_LIVE_URI = 'https://api.compropago.com/v1/';
     const API_SANDBOX_URI = 'https://api.compropago.com/v1/';
+
+    //const API_LIVE_URI = 'https://api-staging.compropago.io/v1/';
+    //const API_SANDBOX_URI = 'https://api-staging.compropago.io/v1/';
 
     public $api;
     public $live;
