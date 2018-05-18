@@ -41,7 +41,7 @@ class Test extends TestCase
         ];
 
         $this->mode = false;
-        $this->limit = 15000;
+        $this->limit = 5001;
         $this->webhookUrl = 'https://prueba123.com/webhook';
         $this->phoneNumber = '5561463627';
 
@@ -98,7 +98,7 @@ class Test extends TestCase
             $client = new Client($this->publicKey, $this->privateKey, $this->mode);
             $response = $client->api->listDefaultProviders();
 
-            $res = ($response[0] instanceof Provider && sizeof($response) == 13);
+            $res = ($response[0] instanceof Provider && sizeof($response) >= 1);
         } catch (\Exception $e) {
             echo "\n====>> testDefaultProviders: ".$e->getMessage()."\n";
         }
@@ -126,6 +126,7 @@ class Test extends TestCase
         $this->assertTrue($flag);
     }
 
+
     public function testProvidersCurrency()
     {
         $flag = true;
@@ -145,6 +146,7 @@ class Test extends TestCase
         }
         $this->assertTrue($flag);
     }
+
 
     public function testPlaceOrder()
     {
