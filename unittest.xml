@@ -1,7 +1,14 @@
-<testsuites>
-    <testsuite name="unittest">
-        <directory>tests</directory>
-        <file>tests/Test.php</file>
-        <file>tests/TestRequest.php</file>
-    </testsuite>
-</testsuites>
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit bootstrap="./vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false">
+
+    <testsuites>
+        <testsuite name="unit">
+            <directory suffix='.php'>./tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
