@@ -18,8 +18,8 @@ class TestCash extends TestCase
     public function testCreateObject()
     {
         try {
-            $obj = (new Cash())->withAuth(self::PRIVATE_KEY, self::PUBLIC_KEY);
-            $this->assertTrue(true);
+            $obj = (new Cash)->withAuth(self::PRIVATE_KEY, self::PUBLIC_KEY);
+            $this->assertTrue($obj instanceof Cash);
 
             return $obj;
         } catch (\Exception $e) {
