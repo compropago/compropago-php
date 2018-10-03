@@ -36,6 +36,7 @@ class TestClient extends TestCase
             var_dump($e->getTrace());
 
             $this->assertTrue(false);
+            $this->assertTrue(false);
             return null;
         }
     }
@@ -62,6 +63,7 @@ class TestClient extends TestCase
             var_dump($e->getTrace());
 
             $this->assertTrue(false);
+            $this->assertTrue(false);
         }
     }
 
@@ -86,6 +88,7 @@ class TestClient extends TestCase
             echo "{$e->getMessage()}\n";
             var_dump($e->getTrace());
 
+            $this->assertTrue(false);
             $this->assertTrue(false);
         }
     }
@@ -112,6 +115,7 @@ class TestClient extends TestCase
             var_dump($e->getTrace());
 
             $this->assertTrue(false);
+            $this->assertTrue(false);
         }
     }
 
@@ -136,6 +140,7 @@ class TestClient extends TestCase
             echo "{$e->getMessage()}\n";
             var_dump($e->getTrace());
 
+            $this->assertTrue(false);
             $this->assertTrue(false);
         }
     }

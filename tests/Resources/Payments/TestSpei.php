@@ -84,6 +84,15 @@ class TestSpei extends TestCase
      */
     public function testVerifyOrder(Spei $obj, $order)
     {
+        try {
+            $verified = $obj->veifyOrder($order['id']);
 
+            $this->assertTrue($order['id'] === $verified['id']);
+        } catch (\Exception $e) {
+            echo "{$e->getMessage()}\n";
+            var_dump($e->getTrace());
+
+            $this->assertTrue(false);
+        }
     }
 }

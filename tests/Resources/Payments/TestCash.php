@@ -121,7 +121,6 @@ class TestCash extends TestCase
         try {
             $verified = $obj->verifyOrder($order['id']);
 
-            $this->assertTrue(is_array($verified));
             $this->assertTrue($order['id'] === $verified['id']);
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";

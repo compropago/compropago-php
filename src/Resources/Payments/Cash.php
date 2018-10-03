@@ -2,45 +2,18 @@
 
 namespace CompropagoSdk\Resources\Payments;
 
-use CompropagoSdk\Helpers\ValidationHelper;
+use CompropagoSdk\Resources\AbstractResource;
 use Requests;
 
-class Cash
+class Cash extends AbstractResource
 {
-    use ValidationHelper;
-
-    /**
-     * Basic auth credentials
-     *
-     * @var array
-     */
-    private $auth;
-
-    /**
-     * API url for cash resource
-     */
-    const API_URL = 'https://api.compropago.com/v1';
-
     /**
      * Cash Constructor
      */
     public function __construct()
     {
         $this->auth = ['auth' => null];
-    }
-
-    /**
-     * Basic auth information for cash resource
-     *
-     * @param string $user     Private key of ComproPago panel
-     * @param string $password Public key of ComproPago panel
-     *
-     * @return Cash Self instace
-     */
-    public function withAuth($user, $password)
-    {
-        $this->auth['auth'] = [$user, $password];
-        return $this;
+        $this->apiUrl = 'https://api.compropago.com/v1';
     }
 
     /**
