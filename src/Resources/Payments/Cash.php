@@ -12,7 +12,7 @@ class Cash extends AbstractResource
      */
     public function __construct()
     {
-        $this->auth = ['auth' => null];
+        parent::__construct();
         $this->apiUrl = 'https://api.compropago.com/v1';
     }
 
@@ -23,10 +23,9 @@ class Cash extends AbstractResource
      */
     public function listDefaultProviders()
     {
-        $endpoint = self::API_URL . '/providers/true';
+        $endpoint = "{$this->apiUrl}/providers/true";
 
         $res = Requests::get($endpoint);
-
         $this->validateResponse($res);
 
         return json_decode($res->body, true);

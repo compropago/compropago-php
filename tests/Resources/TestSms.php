@@ -20,7 +20,7 @@ class TestSms extends TestCase
     public function testCreateObject()
     {
         try {
-            $obj = (new Sms)->withAuth(self::PRIVATE_KEY, self::PUBLIC_KEY);
+            $obj = (new Sms)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
             $this->assertTrue($obj instanceof Sms);
 
             return $obj;
@@ -86,7 +86,7 @@ class TestSms extends TestCase
      */
     private function createCashOrder()
     {
-        $cash = (new Cash)->withAuth(self::PRIVATE_KEY, self::PUBLIC_KEY);
+        $cash = (new Cash)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
 
         $data = [
             'order_id' => 2,
@@ -109,7 +109,7 @@ class TestSms extends TestCase
      */
     private function createSpeiOrder()
     {
-        $cash = (new Spei)->withAuth(self::PRIVATE_KEY, self::PUBLIC_KEY);
+        $cash = (new Spei)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
 
         $data = [
             "product" => [

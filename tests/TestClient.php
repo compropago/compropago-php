@@ -144,4 +144,34 @@ class TestClient extends TestCase
             $this->assertTrue(false);
         }
     }
+
+    /**
+     * Validate get public key function
+     *
+     * @depends testCreateObject
+     *
+     * @param Client $obj Instance of Client object
+     */
+    public function testGetPublicKey(Client $obj)
+    {
+        $this->assertEquals(
+            self::PUBLIC_KEY,
+            $obj->getPublicKey()
+        );
+    }
+
+    /**
+     * Validate get private key
+     *
+     * @depends testCreateObject
+     *
+     * @param Client $obj Instance of Client object
+     */
+    public function testGetPrivateKey(Client $obj)
+    {
+        $this->assertEquals(
+            self::PRIVATE_KEY,
+            $obj->getPrivateKey()
+        );
+    }
 }
