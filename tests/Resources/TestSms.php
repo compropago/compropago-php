@@ -13,7 +13,7 @@ class TestSms extends TestCase
     const PRIVATE_KEY = 'sk_test_9c95e149614142822f';
 
     /**
-     * Test creation of object Sms
+     * Test creation object of Sms
      *
      * @return Sms Instance of Sms object
      */

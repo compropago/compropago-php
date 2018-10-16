@@ -13,7 +13,7 @@ abstract class AbstractResource
      *
      * @var array
      */
-    protected $auth = [];
+    protected $options = [];
 
     /**
      * Base API url for the endpoints
@@ -23,11 +23,19 @@ abstract class AbstractResource
     protected $apiUrl = '';
 
     /**
+     * Shared headers between resources
+     *
+     * @var array
+     */
+    protected $headers = [];
+
+    /**
      * AbstractResource Construct
      */
     public function __construct()
     {
-        $this->auth = ['auth' => null];
+        $this->options = ['auth' => null];
+        $this->headers = ['Content-Type' => 'application/json'];
     }
 
     /**
@@ -40,7 +48,7 @@ abstract class AbstractResource
      */
     public function withKeys($public, $private)
     {
-        $this->auth['auth'] = [$pruvate, $public];
+        $this->options['auth'] = [$private, $public];
         return $this;
     }
 
@@ -51,6 +59,6 @@ abstract class AbstractResource
      */
     public function getAuth()
     {
-        return $this->auth['auth'];
+        return $this->options['auth'];
     }
 }

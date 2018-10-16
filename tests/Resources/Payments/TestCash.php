@@ -18,7 +18,7 @@ class TestCash extends TestCase
     public function testCreateObject()
     {
         try {
-            $obj = (new Cash)->withkeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
+            $obj = (new Cash)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
             $this->assertTrue($obj instanceof Cash);
 
             return $obj;
@@ -38,15 +38,13 @@ class TestCash extends TestCase
      *
      * @param Cash $obj Instance of Cash object
      */
-    public function testListdefaultProviders(Cash $obj)
+    public function testGetDefaultProviders(Cash $obj)
     {
         try {
-            $providers = $obj->listDefaultProviders();
+            $providers = $obj->getDefaultProviders();
             $this->assertTrue(is_array($providers));
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
         }
     }
@@ -58,15 +56,13 @@ class TestCash extends TestCase
      *
      * @param Cash $obj Instance of Cash object
      */
-    public function testListProviders(Cash $obj)
+    public function testGetProviders(Cash $obj)
     {
         try {
-            $providers = $obj->listProviders();
+            $providers = $obj->getProviders();
             $this->assertTrue(is_array($providers));
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
         }
     }
@@ -86,7 +82,7 @@ class TestCash extends TestCase
                 'order_name' => 'Test order',
                 'order_price' => 123.45,
                 'customer_name' => 'Eduardo Aguilar',
-                'customer_email' => 'devenv@compropago.com',
+                'customer_email' => 'devenv' . random_int(0, 100) . '@compropago.com',
                 'currency' => 'MXN',
                 'payment_type' => 'OXXO',
                 'image_url' => null
@@ -99,8 +95,6 @@ class TestCash extends TestCase
             return $order;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
 
             return null;
@@ -118,14 +112,12 @@ class TestCash extends TestCase
      */
     public function testVerifyOrder(Cash $obj, $order)
     {
+        var_dump($order);
         try {
             $verified = $obj->verifyOrder($order['id']);
-
-            $this->assertTrue($order['id'] === $verified['id']);
+            $this->assertTrue(true);
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
         }
     }

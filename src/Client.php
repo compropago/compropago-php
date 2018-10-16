@@ -70,7 +70,7 @@ class Client
     /**
      * Generates an instance of a resource whit the configurated keys
      *
-     * @param string $class Fully cualified reource name
+     * @param string $class Fully cualified resource name
      *
      * @return AbstractResource
      */
