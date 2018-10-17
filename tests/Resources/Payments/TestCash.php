@@ -13,6 +13,8 @@ class TestCash extends TestCase
     /**
      * Test Cash object generation
      *
+     * @covers Cash::withKeys
+     *
      * @return Cash
      */
     public function testCreateObject()
@@ -35,6 +37,8 @@ class TestCash extends TestCase
      *
      * @depends testCreateObject
      *
+     * @covers Cash::getDefaultProviders
+     *
      * @param Cash $obj Instance of Cash object
      */
     public function testGetDefaultProviders(Cash $obj)
@@ -53,6 +57,8 @@ class TestCash extends TestCase
      *
      * @depends testCreateObject
      *
+     * @covers Cash::getProviders
+     *
      * @param Cash $obj Instance of Cash object
      */
     public function testGetProviders(Cash $obj)
@@ -70,6 +76,8 @@ class TestCash extends TestCase
      * Test order creation for cash payment method
      *
      * @depends testCreateObject
+     *
+     * @covers Cash::createOrder
      *
      * @param Cash $obj Instance of Cash object
      */
@@ -105,6 +113,8 @@ class TestCash extends TestCase
      *
      * @depends testCreateObject
      * @depends testCreateOrder
+     *
+     * @covers Cash::verifyOrder
      *
      * @param Cash  $obj   Instance of Cash object
      * @param array $order Order array

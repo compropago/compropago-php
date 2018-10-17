@@ -13,6 +13,8 @@ class TestSpei extends TestCase
     /**
      * Test creation of object Spei
      *
+     * @covers Spei::withKeys
+     *
      * @return Spei Instance of Spei object
      */
     public function testCreateObject()
@@ -34,6 +36,8 @@ class TestSpei extends TestCase
      * Test spei order creation
      *
      * @depends testCreateObject
+     *
+     * @covers Spei::createOrder
      *
      * @param Spei $obj Instance of Spei object
      *
@@ -76,6 +80,8 @@ class TestSpei extends TestCase
      *
      * @depends testCreateObject
      * @depends testCreateOrder
+     *
+     * @covers Spei::verifyOrder
      *
      * @param Spei $obj
      *

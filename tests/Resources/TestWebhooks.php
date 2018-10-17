@@ -16,6 +16,8 @@ class TestWebhook extends TestCase
     /**
      * Test create object of webhook
      *
+     * @covers Webhook::withKeys
+     *
      * @return Webhook
      */
     public function testCreateObject()
@@ -37,6 +39,8 @@ class TestWebhook extends TestCase
      * Trest list webhooks
      *
      * @depends testCreateObject
+     *
+     * @covers Webhook::getAll
      *
      * @param Webhook $obj Instance of Webhook resource
      *
@@ -60,6 +64,8 @@ class TestWebhook extends TestCase
      * Test webhook creation
      *
      * @depends testCreateObject
+     *
+     * @covers Webhook::create
      *
      * @param Webhook $obj Webhook instance
      *
@@ -86,6 +92,8 @@ class TestWebhook extends TestCase
      * @depends testCreateObject
      * @depends testCreateWebhook
      *
+     * @covers Webhook::update
+     *
      * @param Webhook $obj webhook instance
      * @param array   $wh  Webhook structure
      *
@@ -111,6 +119,8 @@ class TestWebhook extends TestCase
      *
      * @depends testCreateObject
      * @depends testUpdateWebhook
+     *
+     * @covers Webhook::delete
      *
      * @param Webhook $obj webhook instance
      * @param array   $wh  Webhook structure

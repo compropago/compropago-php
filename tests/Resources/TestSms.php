@@ -17,6 +17,8 @@ class TestSms extends TestCase
     /**
      * Test creation object of Sms
      *
+     * @covers Sms::withKeys
+     *
      * @return Sms Instance of Sms object
      */
     public function testCreateObject()
@@ -39,6 +41,8 @@ class TestSms extends TestCase
      *
      * @depends testCreateObject
      *
+     * @covers Sms::sendToOrder
+     *
      * @param Sms $obj Instance of Sms object
      */
     public function testSmsSendForCashOrders(Sms $obj)
@@ -60,6 +64,8 @@ class TestSms extends TestCase
      *
      * @depends testCreateObject
      *
+     * @covers Sms::sendToOrder
+     *
      * @param Sms $obj Instance of Sms object
      */
     public function testSmsSendForSpeiOrders(Sms $obj)
@@ -78,6 +84,8 @@ class TestSms extends TestCase
 
     /**
      * Create a cash order
+     *
+     * @codeCoverageIgnore
      *
      * @return array
      */
@@ -101,6 +109,8 @@ class TestSms extends TestCase
 
     /**
      * Create a spei order
+     *
+     * @codeCoverageIgnore
      *
      * @return array
      */

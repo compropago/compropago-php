@@ -20,6 +20,8 @@ class TestClient extends TestCase
     /**
      * Test Client instanciation
      *
+     * @coversNothing
+     *
      * @return Client
      */
     public function testCreateObject()
@@ -27,8 +29,7 @@ class TestClient extends TestCase
         try {
             $obj = new Client(self::PUBLIC_KEY, self::PRIVATE_KEY);
 
-            $this->assertEquals(self::PUBLIC_KEY, $obj->getPublicKey());
-            $this->assertEquals(self::PRIVATE_KEY, $obj->getPrivateKey());
+            $this->assertTrue($obj instanceof Client);
 
             return $obj;
         } catch (\Exception $e) {
@@ -44,6 +45,8 @@ class TestClient extends TestCase
      * Test to obtaine Cash
      *
      * @depends testCreateObject
+     *
+     * @covers Cash::getAuth
      *
      * @param Client $obj Client object instance
      */
@@ -69,6 +72,8 @@ class TestClient extends TestCase
      *
      * @depends testCreateObject
      *
+     * @covers Spei::getAuth
+     *
      * @param Client $obj Client object instance
      */
     public function testGetSpeiResource(Client $obj)
@@ -92,6 +97,8 @@ class TestClient extends TestCase
      * Test to obtaine Spei
      *
      * @depends testCreateObject
+     *
+     * @covers Sms::getAuth
      *
      * @param Client $obj Client object instance
      */
@@ -117,6 +124,8 @@ class TestClient extends TestCase
      *
      * @depends testCreateObject
      *
+     * @covers Webhook::getAuth
+     *
      * @param Client $obj Client object instance
      */
     public function testGetWebhooksResource(Client $obj)
@@ -141,6 +150,8 @@ class TestClient extends TestCase
      *
      * @depends testCreateObject
      *
+     * @covers Client::getPublicKey
+     *
      * @param Client $obj Instance of Client object
      */
     public function testGetPublicKey(Client $obj)
@@ -155,6 +166,8 @@ class TestClient extends TestCase
      * Validate get private key
      *
      * @depends testCreateObject
+     *
+     * @covers Client::getPrivateKey
      *
      * @param Client $obj Instance of Client object
      */
