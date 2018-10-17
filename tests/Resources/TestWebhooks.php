@@ -27,9 +27,8 @@ class TestWebhook extends TestCase
             return $obj;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
+
             return null;
         }
     }
@@ -51,9 +50,8 @@ class TestWebhook extends TestCase
             return $obj;
         } catch (\Esception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
+
             return null;
         }
     }
@@ -76,9 +74,8 @@ class TestWebhook extends TestCase
             return $wh;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
+
             return null;
         }
     }
@@ -103,9 +100,8 @@ class TestWebhook extends TestCase
             return $wh;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
+
             return null;
         }
     }
@@ -128,8 +124,6 @@ class TestWebhook extends TestCase
             );
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
         }
     }

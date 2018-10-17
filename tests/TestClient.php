@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use CompropagoSdk\Client;
 use CompropagoSdk\Resources\Payments\Cash;
 use CompropagoSdk\Resources\Payments\Spei;
-use CompropagoSdk\Resources\Webhooks;
+use CompropagoSdk\Resources\Webhook;
 use CompropagoSdk\Resources\Sms;
 
 class TestClient extends TestCase
@@ -33,10 +33,9 @@ class TestClient extends TestCase
             return $obj;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
+            $this->assertTrue(false);
+            $this->assertTrue(false);
 
-            $this->assertTrue(false);
-            $this->assertTrue(false);
             return null;
         }
     }
@@ -60,8 +59,6 @@ class TestClient extends TestCase
             );
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
             $this->assertTrue(false);
         }
@@ -86,8 +83,6 @@ class TestClient extends TestCase
             );
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
             $this->assertTrue(false);
         }
@@ -112,8 +107,6 @@ class TestClient extends TestCase
             );
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
             $this->assertTrue(false);
         }
@@ -129,17 +122,15 @@ class TestClient extends TestCase
     public function testGetWebhooksResource(Client $obj)
     {
         try {
-            $resoruce = $obj->getResource(Webhooks::class);
+            $resoruce = $obj->getResource(Webhook::class);
 
-            $this->assertTrue($resoruce instanceof Sms);
+            $this->assertTrue($resoruce instanceof Webhook);
             $this->assertEquals(
                 [self::PRIVATE_KEY, self::PUBLIC_KEY],
                 $resoruce->getAuth()
             );
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
             $this->assertTrue(false);
         }

@@ -41,7 +41,7 @@ class Spei extends AbstractResource
     /**
      * Verify the information of a spei order
      *
-     * @param array $orderId Spei order ID
+     * @param string $orderId Spei order ID
      *
      * @return array Structure with spei order nformation
      */

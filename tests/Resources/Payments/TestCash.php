@@ -18,15 +18,14 @@ class TestCash extends TestCase
     public function testCreateObject()
     {
         try {
-            $obj = (new Cash)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
+            $obj = (new Cash)->withKeys(self::PUBLIC_KEY, self::PRIVATE_KEY);
             $this->assertTrue($obj instanceof Cash);
 
             return $obj;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
+
             return null;
         }
     }
@@ -112,7 +111,6 @@ class TestCash extends TestCase
      */
     public function testVerifyOrder(Cash $obj, $order)
     {
-        var_dump($order);
         try {
             $verified = $obj->verifyOrder($order['id']);
             $this->assertTrue(true);

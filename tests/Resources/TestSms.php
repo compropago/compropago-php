@@ -12,6 +12,8 @@ class TestSms extends TestCase
     const PUBLIC_KEY = 'pk_test_638e8b14112423a086';
     const PRIVATE_KEY = 'sk_test_9c95e149614142822f';
 
+    const PHONE = "5561463627";
+
     /**
      * Test creation object of Sms
      *
@@ -20,15 +22,14 @@ class TestSms extends TestCase
     public function testCreateObject()
     {
         try {
-            $obj = (new Sms)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
+            $obj = (new Sms)->withKeys(self::PUBLIC_KEY, self::PRIVATE_KEY);
             $this->assertTrue($obj instanceof Sms);
 
             return $obj;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
+
             return null;
         }
     }
@@ -45,13 +46,11 @@ class TestSms extends TestCase
         try {
             $order = $this->createCashOrder();
 
-            $sms = $obj->sendToOrder($order['id']);
+            $sms = $obj->sendToOrder($order['id'], self::PHONE);
 
             $this->assertEquals('sms.success', $sms['type']);
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
         }
     }
@@ -68,13 +67,11 @@ class TestSms extends TestCase
         try {
             $order = $this->createSpeiOrder();
 
-            $sms = $obj->sendToOrder($order['id']);
+            $sms = $obj->sendToOrder($order['data']['id'], self::PHONE);
 
             $this->assertEquals('sms.success', $sms['type']);
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
         }
     }
@@ -93,13 +90,13 @@ class TestSms extends TestCase
             'order_name' => 'Test order',
             'order_price' => 123.46,
             'customer_name' => 'Eduardo Aguilar',
-            'customer_email' => 'devenv@compropago.com',
+            'customer_email' => 'devenv' . random_int(0, 100) . '@compropago.com',
             'currency' => 'MXN',
             'payment_type' => 'OXXO',
             'image_url' => null
         ];
 
-        return $obj->createOrder($data);
+        return $cash->createOrder($data);
     }
 
     /**
@@ -109,7 +106,7 @@ class TestSms extends TestCase
      */
     private function createSpeiOrder()
     {
-        $cash = (new Spei)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
+        $spei = (new Spei)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
 
         $data = [
             "product" => [
@@ -121,7 +118,7 @@ class TestSms extends TestCase
             ],
             "customer" => [
                 "name" => "Eduardo Aguilar",
-                "email" => "devenv@compropago.com",
+                "email" => "devenv" . random_int(0, 100) . "@compropago.com",
                 "phone" => ""
             ],
             "payment" =>  [
@@ -129,6 +126,6 @@ class TestSms extends TestCase
             ]
         ];
 
-        return $obj->createOrder($data);
+        return $spei->createOrder($data);
     }
 }

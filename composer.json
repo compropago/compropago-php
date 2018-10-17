@@ -31,6 +31,6 @@
     }
   },
   "scripts" : {
-    "test": "./vendor/bin/phpunit --configuration ./unittest.xml --testsuite unittest"
+    "test": "./vendor/bin/phpunit --configuration ./phpunit.xml --testsuite unittest"
   }
 }

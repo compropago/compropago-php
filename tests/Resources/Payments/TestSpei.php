@@ -18,7 +18,7 @@ class TestSpei extends TestCase
     public function testCreateObject()
     {
         try {
-            $obj = (new Spei)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
+            $obj = (new Spei)->withKeys(self::PUBLIC_KEY, self::PRIVATE_KEY);
             $this->assertTrue($obj instanceof Spei);
 
             return $obj;
