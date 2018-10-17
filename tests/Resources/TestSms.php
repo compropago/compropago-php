@@ -98,7 +98,7 @@ class TestSms extends TestCase
             'order_name' => 'Test order',
             'order_price' => 123.46,
             'customer_name' => 'Eduardo Aguilar',
-            'customer_email' => 'devenv' . random_int(0, 100) . '@compropago.com',
+            'customer_email' => 'devenv' . rand(0, 100) . '@compropago.com',
             'currency' => 'MXN',
             'payment_type' => 'OXXO',
             'image_url' => null
@@ -128,7 +128,7 @@ class TestSms extends TestCase
             ],
             "customer" => [
                 "name" => "Eduardo Aguilar",
-                "email" => "devenv" . random_int(0, 100) . "@compropago.com",
+                "email" => "devenv" . rand(0, 100) . "@compropago.com",
                 "phone" => ""
             ],
             "payment" =>  [

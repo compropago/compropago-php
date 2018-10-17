@@ -102,7 +102,7 @@ class TestWebhook extends TestCase
     public function testUpdateWebhook(Webhook $obj, $wh)
     {
         try {
-            $wh = $obj->update($wh['id'], self::U_TESTWH . random_int(0, 1000));
+            $wh = $obj->update($wh['id'], self::U_TESTWH . rand(0, 1000));
             $this->assertTrue(is_array($wh) && isset($wh['id']));
 
             return $wh;

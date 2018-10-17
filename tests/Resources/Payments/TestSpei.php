@@ -56,7 +56,7 @@ class TestSpei extends TestCase
                 ],
                 "customer" => [
                     "name" => "Eduardo Aguilar",
-                    "email" => "devenv" . random_int(0, 100) . "@compropago.com",
+                    "email" => "devenv" . rand(0, 100) . "@compropago.com",
                     "phone" => ""
                 ],
                 "payment" =>  [
