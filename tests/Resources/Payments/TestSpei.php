@@ -24,9 +24,8 @@ class TestSpei extends TestCase
             return $obj;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
+
             return null;
         }
     }
@@ -53,7 +52,7 @@ class TestSpei extends TestCase
                 ],
                 "customer" => [
                     "name" => "Eduardo Aguilar",
-                    "email" => "devenv@compropago.com",
+                    "email" => "devenv" . random_int(0, 100) . "@compropago.com",
                     "phone" => ""
                 ],
                 "payment" =>  [
@@ -62,13 +61,12 @@ class TestSpei extends TestCase
             ];
 
             $order = $obj->createOrder($data);
-            $this->assertTrue(!empty($order['id']));
+            $this->assertTrue(is_array($order) && isset($order['data']['id']));
             return $order;
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
+
             return null;
         }
     }
@@ -80,18 +78,16 @@ class TestSpei extends TestCase
      * @depends testCreateOrder
      *
      * @param Spei $obj
+     *
      * @param array $order
      */
     public function testVerifyOrder(Spei $obj, $order)
     {
         try {
-            $verified = $obj->veifyOrder($order['id']);
-
-            $this->assertTrue($order['id'] === $verified['id']);
+            $verified = $obj->verifyOrder($order['data']['id']);
+            $this->assertTrue($order['data']['id'] === $verified['data']['id']);
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
-            var_dump($e->getTrace());
-
             $this->assertTrue(false);
         }
     }

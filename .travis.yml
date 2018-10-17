@@ -1,0 +1,23 @@
+language: php
+
+php:
+    - 5.6
+    - 7.0
+    - 7.1
+    - 7.2
+
+branche:
+    only: master
+
+env:
+    - CODECOV_TOKEN="661bca02-74ac-4ed0-9b27-4f9e89663d99"
+
+before_script:
+    - travis_retry composer self-update
+    - travis_retry composer install --no-interaction --prefer-source --dev
+
+script:
+    - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+    - bash < (curl -s https://codecov.io/bash)
