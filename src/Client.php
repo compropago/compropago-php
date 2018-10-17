@@ -38,7 +38,7 @@ class Client
      * @param string $public  Public key of the ComproPago config panel
      * @param string $private Private key of the ComproPago config panel
      *
-     * @return Client
+     * @return Client Self instance
      */
     public function withKeys($public = null, $private = null)
     {
@@ -50,7 +50,7 @@ class Client
     /**
      * Get the configurated public key
      *
-     * @return string
+     * @return string Registed public key
      */
     public function getPublicKey()
     {
@@ -60,7 +60,7 @@ class Client
     /**
      * Get the configurated private key
      *
-     * @return string
+     * @return string Registed private key
      */
     public function getPrivateKey()
     {
@@ -72,7 +72,7 @@ class Client
      *
      * @param string $class Fully cualified resource name
      *
-     * @return AbstractResource
+     * @return AbstractResource Instance of a specific resource
      */
     public function getResource($class)
     {

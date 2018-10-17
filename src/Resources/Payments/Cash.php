@@ -20,6 +20,8 @@ class Cash extends AbstractResource
      * Return a list of the default Cash Providers of ComproPago
      *
      * @return array List of all posible providers
+     *
+     * @throws \Exception Request error or exception
      */
     public function getDefaultProviders()
     {
@@ -38,6 +40,8 @@ class Cash extends AbstractResource
      * @param string $currency Currency of the limit amount
      *
      * @return array List of filtered providers
+     *
+     * @throws \Exception Request error or exception
      */
     public function getProviders($limit = 0, $currency = 'MXN')
     {
@@ -63,6 +67,8 @@ class Cash extends AbstractResource
      * @param array $data Order information like customer data, price currency an product
      *
      * @return array Structure with order details
+     *
+     * @throws \Exception Request error or exception
      */
     public function createOrder($data)
     {
@@ -85,6 +91,8 @@ class Cash extends AbstractResource
      * @param string $orderId Order id
      *
      * @return array Structure with order details
+     *
+     * @throws \Exception Request error or exception
      */
     public function verifyOrder($orderId)
     {

@@ -21,7 +21,7 @@ class TestWebhook extends TestCase
     public function testCreateObject()
     {
         try {
-            $obj = (new Webhook)->withKeys(self::PRIVATE_KEY, self::PUBLIC_KEY);
+            $obj = (new Webhook)->withKeys(self::PUBLIC_KEY, self::PRIVATE_KEY);
             $this->assertTrue($obj instanceof Webhook);
 
             return $obj;
@@ -94,7 +94,7 @@ class TestWebhook extends TestCase
     public function testUpdateWebhook(Webhook $obj, $wh)
     {
         try {
-            $wh = $obj->update($wh['id'], self::U_TESTWH);
+            $wh = $obj->update($wh['id'], self::U_TESTWH . random_int(0, 1000));
             $this->assertTrue(is_array($wh) && isset($wh['id']));
 
             return $wh;
@@ -115,7 +115,7 @@ class TestWebhook extends TestCase
      * @param Webhook $obj webhook instance
      * @param array   $wh  Webhook structure
      */
-    public function testDeleteWebhook()
+    public function testDeleteWebhook(Webhook $obj, $wh)
     {
         try {
             $wh = $obj->delete($wh['id']);

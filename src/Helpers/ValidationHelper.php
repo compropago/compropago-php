@@ -6,6 +6,15 @@ use Requests_Response;
 
 trait ValidationHelper
 {
+    /**
+     * Validate if the response of the ComproPago API is a success response or an error response
+     *
+     * @param Requests_Response $res Response object from Requests library
+     *
+     * @return void
+     *
+     * @throws \Exception Request error or exception
+     */
     public function validateResponse(Requests_Response $res)
     {
         $body = json_decode($res->body, true);

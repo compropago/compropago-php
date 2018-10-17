@@ -23,6 +23,8 @@ class Sms extends AbstractResource
      * @param string $phone   Phone number to send the message
      *
      * @return array Structure with SMS information
+     *
+     * @throws \Exception Request error or exception
      */
     public function sendToOrder($orderId, $phone)
     {

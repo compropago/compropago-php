@@ -31,6 +31,6 @@
     }
   },
   "scripts" : {
-    "test": "./vendor/bin/phpunit --configuration ./phpunit.xml --testsuite unittest"
+    "test": "./vendor/bin/phpunit --coverage-clover=coverage.xml"
   }
 }

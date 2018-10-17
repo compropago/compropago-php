@@ -44,6 +44,8 @@ class Spei extends AbstractResource
      * @param string $orderId Spei order ID
      *
      * @return array Structure with spei order nformation
+     *
+     * @throws \Exception Request error or exception
      */
     public function verifyOrder($orderId)
     {
