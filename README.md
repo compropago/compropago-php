@@ -9,4 +9,3 @@ También cuenta con los métodos necesarios para facilitarle su desarrollo por m
 más utilizados (SDK).
 
 Con ComproPago puede recibir pagos en 7Eleven, Extra y muchas tiendas más en todo México.
-
