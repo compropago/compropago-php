@@ -74,7 +74,7 @@ class TestWebhook extends TestCase
     public function testCreateWebhook(Webhook $obj)
     {
         try {
-            $wh = $obj->create(self::TESTWH);
+            $wh = $obj->create(self::TESTWH . rand(0, 100));
             $this->assertTrue(is_array($wh) && isset($wh['id']));
 
             return $wh;
