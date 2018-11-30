@@ -10,4 +10,24 @@ más utilizados (SDK).
 
 Con ComproPago puede recibir pagos en 7Eleven, Extra y muchas tiendas más en todo México.
 
-## [Documentacion](https://github.com/danteay/compropago-php/wiki)
+## Requirements
+
+* PHP >= 5.6
+* Composer
+
+## Installation
+
+You need to install composer to download this package from Packagist. You can find the steps to install com poser from [here](https://getcomposer.org/download/). Once you have composer installed you add the package by running this command:
+
+```bash
+composer require compropago/php-sdk
+```
+
+Alternatively you can add the package to your `composer.json` file in the require section, and run the `composer install` command.
+
+```json
+"require": {
+    "php": ">=5.6",
+    "compropago/php-sdk": "^4"
+},
+```
