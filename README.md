@@ -28,6 +28,6 @@ Alternatively you can add the package to your `composer.json` file in the requir
 ```json
 "require": {
     "php": ">=5.6",
-    "compropago/php-sdk": "^4"
+    "compropago/php-sdk": "^5"
 },
 ```
