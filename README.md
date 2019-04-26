@@ -7,7 +7,7 @@ ComproPago API - PHP SDK
 
 Introducción
 ============
-Con ComproPago puede recibir pagos en 7Eleven, Oxxo, Extra y muchas tiendas más en todo México.
+Con ComproPago puede recibir pagos vía SPEI y en efectivo.
 
 La librería de `ComproPago PHP SDK` le permite interactuar con el API de ComproPago en su aplicación.
 También cuenta con los métodos necesarios para facilitarle su desarrollo por medio de los servicios
@@ -90,6 +90,7 @@ Guía básica de uso
 
 Se debe contar con una cuenta activa de ComproPago.
 - [Registrarse en ComproPago](https://panel.compropago.com/users/sign_up)
+- [Documentación detallada del SDK](http://demo.compropago.com/sdk/php)
 
 Importación
 -----------
@@ -163,16 +164,19 @@ $data = [
         "id" => "10001",
         "price" => 258.99,
         "name" => "Test ComproPago SPEI",
-        "currency" => "MXN"
+        "currency" => "MXN",
+        "url" => "http://dummyurl.com/prod10001.jpg"
     ],
     "customer" => [
+        "id" => "123454",
         "name" => "Nombre del Cliente",
         "email" => "cliente@dominio.com",
         "phone" => "55222999888"
     ],
     "payment" =>  [
         "type" => "SPEI"
-    ]
+    ],
+    "expiresAt" => 1556555092
 ];
 
 /**
@@ -221,12 +225,14 @@ $providers = $compropagoCash->getProviders(
 <?php
 $data = [
     "order_id" => "10002",
-    'order_name' => "Test ComproPago CASH",
-    'order_price' => 157.25,
-    'customer_name' => "Nombre del Cliente",
-    'customer_email' => "cliente@dominio.com",
-    'currency' => 'MXN',
-    'payment_type' => 'OXXO'
+    "order_name" => "Test ComproPago CASH",
+    "order_price" => 157.25,
+    "image_url" => "http://dummyurl.com/prod10002.jpg",
+    "customer_name" => "Nombre del Cliente",
+    "customer_email" => "cliente@dominio.com",
+    "customer_phone" => "55222999888",
+    "currency" => 'MXN',
+    "payment_type" => "OXXO"
 ];
 
 /**
